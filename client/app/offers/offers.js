@@ -9,6 +9,13 @@ angular.module('myApp.offers', ['ngRoute'])
   });
 }])
 
-.controller('OffersCtrl', [function() {
+.controller('OffersCtrl', ['$scope','$http', function ($scope, $http) {
+	
+	var search = ""
+	/*var offers = $http.get('http://localhost:8000/offers')
+					.then(function(result) {
+						return result.data.results;
+					});*/
+	$scope.offers = [{"name":"uno", "description":"uno"},{"name":"dos", "description":"dos"},{"name":"tres", "description":"tres"},{"name":"cuatro", "description":"cuatro"}]
 
 }]);

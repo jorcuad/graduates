@@ -1,11 +1,38 @@
-<p>This is the partial for view 1.</p>
-
-<md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
-<div>
-  <md-input-container>
-    <label>Busqueda de ofertas</label>
-    <input ng-model="user.title">
-  </md-input-container>
-  <md-button class="md-raised">Buscar</md-button>
+<div layout-padding layout="row" layout-align="center">
+	<md-content layout-padding flex="60">
+		<!-- Search bar -->
+		<div layout="row" layout-padding>
+			<div layout="column" flex="75">
+			<md-input-container>
+				<label>Búsqueda de ofertas</label>
+				<input name="search" ng-model="OffersCtrl.search">
+			</md-input-container>
+			</div>
+			<div layout="column">
+				<md-button class="md-raised">Buscar</md-button>
+			</div>
+		</div>
+		<!-- Categories accordion TODO meter en acordeon-->
+		<div>
+		</div>
+	</md-content>
 </div>
-</md-content>
+<md-divider></md-divider>
+<div layout-padding layout="row" layout-align="center">
+	<md-content layout-padding flex="100">
+		<!-- Offer List ng-repeat="offer in offerCtrl.offers"-->
+		<md-list flex="100">
+			<md-list-item ng-repeat="offer in offers">
+				<md-card flex>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline">{{offer.name}}</span>
+							<span class="md-subhead">{{offer.description}}</span>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	{{OffersCtrl.offers}}
+</div>
