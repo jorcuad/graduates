@@ -1,2 +1,11 @@
 <p>This is the partial for view 1.</p>
- <md-button class="md-raised">Button</md-button>
+
+<md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+<div>
+  <md-input-container>
+    <label>Busqueda de ofertas</label>
+    <input ng-model="user.title">
+  </md-input-container>
+  <md-button class="md-raised">Buscar</md-button>
+</div>
+</md-content>
