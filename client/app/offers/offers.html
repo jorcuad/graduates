@@ -1,8 +1,8 @@
 <div layout-padding layout="row" layout-align="center">
-	<md-content layout-padding flex="60">
+	<md-content layout-padding flex="95">
 		<!-- Search bar -->
 		<div layout="row" layout-padding>
-			<div layout="column" flex="75">
+			<div layout="column" flex="65">
 			<md-input-container>
 				<label>Búsqueda de ofertas</label>
 				<input name="search" ng-model="OffersCtrl.search">
@@ -11,10 +11,23 @@
 			<div layout="column">
 				<md-button class="md-raised">Buscar</md-button>
 			</div>
+			<div layout="column" flex="5">
+			</div>
+			<!-- login form -->
+			<div layout="column" flex="30" style="border: 1px solid #DCDCDC">
+				<md-input-container style="margin:0">
+					<label>Nick</label>
+					<input name="search" ng-model="OffersCtrl.nick">
+				</md-input-container>
+				<md-input-container style="margin:0">
+					<label>Password</label>
+					<input name="search" ng-model="OffersCtrl.password">
+				</md-input-container>
+				<md-button class="md-raised md-primary">Entrar</md-button>
+			</div>
 		</div>
 		<!-- Categories accordion TODO meter en acordeon-->
-		<div>
-		</div>
+		
 	</md-content>
 </div>
 <md-divider></md-divider>
