@@ -35,11 +35,11 @@
 	<md-content layout-padding flex="100">
 		<!-- Offer List ng-repeat="offer in offerCtrl.offers"-->
 		<md-list flex="100">
-			<md-list-item ng-repeat="offer in offers">
+			<md-list-item ng-repeat="offer in $ctrl.offers">
 				<md-card flex>
 					<md-card-title>
 						<md-card-title-text>
-							<span class="md-headline">Soy: {{offer.name}}</span>
+							<span class="md-headline">Soy: {{offer.offerer_name}}</span>
 							<span class="md-subhead"><b>Ofrezco:</b> {{offer.description}}</span>
 						</md-card-title-text>
 					</md-card-title>
@@ -47,5 +47,4 @@
 			</md-list-item>
 		</md-list>
 	</md-content>
-	{{OffersCtrl.offers}}
 </div>
