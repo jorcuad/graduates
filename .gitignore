@@ -6,6 +6,4 @@ client/.idea/
 client/.tmp/
 client/dist/
 server/db.sqlite3
-server/ofertas/__pycache__
-server/ofertas/migrations/__pycache__
-server/spice/__pycache__
+*/__pycache__/
