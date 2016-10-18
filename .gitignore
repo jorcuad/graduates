@@ -5,5 +5,7 @@ client/.sass-cache/
 client/.idea/
 client/.tmp/
 client/dist/
+server/ofertas/migrations/__pycache__/*
+server/spice/__pycache__/*
+server/ofertas/__pycache__/*
 server/db.sqlite3
-*/__pycache__/
