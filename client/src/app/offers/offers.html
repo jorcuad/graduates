@@ -14,23 +14,40 @@
 			<div layout="column" flex="5">
 			</div>
 			<!-- login form -->
-			<div layout="column" flex="30" style="border: 1px solid #DCDCDC">
-				<md-input-container style="margin:0">
-					<label>Nick</label>
-					<input name="search" ng-model="OffersCtrl.nick">
-				</md-input-container>
-				<md-input-container style="margin:0">
-					<label>Password</label>
-					<input name="search" ng-model="OffersCtrl.password">
-				</md-input-container>
-				<md-button class="md-raised md-primary">Entrar</md-button>
+			<div  layout="column" flex="30" style="border: 1px solid #DCDCDC">
+
+
+
+				<section ng-show="!logged" layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+					<md-input-container style="margin:0">
+						<label>Nick</label>
+						<input name="search" ng-model="OffersCtrl.nick">
+					</md-input-container>
+					<md-input-container style="margin:0">
+						<label>Password</label>
+						<input name="search" ng-model="OffersCtrl.password">
+					</md-input-container>
+					<md-button class="md-raised md-primary">Entrar</md-button>
+				</section>
+
+				<section ng-show="logged" layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+					<span>Usuario logueado: {{username}}</span>
+				</section>
+
+				<section layout="row" layout-sm="column" layout-align="center center" >
+					<md-button ng-disabled="!logged" ng-click="showAdvanced($event)" class="md-raised md-primary">Crear Oferta</md-button>
+				</section>
+
 			</div>
 		</div>
 		<!-- Categories accordion TODO meter en acordeon-->
-		
+
 	</md-content>
 </div>
+
 <md-divider></md-divider>
+
+
 <div layout-padding layout="row" layout-align="center">
 	<md-content layout-padding flex="100">
 		<!-- Offer List ng-repeat="offer in offerCtrl.offers"-->
