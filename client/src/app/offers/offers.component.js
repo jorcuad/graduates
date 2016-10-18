@@ -51,3 +51,4 @@ angular.module('graduatesApp').component('offers', {
 	templateUrl: 'app/offers/offers.html',
 	controller: offersCtrl
 });
+
