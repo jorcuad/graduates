@@ -1,24 +1,28 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model):
-    username = models.CharField(max_length=200)
-    email = models.EmailField(max_length=70,blank=True, null= False, unique= True)
-
-    def __str__(self):
-        return self.username
+class Offerer(models.Model):
+	offerer_name = models.OneToOneField(User, on_delete=models.CASCADE)
+	email = models.EmailField(max_length=70,blank=True, null= False, unique= True)
+	def __str__(self):
+		return self.offerer_name
+	class Meta:
+		verbose_name = "Offerer"
+		verbose_name_plural = "Offerers"
 
 class Offer(models.Model):
-    ##TODO: buscar problema null
-	offerer_name = models.CharField(max_length=200)
+	##TODO: buscar problema null
+	offer_name = models.CharField(max_length=200)
 	description = models.CharField(max_length=1000,null=True)
 	pub_date = models.DateTimeField('date published', null=True)
-	email = models.EmailField(max_length=70,blank=True, null= False, unique= True)
 	categories = models.CharField(max_length=500,null=True)
 	place = models.CharField(max_length=100,null=True)
+	offerer_key = models.ForeignKey(Offerer, on_delete=models.CASCADE)
+
 
 	class Meta:
 		verbose_name = "Offer"
 		verbose_name_plural = "Offers"
 
 	def __str__(self):
-		return self.description
+		return self.offer_name
