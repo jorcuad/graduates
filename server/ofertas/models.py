@@ -1,14 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Offerer(models.Model):
+class Client(models.Model):
 	offerer_name = models.OneToOneField(User, on_delete=models.CASCADE)
 	email = models.EmailField(max_length=70,blank=True, null= False, unique= True)
 	def __str__(self):
 		return self.offerer_name
 	class Meta:
-		verbose_name = "Offerer"
-		verbose_name_plural = "Offerers"
+		verbose_name = "Client"
+		verbose_name_plural = "Clients"
 
 class Offer(models.Model):
 	##TODO: buscar problema null
@@ -17,7 +17,7 @@ class Offer(models.Model):
 	pub_date = models.DateTimeField('date published', null=True)
 	categories = models.CharField(max_length=500,null=True)
 	place = models.CharField(max_length=100,null=True)
-	offerer_key = models.ForeignKey(Offerer, on_delete=models.CASCADE)
+	client_key = models.ForeignKey(Client, on_delete=models.CASCADE)
 
 
 	class Meta:
@@ -26,3 +26,4 @@ class Offer(models.Model):
 
 	def __str__(self):
 		return self.offer_name
+		

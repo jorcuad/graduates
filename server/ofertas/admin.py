@@ -20,12 +20,12 @@ class AdminOffer(admin.ModelAdmin):
 #    class Meta:
 #        model = Employee
 class OffererInline(admin.StackedInline):
-    model = Offerer
+    model = Client
     can_delete = False
-    verbose_name_plural = 'offerer'
+    verbose_name_plural = 'Clients'
 
 
 #admin.site.register(User)
-admin.site.register(Offerer)
+admin.site.register(Client)
 #admin.site.register(User, AdminUser)
 admin.site.register(Offer, AdminOffer)
