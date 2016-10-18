@@ -11,4 +11,4 @@ Create a virtualenv to isolate our package dependencies locally
   pip install django-cors-headers django djangorestframework
   
   cd server
-  python manage.py runserver
+  python manage.py runserver`
