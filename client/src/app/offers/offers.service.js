@@ -10,6 +10,7 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 					.then(function(result) {
 						return result.data;
 					});
+
 		/*return [{"name":"Pablo", "description":"Cambio partido de futbol por cañas"},
 				{"name":"Kiko", "description":"cambio motillo por motor"},
 				{"name":"Jaime", "description":"arreglo ordenador a cambio de tu presencia"},
