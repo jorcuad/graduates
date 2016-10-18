@@ -20,11 +20,11 @@ from rest_framework.routers import SimpleRouter
 
 
 router = SimpleRouter()
-router.register(r'offers', views.OfferViewSet)
 router.register(r'users', views.UserViewSet)
 #router.register(r'employee', views.UserViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include('ofertas.urls'))
 ]
