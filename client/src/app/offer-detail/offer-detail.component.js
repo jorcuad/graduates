@@ -4,10 +4,17 @@ function offerDetailCtrl ($scope, $routeParams, OfferDetailService) {
 	var vm = this;
 
 	vm.$onInit = function () {
-		vm.offers = Offers.get().then(function (offerDetailService) { vm.offers = offers; })
+		OfferDetailService.get($routeParams.orderId)
+			.then(function (result) {
+				vm.offer = result;
+				console.log(vm.offer.pub_date)
+				var dateObject = new Date(Date.parse(vm.offer.pub_date));
+				console.log(dateObject)
+				var dateReadable = dateObject.toLocaleDateString();
+				console.log(dateReadable)
+				vm.offer.pub_date = dateReadable
+			})
 	};
-
-	$scope.order_id = $routeParams.orderId;
 
 }
 

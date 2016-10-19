@@ -4,7 +4,7 @@ function offersCtrl (Offers) {
 	var vm = this;
 
 	vm.$onInit = function () {
-		vm.offers = Offers.get().then(function (offers) { vm.offers = offers; })
+		Offers.get().then(function (offers) { vm.offers = offers; })
 	};
 
 }

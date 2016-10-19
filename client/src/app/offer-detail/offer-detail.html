@@ -3,25 +3,46 @@
 		<md-card>
 			<md-card-header>
 				<md-card-avatar>
-					<img src="img/logo.svg"/>
+					<img src="https://material.angularjs.org/latest/img/logo.svg"/>
 				</md-card-avatar>
 				<md-card-header-text>
-					<span class="md-title">Angular {{order_id}}</span>
-					<span class="md-subhead">Material</span>
+					<span class="md-title">{{$ctrl.offer.description}}</span>
+					<span class="md-subhead">{{$ctrl.offer.offerer_name}}</span>
 				</md-card-header-text>
+				<div layout-align="center">
+					<md-button ng-show="!$ctrl.favorite" class="md-icon-button" aria-label="Favorite">
+						<md-icon md-svg-icon="../assets/icons/favorite.svg"></md-icon>
+					</md-button>
+					<md-button ng-show="$ctrl.favorite" class="md-icon-button" aria-label="Favorite">
+						<md-icon md-svg-icon="../assets/icons/favorited.svg"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="Share">
+						<md-icon md-svg-icon="../assets/icons/share.svg"></md-icon>
+					</md-button>
+				</div>
 			</md-card-header>
-			<img ng-src="https://material.angularjs.org/latest/img/washedout.png" class="md-card-image" alt="Washed Out">
+			<!--img ng-src="https://material.angularjs.org/latest/img/washedout.png" class="md-card-image" alt="Washed Out"-->
 			<md-card-title>
 				<md-card-title-text>
-					<span class="md-headline">Card header</span>
+					<span class="md-headline">{{$ctrl.offer.offer_name}}</span>
 				</md-card-title-text>
 			</md-card-title>
 			<md-card-content>
-				<p>
-				The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-				two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-				</p>
+				<div layout-padding>
+				<p>{{$ctrl.offer.description}}</p>
+				</div>
 			</md-card-content>
+			<md-divider></md-divider>
+			<md-card-content>
+				<div layout-padding>
+				<p><b>Fecha:</b> {{$ctrl.offer.pub_date}}</p>
+				<p><b>Categorías:</b> {{$ctrl.offer.categories}}</p>
+				<p><b>Lugar:</b> {{$ctrl.offer.place}}</p>
+				</div>
+			</md-card-content>
+			<md-card-actions layout="row" layout-align="center">
+				<md-button class="md-raised md-primary">Contactar</md-button>
+			</md-card-actions>
 		</md-card>
 	</md-content>
 </div>
