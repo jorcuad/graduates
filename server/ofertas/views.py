@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group
 from django.views.decorators.csrf import csrf_exempt
 
 from ofertas.models import Offer, Client
-from ofertas.serializers import OfferSerializer, ClientSerializer
+from ofertas.serializers import OfferSerializer, ClientSerializer, UserSerializer
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -74,10 +74,10 @@ def new_client(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def client_detail(request, id):
     """
-    Retrieve, update or delete an offer.
-    """
+    Retrieve, update or delete an client.
+	    """
     try:
-    	client = Client.objects.get(id=id)
+        client = Client.objects.get(id=id)
     except Client.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -95,3 +95,15 @@ def client_detail(request, id):
     elif request.method == 'DELETE':
         client.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def client_name(request, id):
+    """
+    Get Client name.
+	    """
+    try:
+        user = User.objects.get(id=id)
+        return Response({"username":str(user)})
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)

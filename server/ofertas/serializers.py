@@ -1,6 +1,8 @@
 from .models import Offer, Client
 from rest_framework import serializers
-
+from django.contrib.auth.models import User
+ 
+from rest_framework import viewsets
 
 class OfferSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,6 +21,7 @@ class OfferSerializer(serializers.ModelSerializer):
         instance.offer_name = validated_data.get('offer_name', instance.offer_name)
         instance.description = validated_data.get('description', instance.description)
         instance.pub_date = validated_data.get('pub_date', instance.pub_date)
+        instance.activity_date = validated_data.get('activity_date', instance.activity_date)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.place = validated_data.get('place', instance.place)
         instance.save()
@@ -29,8 +32,30 @@ class ClientSerializer(serializers.ModelSerializer):
         return Client.objects.create(**validated_data)
     def update(self, instance, validated_data):
         instance.offerer_name = validated_data.get('offerer_name', instance.offerer_name)
+        #instance.offerer_name = validated_data.get('offerer_name', User.username)
         instance.email = validated_data.get('email', instance.email)
         instance.save()
         return instance
     class Meta:
         model = Client
+
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User(
+            email=validated_data['email'],
+            username=validated_data['username']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+#class ViewOffer(viewsets.ModelViewSet):
+#    serializer_class = OfferSerializer
+#    queryset = Offer.objects.all().prefetch_related('client_key')[:10]
