@@ -1,14 +1,16 @@
 from django.db import models
 
+
 class User(models.Model):
     username = models.CharField(max_length=200)
-    email = models.EmailField(max_length=70,blank=True, null= False, unique= True)
+    email = models.EmailField(max_length=70, blank=True, null=False, unique=True)
 
     def __str__(self):
         return self.username
 
+
 class Offer(models.Model):
-    ##TODO: buscar problema null
+    # TODO: buscar problema null
 	offerer_name = models.CharField(max_length=200)
 	description = models.CharField(max_length=1000,null=True)
 	pub_date = models.DateTimeField('date published', null=True)
