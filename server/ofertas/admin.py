@@ -13,6 +13,5 @@ class OffererInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = 'Clients'
 
-
 admin.site.register(Client)
 admin.site.register(Offer, AdminOffer)

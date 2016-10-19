@@ -32,7 +32,6 @@ class ClientSerializer(serializers.ModelSerializer):
         return Client.objects.create(**validated_data)
     def update(self, instance, validated_data):
         instance.offerer_name = validated_data.get('offerer_name', instance.offerer_name)
-        #instance.offerer_name = validated_data.get('offerer_name', User.username)
         instance.email = validated_data.get('email', instance.email)
         instance.save()
         return instance
@@ -41,20 +40,7 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('email', 'username', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
 
-    def create(self, validated_data):
-        user = User(
-            email=validated_data['email'],
-            username=validated_data['username']
-        )
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
 
 #class ViewOffer(viewsets.ModelViewSet):
 #    serializer_class = OfferSerializer

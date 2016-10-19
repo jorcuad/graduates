@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group
 from django.views.decorators.csrf import csrf_exempt
 
 from ofertas.models import Offer, Client
-from ofertas.serializers import OfferSerializer, ClientSerializer, UserSerializer
+from ofertas.serializers import OfferSerializer, ClientSerializer
 
 from rest_framework import status
 from rest_framework.decorators import api_view
