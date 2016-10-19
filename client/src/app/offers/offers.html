@@ -5,11 +5,11 @@
 			<div layout="column" flex="65">
 			<md-input-container>
 				<label>Búsqueda de ofertas</label>
-				<input name="search" ng-model="OffersCtrl.search">
+				<input name="search" ng-model="$ctrl.search">
 			</md-input-container>
 			</div>
 			<div layout="column">
-				<md-button class="md-raised">Buscar</md-button>
+				<md-button class="md-raised" ng-click="search()">Buscar</md-button>
 			</div>
 			<div layout="column" flex="5">
 			</div>
