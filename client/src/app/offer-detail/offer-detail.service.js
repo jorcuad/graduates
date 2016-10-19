@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('graduatesApp').service('OfferDetailService', function ($http) {
-	//var topicsEndpoint = 'topics.json';
 	$http.defaults.useXDomain = true;
 	var offersEndpoint = 'http://localhost:8000/offers/'
 
