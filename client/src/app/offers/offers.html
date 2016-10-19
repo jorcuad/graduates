@@ -27,13 +27,12 @@
 			</div>
 		</div>
 		<!-- Categories accordion TODO meter en acordeon-->
-		
+
 	</md-content>
 </div>
 <md-divider></md-divider>
 <div layout-padding layout="row" layout-align="center">
 	<md-content layout-padding flex="100">
-		<!-- Offer List ng-repeat="offer in offerCtrl.offers"-->
 		<md-list flex="100">
 			<md-list-item ng-repeat="offer in $ctrl.offers">
 				<md-card flex>
@@ -43,6 +42,9 @@
 							<span class="md-subhead"><b>Ofrezco:</b> {{offer.description}}</span>
 						</md-card-title-text>
 					</md-card-title>
+					<md-card-actions layout="row" layout-align="end center">
+	 					<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
+ 					</md-card-actions>
 				</md-card>
 			</md-list-item>
 		</md-list>
