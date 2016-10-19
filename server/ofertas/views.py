@@ -78,7 +78,7 @@ def client_detail(request, id):
     """
     try:
     	client = Client.objects.get(id=id)
-    except client.DoesNotExist:
+    except Client.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':

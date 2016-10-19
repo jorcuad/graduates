@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^offers/(?P<id>[0-9]+)/$', views.offer_detail),
     url(r'^user/(?P<id>[0-9]+)/$', views.client_detail),
     url(r'^user/$', views.new_client),
+    
 ]
