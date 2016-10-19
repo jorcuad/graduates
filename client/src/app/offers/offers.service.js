@@ -3,7 +3,7 @@
 angular.module('graduatesApp').service('Offers', function ($http) {
 	//var topicsEndpoint = 'topics.json';
 	$http.defaults.useXDomain = true;
-	var offersEndpoint = 'http://192.168.1.51:8001/offers'
+	var offersEndpoint = 'http://localhost:8000/offers'
 
 	this.get = function () {
 		return $http.get(offersEndpoint)
