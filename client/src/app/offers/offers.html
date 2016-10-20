@@ -1,43 +1,37 @@
 <div layout-padding layout="row" layout-align="center">
-	<md-content layout-padding flex="95">
+	<md-content layout="row" layout-padding flex="95">
 		<!-- Search bar -->
-		<div layout="row" layout-padding>
-			<div layout="column" flex="65">
-			<md-input-container>
-				<label>Búsqueda de ofertas</label>
-				<input name="search" ng-model="$ctrl.search">
-			</md-input-container>
+		<div layout="column" layout-padding flex>
+			<div layout="row" flex>
+				<md-input-container flex>
+					<label>Búsqueda de ofertas</label>
+					<input name="search" ng-model="$ctrl.search">
+				</md-input-container>
+				<div>
+					<md-button class="md-raised" ng-click="$ctrl.filter()">Buscar</md-button>
+				</div>
 			</div>
-			<div layout="column">
-				<md-button class="md-raised" ng-click="$ctrl.filter()">Buscar</md-button>
-			</div>
-			<div layout="column" flex="5">
-			</div>
+			<div layout="row">
+				<div layout="column" flex>
+					<md-select placeholder="category" ng-model="$ctrl.category">
+		          		<md-option ng-repeat="category in $ctrl.categories" >{{category.category_name}}</md-option>
+		        	</md-select>
+	        	</div>
+        	</div>
+        </div>
 			<!-- login form -->
-			<div layout="column" flex="30" style="border: 1px solid #DCDCDC">
-				<md-input-container style="margin:0">
-					<label>Nick</label>
-					<input name="search" ng-model="OffersCtrl.nick">
-				</md-input-container>
-				<md-input-container style="margin:0">
-					<label>Password</label>
-					<input name="search" ng-model="OffersCtrl.password">
-				</md-input-container>
-				<md-button class="md-raised md-primary">Entrar</md-button>
-			</div>
+		<div layout="column" flex="30" style="border: 1px solid #DCDCDC">
+			<md-input-container style="margin:0">
+				<label>Nick</label>
+				<input name="search" ng-model="OffersCtrl.nick">
+			</md-input-container>
+			<md-input-container style="margin:0">
+				<label>Password</label>
+				<input name="search" ng-model="OffersCtrl.password">
+			</md-input-container>
+			<md-button class="md-raised md-primary">Entrar</md-button>
 		</div>
-
-
-
-
-
 		<!-- Categories accordion TODO meter en acordeon-->
-		<md-select placeholder="category" >
-          <md-option ng-repeat="category in $ctrl.categories" >{{category.category_name}}</md-option>
-        </md-select>
-
-
-
 	</md-content>
 </div>
 <md-divider></md-divider>
