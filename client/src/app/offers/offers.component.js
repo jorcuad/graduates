@@ -10,17 +10,16 @@ function offersCtrl (Offers) {
 		Offers.get().then(function (offers) { vm.offers = offers; })
 	};
 
-	$scope.search = function() {
+	vm.filter = function() {
+		console.log("FILTRANDO")
 		var query = ""
 		if (vm.search !== "") {
 			query = "search="+vm.search
 		}
 		if (vm.category !== "") {
 			if ( query !== "") {
-				query = query+"&category="+vm.category
-			} else {
-				query = "category="+vm.category
-			}
+				query = query+"&"
+			query = query+"category="+vm.category
 		}
     	Offers.search(query).then(function (offers) { vm.offers = offers; })
   	};
