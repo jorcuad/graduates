@@ -20,7 +20,9 @@ from rest_framework.routers import SimpleRouter
 
 
 router = SimpleRouter()
-router.register(r'users', views.UserViewSet)
+router.register(r'categories', views.CategoryViewSet)
+router.register(r'offers', views.OfferViewSet)
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

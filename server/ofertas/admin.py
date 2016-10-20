@@ -3,17 +3,17 @@ from .models import *
 
 # Register your models here.
 
-class AdminUser(admin.ModelAdmin):
-    """docstring for AdminUser."""
-    list_display = ["__str__", "username"]
+class AdminCategory(admin.ModelAdmin):
+    """docstring for AdminCategory."""
+    list_display = ["__str__"]
     class Meta:
-        model = User
+        model = Category
 
 class AdminOffer(admin.ModelAdmin):
-    """docstring for AdminUser."""
-    list_display = ["__str__", "offerer_name"]
+    """docstring for AdminOffer."""
+    list_display = ["__str__"]
     class Meta:
         model = Offer
 
-admin.site.register(User, AdminUser)
+admin.site.register(Category, AdminCategory)
 admin.site.register(Offer, AdminOffer)
