@@ -4,19 +4,34 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	var vm = this;
 	$scope.formData = {};
 
-	//TODO: poner mas bonito
-	$scope.logged = true;
-	$scope.username = "Manuel";
-	vm.$onInit = function () {
-			
-	$scope.myDate = ""
-	$scope.offerform = {}
+	vm.search = ""
+	vm.category = ""
 
-	vm.offers = Offers.get().then(
-		function (offers) {
-			vm.offers = offers;
-		})
+	vm.$onInit = function () {
+		$scope.logged = true;
+		$scope.username = "Manuel";
+		vm.$onInit = function () {
+				
+		$scope.myDate = ""
+		$scope.offerform = {}
+		Offers.get().then(function (offers) { vm.offers = offers; })
 	};
+
+	vm.filter = function() {
+		var query = ""
+		if (vm.search !== "") {
+			query = "search="+vm.search
+		}
+		if (vm.category !== "") {
+			if ( query !== "") {
+				query = query+"&"
+			}
+			query = query+"category="+vm.category
+		}
+    	Offers.search(query).then(function (offers) { vm.offers = offers; })
+  	};
+
+}
 
 
 	$scope.showAdvanced = function(ev) {
