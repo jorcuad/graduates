@@ -1,10 +1,9 @@
 from django.db import models
-
-
+from django.contrib.auth.models import User
 
 class Offer(models.Model):
     # TODO: buscar problema null
-	offerer_name = models.CharField(max_length=200)
+	username = models.ForeignKey(User, null=True)
 	description = models.CharField(max_length=1000,null=True)
 	pub_date = models.DateTimeField('date published', null=True)
 	email = models.EmailField(max_length=70,blank=True, null= False, unique= True)
