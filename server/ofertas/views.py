@@ -58,10 +58,9 @@ def offer_search(request):
         # create the q filter for unorder items for description field
         qDescFilter = reduce(lambda x, y: x & y, [Q(description__icontains=word) for word in words])
         # same with offer_name field
-        qNameFilter = reduce(lambda x, y: x & y, [Q(description__icontains=word) for word in words])
+        qNameFilter = reduce(lambda x, y: x & y, [Q(offer_name__icontains=word) for word in words])
 
-        # qFilter.add( qDescFilter | qNameFilter, Q.AND)
-        qFilter.add( qDescFilter, Q.AND)
+        qFilter.add( qDescFilter | qNameFilter, Q.AND)
 
     if categories:
         # categories equals categories
