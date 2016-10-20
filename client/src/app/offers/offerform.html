@@ -57,18 +57,20 @@
           </div>
 
           <md-input-container class="md-block">
-            <label>Date</label>
-            <md-datepicker required name="offerDate"  md-min-date="minDate"  ng-model="offerform.pub_date" ng-model-options="{ timezone: '-0500'}" md-placeholder="Enter date"></md-datepicker>
-
-            <div ng-messages="projectForm.offerDate.$error" role="alert">
-              <div ng-message="required"> This is required.</div>
-            </div>
+            <input type="date" id="exampleInput" name="formDate" ng-model="offerform.pub_date"
+       placeholder="yyyy-MM-dd" required ng-value="myDate"/>
+   <div role="alert">
+     <span class="error" ng-show="formDate.$error.required">
+         Required!</span>
+     <span class="error" ng-show="formDate.$error.date">
+         Not a valid date!</span>
+    </div>
           </md-input-container>
+
           <span flex></span>
-        <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+        <md-button class="md-raised md-primary"  ng-click="save()" type="submit">Submit</md-button>
         <md-button class="md-raised md-warn" ng-click="cancel()">Cancel</md-button>
       </md-dialog-actions>
-
 
         </form>
         <p>form = {{offerform}}</p>

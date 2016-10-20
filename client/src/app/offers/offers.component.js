@@ -4,22 +4,24 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	var vm = this;
 	$scope.formData = {};
 
-	$scope.myDate = new Date();
-	
-	$scope.minDate = new Date(
-      $scope.myDate.getDate(),
-      $scope.myDate.getMonth(),
-      $scope.myDate.getFullYear());
-	//var logged = true;
-
 	//TODO: poner mas bonito
 	$scope.logged = true;
 	$scope.username = "Manuel";
-	console.log(new Date());
+	vm.$onInit = function () {
+			
+	$scope.myDate = ""
+	$scope.offerform = {}
+
+	vm.offers = Offers.get().then(
+		function (offers) {
+			vm.offers = offers;
+		})
+	};
+
+
 	$scope.showAdvanced = function(ev) {
 		$mdDialog.show({
 			controller: DialogController,
-			//templateUrl: 'app/offers/inscribir_oferta_dialog.html',
 			templateUrl: 'app/offers/offerform.html',
 			targetEvent: ev,
 			clickOutsideToClose:true,
@@ -33,53 +35,66 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	};
 
 	function DialogController($scope, $mdDialog) {
+		
 		$scope.hide = function() {
 			$mdDialog.hide();
 		};
 
 		$scope.cancel = function() {
 			$mdDialog.cancel();
-			alert(Date.now);
 		};
 		$scope.save = function(offerform) {
-			alert('hola');
-
-			myValidation(offerform);
-			$http.post("http://192.168.1.51:8001/offers", offerform)
-			.then(function(result) {
-				return result.data;
-			});
-      /*vm.offers = Offers.post(offerform).then(
-			function (offers) {
-				vm.offers = offers;
-			})*/
+			console.log($scope.offerform)
+			if( correctDate($scope) && correctName($scope)  && correctPlace($scope) && correctCategories($scope)) {
+				alert("llega");
+				$http.post("http://192.168.1.51:8001/offers", offerform)
+				.then(function(result) {
+					return result.data;
+				});
+			} else {
+				//TODO dar error
+			}
 		};
-
-		function myValidation(offerform) {
-			 if(offerform.offerer_name ==" " || offerform.offerer_name == null){
-			 	alert("NO HAY OFERTANTE");
-			 }
-			 if(offerform.description == null || offerform.description == ""){
-			 	alert("NO HAY DESCRIPCION");
-			 }
-			 if(offerform.pub_date == null || offerform.pub_date == ""){
-			 	alert("NO HAY FECHA");
-			 	cancel();
-			 }
-		
-		}
-
+		$scope.formDate="";
 	}
-	vm.$onInit = function () {
-		vm.offers = Offers.get().then(
-			function (offers) {
-				vm.offers = offers;
-			})
 
+	function correctName($scope){
+		if($scope.offerform.name==""){
+			return false;
+			}
+		else {
+			return true;
+		}
+	}
+	function correctPlace($scope){
+		if($scope.offerform.place==""){
+			return false;
+			}
+		else {
+			return true;
+		}
+	}
+	function correctCategories($scope){
+		if($scope.offerform.categories==""){
+			return false;
+			}
+		else {
+			return true;
+		}
+	}
+	function correctDate($scope){
+		console.log($scope)
+		var today =  new Date();
+
+		if($scope.offerform.pub_date > today) {
+			console.log("myDate " + today + '-->'+ $scope.offerform.pub_date);
+			return true;
+		} else {
+			console.log("today "+ today + '-->'+ $scope.offerform.pub_date );
+			return false;
+		}
 	};
-
 }
-
 angular.module('graduatesApp').component('offers', {
 	templateUrl: 'app/offers/offers.html',
 	controller: offersCtrl
