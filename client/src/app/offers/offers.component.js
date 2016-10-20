@@ -62,6 +62,7 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 				var datos = $scope.offerform
 				$http.post("http://localhost:8000/offers/", datos)
 				.then(function(result) {
+					$mdDialog.cancel();
 					return result.data;
 				});
 			} else {
