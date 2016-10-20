@@ -14,8 +14,8 @@
 			<div layout="row">
 				<div layout="column" flex>
 					<md-select placeholder="category" ng-model="$ctrl.category">
-		          		<md-option ng-repeat="category in $ctrl.categories" >{{category.category_name}}</md-option>
-		        	</md-select>
+						<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name}}</md-option>
+					</md-select>
 	        	</div>
         	</div>
         </div>

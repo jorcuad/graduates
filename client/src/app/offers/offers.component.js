@@ -10,8 +10,7 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 
 	vm.$onInit = function () {
 		$scope.logged = true;
-		$scope.username = "Manuel";		
-		$scope.myDate = ""
+		$scope.username = "Manuel";
 		$scope.offerform = {}
 		Offers.get().then(function (offers) { vm.offers = offers; })
 		// Get all categories
