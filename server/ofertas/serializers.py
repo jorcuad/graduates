@@ -1,4 +1,4 @@
-from .models import Offer, User
+from .models import Offer, Category
 from rest_framework import serializers
 
 
@@ -25,6 +25,7 @@ class OfferSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-class UserSerializer(serializers.ModelSerializer):
+
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Category

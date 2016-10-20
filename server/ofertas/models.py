@@ -1,13 +1,6 @@
 from django.db import models
 
 
-class User(models.Model):
-    username = models.CharField(max_length=200)
-    email = models.EmailField(max_length=70, blank=True, null=False, unique=True)
-
-    def __str__(self):
-        return self.username
-
 
 class Offer(models.Model):
     # TODO: buscar problema null
@@ -24,3 +17,13 @@ class Offer(models.Model):
 
 	def __str__(self):
 		return self.description
+
+class Category(models.Model):
+    category_name = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.category_name

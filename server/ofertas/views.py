@@ -7,19 +7,20 @@ from django.db.models import Q
 
 from django.views.decorators.csrf import csrf_exempt
 
-from ofertas.models import Offer
-from ofertas.serializers import OfferSerializer, UserSerializer
+from ofertas.models import Offer, Category
+from ofertas.serializers import OfferSerializer, CategorySerializer
 
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-class UserViewSet(ModelViewSet):
+
+class CategoryViewSet(ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint that allows categories to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 
 @api_view(['GET'])
