@@ -15,7 +15,7 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	//TODO: poner mas bonito
 	$scope.logged = true;
 	$scope.username = "Manuel";
-
+	console.log(new Date());
 	$scope.showAdvanced = function(ev) {
 		$mdDialog.show({
 			controller: DialogController,
