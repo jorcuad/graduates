@@ -44,10 +44,10 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 			$mdDialog.cancel();
 		};
 		$scope.save = function(offerform) {
-			console.log($scope.offerform)
 			if( correctDate($scope) && correctName($scope)  && correctPlace($scope) && correctCategories($scope)) {
-				alert("llega");
-				$http.post("http://192.168.1.51:8001/offers", offerform)
+				console.log($scope.offerform)
+				var datos = $scope.offerform
+				$http.post("http://localhost:8000/offers/", datos)
 				.then(function(result) {
 					return result.data;
 				});
@@ -83,14 +83,11 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 		}
 	}
 	function correctDate($scope){
-		console.log($scope)
 		var today =  new Date();
 
 		if($scope.offerform.pub_date > today) {
-			console.log("myDate " + today + '-->'+ $scope.offerform.pub_date);
 			return true;
 		} else {
-			console.log("today "+ today + '-->'+ $scope.offerform.pub_date );
 			return false;
 		}
 	};
