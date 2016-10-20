@@ -4,6 +4,8 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 	$http.defaults.useXDomain = true;
 	var offersEndpoint = 'http://localhost:8000/offers'
 	var searchEndpoint = 'http://localhost:8000/offersearch/?'
+	var categoriesEndpoint = 'http://localhost:8000/categories/'
+
 
 	this.get = function () {
 		return $http.get(offersEndpoint)
@@ -19,4 +21,11 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 					});
 	}
 
+	//Get all categories
+	this.getCategories = function () {
+		return $http.get(categoriesEndpoint)
+					.then(function(result) {
+						return result.data;
+					});
+	}
 });

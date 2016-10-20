@@ -5,9 +5,13 @@ function offersCtrl (Offers) {
 
 	vm.search = ""
 	vm.category = ""
+	vm.categories = ""
 
 	vm.$onInit = function () {
+		// Get all offers
 		Offers.get().then(function (offers) { vm.offers = offers; })
+		// Get all categories
+		Offers.getCategories().then(function (categories) { vm.categories = categories; })
 	};
 
 	vm.filter = function() {
@@ -23,7 +27,6 @@ function offersCtrl (Offers) {
 		}
     	Offers.search(query).then(function (offers) { vm.offers = offers; })
   	};
-
 }
 
 angular.module('graduatesApp').component('offers', {
