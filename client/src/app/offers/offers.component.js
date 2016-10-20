@@ -11,7 +11,6 @@ function offersCtrl (Offers) {
 	};
 
 	vm.filter = function() {
-		console.log("FILTRANDO")
 		var query = ""
 		if (vm.search !== "") {
 			query = "search="+vm.search
@@ -19,6 +18,7 @@ function offersCtrl (Offers) {
 		if (vm.category !== "") {
 			if ( query !== "") {
 				query = query+"&"
+			}
 			query = query+"category="+vm.category
 		}
     	Offers.search(query).then(function (offers) { vm.offers = offers; })
