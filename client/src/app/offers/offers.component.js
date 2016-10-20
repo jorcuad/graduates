@@ -2,6 +2,14 @@
 
 function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	var vm = this;
+	$scope.formData = {};
+
+	$scope.myDate = new Date();
+	
+	$scope.minDate = new Date(
+      $scope.myDate.getDate(),
+      $scope.myDate.getMonth(),
+      $scope.myDate.getFullYear());
 	//var logged = true;
 
 	//TODO: poner mas bonito
@@ -25,15 +33,19 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	};
 
 	function DialogController($scope, $mdDialog) {
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
+		$scope.hide = function() {
+			$mdDialog.hide();
+		};
 
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-    $scope.save = function(offerform) {
-		$http.post("http://192.168.1.51:8001/offers", offerform)
+		$scope.cancel = function() {
+			$mdDialog.cancel();
+			alert(Date.now);
+		};
+		$scope.save = function(offerform) {
+			alert('hola');
+
+			myValidation(offerform);
+			$http.post("http://192.168.1.51:8001/offers", offerform)
 			.then(function(result) {
 				return result.data;
 			});
@@ -41,12 +53,23 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 			function (offers) {
 				vm.offers = offers;
 			})*/
-    };
+		};
 
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
-    };
-  }
+		function myValidation(offerform) {
+			 if(offerform.offerer_name ==" " || offerform.offerer_name == null){
+			 	alert("NO HAY OFERTANTE");
+			 }
+			 if(offerform.description == null || offerform.description == ""){
+			 	alert("NO HAY DESCRIPCION");
+			 }
+			 if(offerform.pub_date == null || offerform.pub_date == ""){
+			 	alert("NO HAY FECHA");
+			 	cancel();
+			 }
+		
+		}
+
+	}
 	vm.$onInit = function () {
 		vm.offers = Offers.get().then(
 			function (offers) {

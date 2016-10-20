@@ -1,5 +1,4 @@
-  <md-dialog aria-label="Inscribirme en oferta">
-    <form ng-cloak ng-submit="vm.enviar()">
+<md-dialog aria-label="Inscribirme en oferta">
       <md-toolbar>
         <div class="md-toolbar-tools">
           <h2>Crear Oferta</h2>
@@ -14,78 +13,68 @@
         <div class="md-dialog-content">
           <div layout="column" layout-padding>
 
-    <md-content class="md-no-momentum">
-      <md-input-container class="md-icon-float md-block">
-        <!-- Use floating label instead of placeholder -->
-        <label>{{offerform.offerer_name="Manuel"}}</label>
-        <md-icon md-font-icon="" />person</md-icon>
-        <input ng-model="offerform.offerer_name" type="text" ng-disabled=true ng-value="Manuel">
-      </md-input-container>
+            <form name="projectForm">
 
-      <md-input-container md-no-float class="md-block">
-        <md-icon md-font-icon="announcement">announcement</md-icon>
-        <input ng-model="offerform.name" type="text" placeholder="Offer Name (required)" ng-required="true">
-      </md-input-container>
+              <md-input-container class="md-icon-float md-block">
 
-      <md-input-container class="md-block">
-        <!-- Use floating placeholder instead of label -->
-        <md-icon md-font-icon="description" class="description">description</md-icon>
-        <textarea ng-model="offerform.description" ng-maxlenght="150" rows="5" placeholder="Description (required)" ng-required="true">
-        </textarea>
-      </md-input-container>
+                <md-icon md-font-icon="" />person</md-icon>
+                <input ng-model="offerform.offerer_name" type="text" ng-disabled=true ng-value={{offerform.offerer_name="Manuel"}}>
+              </md-input-container>
 
-      <md-input-container class="md-icon-float md-icon-right md-block">
-        <input ng-model="offerform.place" type="text" placeholder="Address" >
-        <md-icon md-font-icon="place" style="display:inline-block;">place</md-icon>
-      </md-input-container>
+              <div layout="row">
+                <md-input-container flex="50">
+                  <label>Offer Name</label>
+                  <md-icon md-font-icon="announcement">announcement</md-icon>
+                  <input required name="offerName" ng-model="offerform.name">
+                  <div ng-messages="projectForm.offerName.$error">
+                    <div ng-message="required">This is required.</div>
+                  </div>
+                </md-input-container>
 
-      <md-input-container class="md-icon-float md-icon-right md-block">
-        <label>Date</label>
-        <md-datepicker ng-model="offerform.pub_date" md-placeholder="Enter date"></md-datepicker>
-      </md-input-container>
-
-        <!--<md-input-container class="md-icon-float md-icon-right md-block">
-          <label>Category</label>
-          <md-select ng-model="offerform.categories" md-selected-text="Category">
-            <md-optgroup label="Categories">
-              <md-option ng-value="Deportes">Deportes</md-option>
-              <md-option ng-value="Ocio">Ocio</md-option>
-              <md-option ng-value="Cultura">Cultura</md-option>
-              <md-option ng-value="Otros"">Otros</md-option>
-            </md-optgroup>
-          </md-select>
-        </md-input-container>-->
-    <label>
-      <input type="radio" ng-model="offerform.categories" value="Deportes">
-      Deportes
-    </label><br/>
-    <label>
-      <input type="radio" ng-model="offerform.categories" value="Ocio">
-      Ocio
-    </label><br/>
-    <label>
-      <input type="radio" ng-model="offerform.categories" value="Cultura">
-      Cultura
-    </label><br/>
-    <label>
-      <input type="radio" ng-model="offerform.categories" value="Otros">
-      Otros
-    </label><br/>
-
-    </section>
-    <p>form = {{offerform}}</p>
-    <p>form = {{offerform.categories}}</p>
-
-  </div>
-        </div>
-      </md-dialog-content>
-      <md-dialog-actions layout="row">
-        <span flex></span>
-        <md-button class="md-raised md-primary" ng-click="save(offerform)" >Save</md-button>
-        <md-button class="md-raised md-warn" ng-click="cancel()">Cancel</md-button>
-      </md-dialog-actions>
-    </md-content>
-    </form>
-  </md-dialog>
+                <md-input-container flex="50">
+                  <label>Category Type</label>
+                  <md-icon md-font-icon="category">category</md-icon>
+                  <md-select name="type" ng-model="offerform.categories" required>
+                    <md-option value="sports">Sports</md-option>
+                    <md-option value="culture">Culture</md-option>
+                    <md-option value="other">Other</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+              <md-input-container class="md-block">
+                <label>Description</label>
+                <md-icon md-font-icon="description" class="description">description</md-icon>
+                <input md-maxlength="30" required md-no-asterisk name="description" ng-model="offerform.description">
+                <div ng-messages="projectForm.description.$error">
+                  <div ng-message="required">This is required.</div>
+                  <div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
+                </div>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-icon-right md-block">
+                <input ng-model="offerform.place" type="text" placeholder="Address" >
+                <md-icon md-font-icon="place" style="display:inline-block;">place</md-icon>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-icon-right md-block">
+                <label>Date</label>
+                <md-datepicker md-min-date="minDate" required name="offerDate" ng-model="offerform.pub_date" md-placeholder="Enter date"></md-datepicker>
+                <div ng-messages="projectForm.offerDate.$error">
+                  <div ng-message="required">This is required.</div>
+                </div>
+                <div ng-message="required">This date is required!</div>
+                <div ng-message="mindate">Date is too early!</div>
+                <div ng-message="maxdate">Date is too late!</div>
+              </div>
+            </md-input-container>
+            {{$scope.minDate}}
 
 
+            <div>
+              <md-button type="submit">Submit</md-button>
+            </div>
+
+            <p style="font-size:.8em; width: 100%; text-align: center;">
+              Make sure to include <a href="https://docs.angularjs.org/api/ngMessages" target="_blank">ngMessages</a> module when using ng-message markup.
+            </p>
+          </form>
+          <p>form = {{offerform}}</p>
+        </md-dialog>
