@@ -26,7 +26,17 @@
 				<md-button class="md-raised md-primary">Entrar</md-button>
 			</div>
 		</div>
+
+
+
+
+
 		<!-- Categories accordion TODO meter en acordeon-->
+		<md-select placeholder="category" >
+          <md-option ng-repeat="category in $ctrl.categories" >{{category.category_name}}</md-option>
+        </md-select>
+
+
 
 	</md-content>
 </div>
