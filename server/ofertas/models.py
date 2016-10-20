@@ -9,7 +9,7 @@ class Offer(models.Model):
 	activity_date = models.DateTimeField('activity_date', null=True)
 	categories = models.CharField(max_length=500,null=True)
 	place = models.CharField(max_length=100,null=True)
-	username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	class Meta:
 		verbose_name = "Offer"
 		verbose_name_plural = "Offers"
