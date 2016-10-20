@@ -5,14 +5,17 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	$scope.formData = {};
 
 	vm.search = ""
+	vm.categories = ""
 	vm.category = ""
-		
+
 	vm.$onInit = function () {
 		$scope.logged = true;
 		$scope.username = "Manuel";		
 		$scope.myDate = ""
 		$scope.offerform = {}
 		Offers.get().then(function (offers) { vm.offers = offers; })
+		// Get all categories
+		Offers.getCategories().then(function (categories) { vm.categories = categories; })
 	};
 
 	vm.filter = function() {
