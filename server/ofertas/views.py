@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 
 from ofertas.models import Offer, Category
-from ofertas.serializers import OfferSerializer, CategorySerializer
+from ofertas.serializers import OfferSerializer, CategorySerializer, UserSerializer
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -21,6 +21,14 @@ class CategoryViewSet(ModelViewSet):
     """
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+
+class UserViewSet(ModelViewSet):
+    """
+    API endpoint that allows clients to be viewed or edited.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class OfferViewSet(ModelViewSet):
     """
@@ -62,4 +70,3 @@ def offer_search(request):
     results = Offer.objects.filter(qFilter).order_by('pub_date')
     serializer = OfferSerializer(results, many=True)
     return Response(serializer.data)
-    
