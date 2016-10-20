@@ -20,7 +20,7 @@
         	</div>
         </div>
 			<!-- login form -->
-		<div layout="column" flex="30" style="border: 1px solid #DCDCDC">
+		<div layout="column" flex="30" layout-padding>
 			<section ng-show="!logged" layout="row" layout-sm="column" layout-align="center center" layout-wrap>
 				<md-input-container style="margin:0">
 					<label>Nick</label>
@@ -31,10 +31,6 @@
 					<input name="search" ng-model="OffersCtrl.password">
 				</md-input-container>
 				<md-button class="md-raised md-primary">Entrar</md-button>
-			</section>
-
-			<section ng-show="logged" layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-				<span>Usuario logueado: {{username}}</span>
 			</section>
 
 			<section layout="row" layout-sm="column" layout-align="center center" >
@@ -50,11 +46,11 @@
 	<md-content layout-padding flex="100">
 		<md-list flex="100">
 			<md-list-item ng-repeat="offer in $ctrl.offers">
-				<md-card flex>
+				<md-card flex layout-padding>
 					<md-card-title>
 						<md-card-title-text>
-							<span class="md-headline">Soy: {{offer.user.username}}</span>
-							<span class="md-subhead"><b>Ofrezco:</b> {{offer.description}}</span>
+							<span class="md-headline">{{offer.offer_name}}</span>
+							<span class="md-subhead">{{offer.description}}</span>
 						</md-card-title-text>
 					</md-card-title>
 					<md-card-actions layout="row" layout-align="end center">

@@ -6,8 +6,8 @@
 					<img src="https://material.angularjs.org/latest/img/logo.svg"/>
 				</md-card-avatar>
 				<md-card-header-text>
-					<span class="md-title">{{$ctrl.offer.description}}</span>
-					<span class="md-subhead">{{$ctrl.offer.user.username}}</span>
+					<span class="md-title">{{$ctrl.offer.offer_name}}</span>
+					<span class="md-subhead">Publicado: {{$ctrl.offer.pub_date}} por {{$ctrl.offer.user.username}}</span>
 				</md-card-header-text>
 				<div layout-align="center">
 					<md-button ng-show="!$ctrl.favorite" class="md-icon-button" aria-label="Favorite">
@@ -21,11 +21,6 @@
 					</md-button>
 				</div>
 			</md-card-header>
-			<md-card-title>
-				<md-card-title-text>
-					<span class="md-headline">{{$ctrl.offer.offer_name}}</span>
-				</md-card-title-text>
-			</md-card-title>
 			<md-card-content>
 				<div layout-padding>
 				<p>{{$ctrl.offer.description}}</p>
@@ -34,7 +29,8 @@
 			<md-divider></md-divider>
 			<md-card-content>
 				<div layout-padding>
-				<p><b>Fecha:</b> {{$ctrl.offer.pub_date}}</p>
+				<p><b>Fecha:</b> {{$ctrl.offer.activity_date}}</p>
+				<p><b>Hora:</b> {{$ctrl.offer.time}}</p>
 				<p><b>Categorías:</b> {{$ctrl.offer.categories}}</p>
 				<p><b>Lugar:</b> {{$ctrl.offer.place}}</p>
 				</div>

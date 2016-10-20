@@ -57,7 +57,9 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 		};
 		$scope.save = function(offerform) {
 			if( correctDate($scope) && correctName($scope)  && correctPlace($scope) && correctCategories($scope)) {
-				console.log($scope.offerform)
+				$scope.offerform.pub_date = new Date()
+				$scope.offerform.user = 1
+				$scope.offerform.time = pad($scope.offerform.activity_hour) +":"+ pad($scope.offerform.activity_min)
 				var datos = $scope.offerform
 				$http.post("http://localhost:8000/offers/", datos)
 				.then(function(result) {
@@ -69,6 +71,10 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 			}
 		};
 		$scope.formDate="";
+	}
+
+	function pad(n) {
+		return (n < 10) ? ("0" + n) : n;
 	}
 
 	function correctName($scope){
@@ -98,7 +104,7 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	function correctDate($scope){
 		var today =  new Date();
 
-		if($scope.offerform.pub_date > today) {
+		if($scope.offerform.activity_date > today) {
 			return true;
 		} else {
 			return false;
