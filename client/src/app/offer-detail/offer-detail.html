@@ -1,0 +1,43 @@
+<div layout-padding layout="row" layout-align="center">
+	<md-content layout-padding flex="95">
+		<md-card>
+			<md-card-header>
+				<md-card-avatar>
+					<img src="https://material.angularjs.org/latest/img/logo.svg"/>
+				</md-card-avatar>
+				<md-card-header-text>
+					<span class="md-title">{{$ctrl.offer.offer_name}}</span>
+					<span class="md-subhead">Publicado: {{$ctrl.offer.pub_date}} por {{$ctrl.offer.user.username}}</span>
+				</md-card-header-text>
+				<div layout-align="center">
+					<md-button ng-show="!$ctrl.favorite" class="md-icon-button" aria-label="Favorite">
+						<md-icon md-svg-icon="../assets/icons/favorite.svg"></md-icon>
+					</md-button>
+					<md-button ng-show="$ctrl.favorite" class="md-icon-button" aria-label="Favorite">
+						<md-icon md-svg-icon="../assets/icons/favorited.svg"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="Share">
+						<md-icon md-svg-icon="../assets/icons/share.svg"></md-icon>
+					</md-button>
+				</div>
+			</md-card-header>
+			<md-card-content>
+				<div layout-padding>
+				<p>{{$ctrl.offer.description}}</p>
+				</div>
+			</md-card-content>
+			<md-divider></md-divider>
+			<md-card-content>
+				<div layout-padding>
+				<p><b>Fecha:</b> {{$ctrl.offer.activity_date}}</p>
+				<p><b>Hora:</b> {{$ctrl.offer.time}}</p>
+				<p><b>Categorías:</b> {{$ctrl.offer.categories}}</p>
+				<p><b>Lugar:</b> {{$ctrl.offer.place}}</p>
+				</div>
+			</md-card-content>
+			<md-card-actions layout="row" layout-align="center">
+				<md-button class="md-raised md-primary">Contactar</md-button>
+			</md-card-actions>
+		</md-card>
+	</md-content>
+</div>

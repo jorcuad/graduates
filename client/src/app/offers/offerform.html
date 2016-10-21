@@ -1,0 +1,87 @@
+<md-dialog aria-label="Inscribirme en oferta">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Crear Oferta</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="cancel()">
+				<md-icon md-font-icon="close" aria-label="Close dialog"></md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+
+	<md-dialog-content>
+		<div class="md-dialog-content">
+			<div layout="column" layout-padding>
+				<form name="projectForm">
+					<md-input-container class="md-block">
+						<md-icon md-font-icon="announcement">announcement</md-icon>
+						<input ng-model="offerform.offer_name" type="text" placeholder="Nombre de la oferta" ng-required="true">
+					</md-input-container>
+
+					<md-input-container class="md-block">
+						<md-icon md-font-icon="description" class="description">description</md-icon>
+						<textarea ng-model="offerform.description" ng-maxlenght="150" rows="5" placeholder="Descripción" ng-required="true"></textarea>
+					</md-input-container>
+
+					<div layout="row">
+						<md-input-container flex="50">
+							<md-icon md-font-icon="place" style="display:inline-block;">place</md-icon>
+							<input required name="clientName" ng-model="offerform.place" placeholder="Lugar">
+							<div ng-messages="projectForm.clientName.$error">
+								<div ng-message="required">This is required.</div>
+							</div>
+						</md-input-container>
+
+						<md-input-container flex="50">
+							<label>Categoría</label>
+							<md-icon md-font-icon="category">category</md-icon>
+							<md-select required name="categoryName" ng-model="offerform.categories">
+								<md-option value="sports">Sports</md-option>
+								<md-option value="culture">Culture</md-option>
+								<md-option value="other">Other</md-option>
+							</md-select>
+							<div ng-messages="projectForm.categoryName.$error">
+								<div ng-message="required">This is required.</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<div layout="column" flex="50">
+							<md-input-container class="md-block">
+								<input type="date" id="exampleInput" name="formDate" ng-model="offerform.activity_date" placeholder="yyyy-MM-dd" required ng-value="myDate"/>
+								<div role="alert">
+									<span class="error" ng-show="formDate.$error.required">
+									Required!</span>
+									<span class="error" ng-show="formDate.$error.date">
+									Not a valid date!</span>
+								</div>
+							</md-input-container>
+						</div>
+						<div layout="column" flex="25">
+							<md-input-container class="md-block">
+								<input type="number" id="exampleInput" name="formHour" ng-model="offerform.activity_hour" required min="0" max="23" placeholder="Hora"/>
+								<div role="alert">
+									<span class="error" ng-show="formDate.$error.required">
+									Required!</span>
+								</div>
+							</md-input-container>
+						</div>
+						<div layout="column" flex="25">
+							<md-input-container class="md-block">
+								<input type="number" id="exampleInput" name="formMin" ng-model="offerform.activity_min" required min="0" max="59" placeholder="Minutos"/>
+								<div role="alert">
+									<span class="error" ng-show="formDate.$error.required">
+									Required!</span>
+								</div>
+							</md-input-container>
+						</div>
+					</div>
+					<md-dialog-actions>
+						<md-button class="md-raised md-primary"  ng-click="save()" type="submit">Submit</md-button>
+						<md-button class="md-raised md-warn" ng-click="cancel()">Cancel</md-button>
+					</md-dialog-actions>
+				</form>
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>

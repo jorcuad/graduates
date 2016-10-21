@@ -1,7 +1,6 @@
 from django.conf.urls import url
-
-from . import views
+from ofertas import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^offersearch/$', views.offer_search)
 ]

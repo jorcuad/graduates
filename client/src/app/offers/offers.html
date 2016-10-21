@@ -1,20 +1,27 @@
 <div layout-padding layout="row" layout-align="center">
-	<md-content layout-padding flex="95">
+	<md-content layout="row" layout-padding flex="95">
 		<!-- Search bar -->
-		<div layout="row" layout-padding>
-			<div layout="column" flex="65">
-			<md-input-container>
-				<label>Búsqueda de ofertas</label>
-				<input name="search" ng-model="OffersCtrl.search">
-			</md-input-container>
+		<div layout="column" layout-padding flex>
+			<div layout="row" flex>
+				<md-input-container flex>
+					<label>Búsqueda de ofertas</label>
+					<input name="search" ng-model="$ctrl.search">
+				</md-input-container>
+				<div>
+					<md-button class="md-raised" ng-click="$ctrl.filter()">Buscar</md-button>
+				</div>
 			</div>
-			<div layout="column">
-				<md-button class="md-raised">Buscar</md-button>
-			</div>
-			<div layout="column" flex="5">
-			</div>
+			<div layout="row">
+				<div layout="column" flex>
+					<md-select placeholder="category" ng-model="$ctrl.category">
+						<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name}}</md-option>
+					</md-select>
+	        	</div>
+        	</div>
+        </div>
 			<!-- login form -->
-			<div layout="column" flex="30" style="border: 1px solid #DCDCDC">
+		<div layout="column" flex="30" layout-padding>
+			<section ng-show="!logged" layout="row" layout-sm="column" layout-align="center center" layout-wrap>
 				<md-input-container style="margin:0">
 					<label>Nick</label>
 					<input name="search" ng-model="OffersCtrl.nick">
@@ -24,25 +31,31 @@
 					<input name="search" ng-model="OffersCtrl.password">
 				</md-input-container>
 				<md-button class="md-raised md-primary">Entrar</md-button>
-			</div>
+			</section>
+
+			<section layout="row" layout-sm="column" layout-align="center center" >
+				<md-button ng-disabled="!logged" ng-click="showAdvanced($event)" class="md-raised md-primary">Crear Oferta</md-button>
+			</section>
 		</div>
-		<!-- Categories accordion TODO meter en acordeon-->
-		
 	</md-content>
 </div>
+
 <md-divider></md-divider>
+
 <div layout-padding layout="row" layout-align="center">
 	<md-content layout-padding flex="100">
-		<!-- Offer List ng-repeat="offer in offerCtrl.offers"-->
 		<md-list flex="100">
 			<md-list-item ng-repeat="offer in $ctrl.offers">
-				<md-card flex>
+				<md-card flex layout-padding>
 					<md-card-title>
 						<md-card-title-text>
-							<span class="md-headline">Soy: {{offer.offerer_name}}</span>
-							<span class="md-subhead"><b>Ofrezco:</b> {{offer.description}}</span>
+							<span class="md-headline">{{offer.offer_name}}</span>
+							<span class="md-subhead">{{offer.description}}</span>
 						</md-card-title-text>
 					</md-card-title>
+					<md-card-actions layout="row" layout-align="end center">
+	 					<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
+ 					</md-card-actions>
 				</md-card>
 			</md-list-item>
 		</md-list>
