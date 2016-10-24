@@ -10,7 +10,7 @@ class Offer(models.Model):
 	activity_date = models.DateTimeField('activity_date')
 	categories = models.CharField(max_length=500, default="otros")
 	place = models.CharField(max_length=100, default="sin lugar")
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	modified_date =  models.DateTimeField(auto_now_add=False, auto_now=True)
 	active = models.BooleanField(default=True)
 	private = models.BooleanField(default=False)
