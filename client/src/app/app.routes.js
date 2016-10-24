@@ -5,6 +5,9 @@ function routeConfig ($routeProvider) {
 		.when('/', {
 			template : "<offers></offers>"
 		})
+		.when('/new-offer', {
+			templateUrl : "./app/views/new-offer.html"
+		})
 		.when('/detail/:orderId', {
 			template : "<offer-detail></offer-detail>"
 		})

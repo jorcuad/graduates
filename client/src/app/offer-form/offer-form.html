@@ -1,0 +1,91 @@
+<div layout-padding>
+	<form name="offer">
+		<div layout="row">
+			<md-input-container flex>
+				<md-icon md-font-icon="announcement">name</md-icon>
+				<input name="name" required type="text" placeholder="Nombre de la oferta" ng-model="$ctrl.offerform.offer_name" ng-pattern="/^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$/" />
+
+				<div ng-messages="offer.name.$error" multiple md-auto-hide="true">
+				  <div ng-message="pattern">
+					El usuario introducido no es válido.
+				  </div>
+				  <div ng-message="required">
+					Este campo es necesario.
+				  </div>
+				</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container flex>
+				<md-icon md-font-icon="description" class="description">description</md-icon>
+				<textarea name="description" required type="text" ng-maxlenght="150" rows="5" placeholder="Descripción" ng-model="$ctrl.offerform.description"></textarea>
+
+				<div ng-messages="offer.description.$error" multiple md-auto-hide="true">
+				  <div ng-message="required">
+					Este campo es necesario.
+				  </div>
+				</div>
+			</md-input-container>
+		</div>
+
+		<div layout="row">
+			<md-input-container flex="45">
+				<md-icon md-font-icon="place">place</md-icon>
+				<input name="place" required type="text" placeholder="Lugar" ng-model="$ctrl.offerform.place"/>
+
+				<div ng-messages="offer.place.$error" multiple md-auto-hide="true">
+				  <div ng-message="required">
+					Este campo es necesario.
+				  </div>
+				</div>
+			</md-input-container>
+			<span flex="10"></span>
+			<md-input-container flex="45">
+				<md-icon md-font-icon="place">category</md-icon>
+				<md-select placeholder="Categoría" ng-model="$ctrl.category">
+					<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">
+						{{cat.category_name}}
+					</md-option>
+				</md-select>
+
+				<div ng-messages="offer.category.$error" multiple md-auto-hide="true">
+				  <div ng-message="required">
+					Este campo es necesario.
+				  </div>
+				</div>
+			</md-input-container>
+		</div>
+
+		<div layout="row">
+			<div layout="column" flex="50">
+				<md-datepicker ng-model="$ctrl.offerForm.date" md-placeholder="Fecha de la oferta"
+				md-min-date="$ctrl.minDate"></md-datepicker>
+			</div>
+			<div layout="column" flex="25">
+				<md-input-container>
+					<input name="hour" required type="number" min="0" max="23" placeholder="Hora" ng-model="$ctrl.offerform.activity_hour"/>
+
+					<div ng-messages="offer.hour.$error" multiple md-auto-hide="true">
+					  <div ng-message="required">
+						Este campo es necesario.
+					  </div>
+					</div>
+				</md-input-container>
+			</div>
+			<div layout="column" flex="25">
+				<md-input-container>
+					<input name="min" required type="number" min="0" max="59" placeholder="Minutos" ng-model="$ctrl.offerform.activity_hour"/>
+
+					<div ng-messages="offer.min.$error" multiple md-auto-hide="true">
+					  <div ng-message="required">
+						Este campo es necesario.
+					  </div>
+					</div>
+				</md-input-container>
+			</div>
+		</div>
+		<div layout="row" layout-align="center center">
+			<md-button class="md-raised md-primary"  ng-click="$ctrl.create()" type="submit">Submit</md-button>
+		</div>
+	</form>
+</div>
