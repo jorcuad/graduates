@@ -64,6 +64,7 @@ def offer_search(request):
 
     if categories:
         # categories equals categories
+        # qFilter.add( Q(categories__iexact=categories), Q.AND)
         qFilter.add( Q(categories=categories), Q.AND)
 
     results = Offer.objects.filter(qFilter).order_by('pub_date')
