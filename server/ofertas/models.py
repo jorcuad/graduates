@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Offer(models.Model):
-    # TODO: buscar problema null
+	# TODO: buscar problema null
 	offer_name = models.CharField(max_length=200, null=True)
 	description = models.CharField(max_length=1000,null=True)
 	pub_date = models.DateTimeField('published_date', null=True)
@@ -11,6 +11,8 @@ class Offer(models.Model):
 	place = models.CharField(max_length=100,null=True)
 	time = models.CharField(max_length=25, null=True)
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	owner = models.ForeignKey('auth.User', related_name='offers')
+	#ighlighted = models.TextField()
 	class Meta:
 		verbose_name = "Offer"
 		verbose_name_plural = "Offers"
@@ -19,11 +21,11 @@ class Offer(models.Model):
 		return self.description
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=200)
+	category_name = models.CharField(max_length=200)
 
-    class Meta:
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
+	class Meta:
+		verbose_name = "Category"
+	verbose_name_plural = "Categories"
 
-    def __str__(self):
-        return self.category_name
+	def __str__(self):
+		return self.category_name

@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.models import User, Group
+from django.http import HttpResponse
 
 from functools import reduce
 
@@ -13,7 +14,12 @@ from ofertas.serializers import OfferSerializer, CategorySerializer, UserSeriali
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import permissions
+from ofertas.permissions import IsOwnerOrReadOnly
 
+
+
+from django.contrib.auth import authenticate, login
 
 class CategoryViewSet(ModelViewSet):
     """
@@ -21,6 +27,8 @@ class CategoryViewSet(ModelViewSet):
     """
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                      IsOwnerOrReadOnly,)
 
 
 class UserViewSet(ModelViewSet):
@@ -36,6 +44,11 @@ class OfferViewSet(ModelViewSet):
     """
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                      IsOwnerOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 @api_view(['GET'])
@@ -43,7 +56,6 @@ def offer_search(request):
     """
     List all snippets, or create a new snippet.
     """
-
     search = request.GET.get('search', None)
     categories = request.GET.get('category', None)
 
@@ -69,3 +81,71 @@ def offer_search(request):
     results = Offer.objects.filter(qFilter).order_by('pub_date')
     serializer = OfferSerializer(results, many=True)
     return Response(serializer.data)
+
+
+from django.contrib.auth.models import User 
+from rest_framework import generics
+from ofertas.serializers import UserSerializer
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'OfferSerializer': reverse('offer-list', request=request, format=format)
+    })
+
+
+# from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+# from rest_framework.permissions import IsAuthenticated
+# from rest_framework.response import Response
+# from rest_framework.views import APIView
+
+# class user_login(APIView):
+#     authentication_classes = (SessionAuthentication, BasicAuthentication)
+#     permission_classes = (IsAuthenticated,)
+
+#     def get(self, request, format=None):
+#         content = {
+#             'user': unicode(request.user),  # `django.contrib.auth.User` instance.
+#             'auth': unicode(request.auth),  # None
+#         }
+#         return Response(content)
+
+
+
+
+
+#@api_view(['POST'])
+#def user_login(request):
+
+#    print (request.user)
+
+
+#    username = request.POST['username']
+#    password = request.POST['password']
+#    user = authenticate(username=username, password=password)
+#    if user is not None:
+#        login(request, user)
+#        # Redirect to a success page.
+#        return render(request, "<body>hola</body>", {})
+#
+#        print("valid login")            
+#    else:
+        # Return an 'invalid login' error message.
+#        print("invalid login")    
+#    return HttpResponse("hola")
+

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 
 class OfferSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Offer
         depth = 1

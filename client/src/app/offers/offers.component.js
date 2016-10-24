@@ -28,10 +28,10 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 			}
 			query = query+"category="+vm.category
 		}
-    	Offers.search(query).then(function (offers) { vm.offers = offers; })
-  	};
+		Offers.search(query).then(function (offers) { vm.offers = offers; })
+	};
 
-  	$scope.showAdvanced = function(ev) {
+	$scope.showAdvanced = function(ev) {
 		$mdDialog.show({
 			controller: DialogController,
 			templateUrl: 'app/offers/offerform.html',
