@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Offer
+from .models import *
 from django.contrib.auth.models import User
 
 
@@ -17,5 +17,11 @@ class AdminOffer(admin.ModelAdmin):
     class Meta:
         model = Offer
 
+class AdminFavorite(admin.ModelAdmin):
+    """docstring for AdminFavorite."""
+    class Meta:
+        model = Favorite
+
 admin.site.register(Category, AdminCategory)
 admin.site.register(Offer, AdminOffer)
+admin.site.register(Favorite, AdminFavorite)

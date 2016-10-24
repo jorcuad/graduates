@@ -23,6 +23,7 @@ router = SimpleRouter()
 router.register(r'categories', views.CategoryViewSet)
 router.register(r'offers', views.OfferViewSet)
 router.register(r'users', views.UserViewSet)
+router.register(r'favs', views.FavoriteViewSet)
 
 
 urlpatterns = [
