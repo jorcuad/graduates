@@ -9,7 +9,7 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	vm.category = ""
 
 	vm.$onInit = function () {
-		$scope.logged = false;
+		$scope.logged = true;
 		$scope.username = "Manuel";
 		$scope.offerform = {}
 		Offers.get().then(function (offers) { vm.offers = offers; })

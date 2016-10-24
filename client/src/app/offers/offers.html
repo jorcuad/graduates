@@ -22,7 +22,7 @@
         <!-- end search bar -->
 		<!-- login form -->
 		<div layout="column" flex="30" layout-padding>
-			<div layout="row">
+			<div ng-show="!logged" layout="row">
 				<login></login>
 			</div>
 
@@ -38,7 +38,28 @@
 
 <md-divider></md-divider>
 
-<div ng-cloak>
+<!-- Offer list -->
+<div ng-show="!logged" layout-padding layout="row" layout-align="center">
+	<md-content layout-padding flex="100">
+		<md-list flex="100">
+			<md-list-item ng-repeat="offer in $ctrl.offers">
+				<md-card flex layout-padding>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline">{{offer.offer_name}}</span>
+							<span class="md-subhead">{{offer.description}}</span>
+						</md-card-title-text>
+					</md-card-title>
+					<md-card-actions layout="row" layout-align="end center">
+	 					<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
+ 					</md-card-actions>
+				</md-card>
+			</md-list-item>
+		</md-list>
+	</md-content>
+</div>
+
+<div ng-show="logged" ng-cloak>
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Ofertas">
