@@ -19,29 +19,26 @@
 	        	</div>
         	</div>
         </div>
-			<!-- login form -->
+        <!-- end search bar -->
+		<!-- login form -->
 		<div layout="column" flex="30" layout-padding>
-			<section ng-show="!logged" layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-				<md-input-container style="margin:0">
-					<label>Nick</label>
-					<input name="search" ng-model="OffersCtrl.nick">
-				</md-input-container>
-				<md-input-container style="margin:0">
-					<label>Password</label>
-					<input name="search" ng-model="OffersCtrl.password">
-				</md-input-container>
-				<md-button class="md-raised md-primary">Entrar</md-button>
-			</section>
+			<div layout="row">
+				<login></login>
+			</div>
 
-			<section layout="row" layout-sm="column" layout-align="center center" >
-				<md-button ng-disabled="!logged" ng-click="showAdvanced($event)" class="md-raised md-primary">Crear Oferta</md-button>
+			<section ng-show="logged" layout="row">
+				<md-button ng-disabled="!logged" ng-click="showAdvanced($event)" class="md-raised md-primary">
+					Crear Oferta
+				</md-button>
 			</section>
 		</div>
+		<!-- end login form -->
 	</md-content>
 </div>
 
 <md-divider></md-divider>
 
+<!-- Offer list -->
 <div layout-padding layout="row" layout-align="center">
 	<md-content layout-padding flex="100">
 		<md-list flex="100">
@@ -61,3 +58,4 @@
 		</md-list>
 	</md-content>
 </div>
+<!--end Offer list -->

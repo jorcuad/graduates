@@ -1,0 +1,11 @@
+<form>
+	<md-input-container class="login_field">
+		<label>Nick</label>
+		<input name="search" required ng-model="$ctrl.nick">
+	</md-input-container>
+	<md-input-container class="login_field">
+		<label>Password</label>
+		<input type="password" name="search" required ng-model="$ctrl.password">
+	</md-input-container>
+	<md-button type="submit" ng-click="$ctrl.do_login()" class="md-raised md-primary">Entrar</md-button>
+</form>
