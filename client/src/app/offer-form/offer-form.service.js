@@ -9,28 +9,36 @@ angular.module('graduatesApp').service('OfferForm', function ($http) {
 	this.get = function (id) {
 		return $http.get(offersEndpoint+id)
 					.then(function(result) {
-						return result.data;
+						return result;
+					}, function (result) {
+						return result;
 					});
 	}
 
 	this.getCategories = function () {
 		return $http.get(categoriesEndpoint)
 					.then(function(result) {
-						return result.data;
+						return result;
+					}, function (result) {
+						return result;
 					});
 	}
 
 	this.create = function (offerData) {
 		return $http.post(offersEndpoint, offerData)
 					.then(function(result) {
-						return result.data;
+						return result;
+					}, function (result) {
+						return result;
 					});
 	}
 
 	this.update = function (offerData) {
 		return $http.put(offersEndpoint, offerData)
 					.then(function(result) {
-						return result.data;
+						return result;
+					}, function (result) {
+						return result;
 					});
 	}
 

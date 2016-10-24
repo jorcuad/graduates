@@ -1,6 +1,6 @@
 'use strict';
 
-function offersCtrl ($http, $scope, Offers) {
+function offersCtrl ($http, $scope, Offers, Utils) {
 	var vm = this;
 	$scope.formData = {};
 
@@ -12,8 +12,16 @@ function offersCtrl ($http, $scope, Offers) {
 		$scope.logged = true;
 		$scope.username = "Manuel";
 		$scope.offerform = {}
-		Offers.get().then(function (offers) { vm.offers = offers; })
-		Offers.getCategories().then(function (categories) { vm.categories = categories; })
+		Offers.get().then(function (answer) { 
+			vm.offers = answer.data; 
+		}, function(answer) {
+			Utils.toast(answer.status + " : Error al obtener las ofertas, recargue la página e intentelo de nuevo.")
+		})
+		Offers.getCategories().then(function (answer) { 
+			vm.categories = answer.data; 
+		}, function (answer) {
+			Utils.toast(answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
+		})
 	};
 
 	vm.filter = function() {
@@ -27,7 +35,11 @@ function offersCtrl ($http, $scope, Offers) {
 			}
 			query = query+"category="+vm.category
 		}
-		Offers.search(query).then(function (offers) { vm.offers = offers; })
+		Offers.search(query).then(function (answer) {
+			vm.offers = answer.data; 
+		}, function(answer) {
+			Utils.toast(answer.status + " : Error al buscar ofertas, recargue la página e intentelo de nuevo.", true)
+		})
 	};
 }
 

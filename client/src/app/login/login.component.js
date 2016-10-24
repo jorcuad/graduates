@@ -1,6 +1,6 @@
 'use strict';
 
-function loginCtrl (LoginService) {
+function loginCtrl (LoginService, Utils) {
 	var vm = this;
 
 	vm.$onInit = function () {
@@ -11,12 +11,12 @@ function loginCtrl (LoginService) {
 		if ( check_login ( vm.nick, vm.password ) ) {
 			LoginService.login({"username":vm.nick, "password":vm.password})
 						.then( function(answer) {
-							//TODO, sacar toast de todo ok.
-						}, function() {
-							//TODO, sacar toast de ha habido un error.
+							Utils.toast(answer.status + " : Usuario loggeado correctamente.", false)
+						}, function(answer) {
+							Utils.toast(answer.status + " : Datos de login incorrectos.", true)
 						});
 		} else {
-			//TODO sacar toast de que ha habido un error, mismo que error de servidor de login
+			Utils.toast("Error : Datos de login incorrectos.", true)
 		}
 	}
 }
@@ -32,7 +32,7 @@ function check_login ( nick, pass ) {
 	var nick_valid = nick_regex.exec(nick);
 	var pass_valid = pass_regex.exec(pass);
 	
-	if ( nick_valid && pass_valid && pass !== undefined && nick !== undefined) {
+	if ( nick_valid && pass_valid && angular.isDefined(pass) && angular.isDefined(nick) ) {
 		return true;
 	} else {
 		return false;

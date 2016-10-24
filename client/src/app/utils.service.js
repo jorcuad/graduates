@@ -3,7 +3,7 @@
 angular.module('graduatesApp').service('Utils', function ($http, $mdToast) {
 
 	this.toast = function (msg, error) {
-		$mdToast.show( $mdToast.simple().textContent(msg).hideDelay(3000).theme('success-toast'));
+		$mdToast.show( $mdToast.simple().textContent(msg).hideDelay(3000) );
 	}
 
 });
