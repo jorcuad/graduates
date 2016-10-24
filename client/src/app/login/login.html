@@ -1,0 +1,23 @@
+<form name="loginForm">
+	<md-input-container class="nick_field">
+		<label>Username</label>
+		<input name="nick" required ng-model="$ctrl.nick"/>
+
+		<div ng-messages="loginForm.nick.$error" multiple md-auto-hide="true">
+		  <div ng-message="required">
+			Este campo es necesario.
+		  </div>
+		</div>
+	</md-input-container>
+	<md-input-container class="pass_field">
+		<label>Password</label>
+		<input type="password" name="password" required ng-model="$ctrl.password"/>
+
+		<div ng-messages="loginForm.password.$error" multiple md-auto-hide="true">
+		  <div ng-message="required">
+			Este campo es necesario.
+		  </div>
+		</div>
+	</md-input-container>
+	<md-button type="submit" ng-click="$ctrl.do_login()" class="md-raised md-primary">Entrar</md-button>
+</form>
