@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('graduatesApp', ['ngRoute', 'ngMaterial']).config(function($httpProvider){
+angular.module('graduatesApp', ['ngRoute', 'ngMaterial', 'ngMessages']).config(function($httpProvider){
     //Enable cross domain calls
       $httpProvider.defaults.useXDomain = true;
 

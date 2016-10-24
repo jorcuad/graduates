@@ -1,11 +1,29 @@
-<form>
-	<md-input-container class="login_field">
-		<label>Nick</label>
-		<input name="search" required ng-model="$ctrl.nick">
+<form name="loginForm">
+	<md-input-container class="nick_field">
+		<label>Username</label>
+		<input name="nick" required ng-model="$ctrl.nick" ng-pattern="/^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$/" />
+
+		<div ng-messages="loginForm.nick.$error" multiple md-auto-hide="true">
+		  <div ng-message="pattern">
+			El usuario introducido no es válido.
+		  </div>
+		  <div ng-message="required">
+			Este campo es necesario.
+		  </div>
+		</div>
 	</md-input-container>
-	<md-input-container class="login_field">
+	<md-input-container class="pass_field">
 		<label>Password</label>
-		<input type="password" name="search" required ng-model="$ctrl.password">
+		<input type="password" name="password" required ng-model="$ctrl.password" ng-pattern="/^(?=.{8,20}$)[a-zA-Z0-9@*#]+$/" />
+
+		<div ng-messages="loginForm.password.$error" multiple md-auto-hide="true">
+		  <div ng-message="pattern">
+			La contraseña introducida no es válida.
+		  </div>
+		  <div ng-message="required">
+			Este campo es necesario.
+		  </div>
+		</div>
 	</md-input-container>
 	<md-button type="submit" ng-click="$ctrl.do_login()" class="md-raised md-primary">Entrar</md-button>
 </form>
