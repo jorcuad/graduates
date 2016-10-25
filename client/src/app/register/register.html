@@ -1,0 +1,65 @@
+<div layout-padding>
+	<form name="register">
+		<div layout="row">
+			<md-input-container flex>
+				<md-icon md-font-icon="name">name</md-icon>
+				<input name="name" required type="text" placeholder="Nombre" ng-pattern="/^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$/" ng-model="ctrl.form.name"/>
+				<div ng-messages="register.name.$error" multiple md-auto-hide="true">
+				  <div ng-message="required">
+					Este campo es necesario.
+				  </div>
+				  <div ng-message="pattern">
+					Este campo no admite símbolos.
+		  		  </div>
+				</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container flex>
+				<md-icon md-font-icon="lastname">lastname</md-icon>
+				<input name="lastname" required type="text" placeholder="Apellidos" ng-model="$ctrl.form.lastname"/>
+				<div ng-messages="register.lastname.$error" multiple md-auto-hide="true">
+				  <div ng-message="required">
+					Este campo es necesario.
+				  </div>
+				</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container flex>
+				<md-icon md-font-icon="email">email</md-icon>
+				<input name="email" required type="text" placeholder="Email" ng-model="$ctrl.form.email"/>
+				<div ng-messages="register.email.$error" multiple md-auto-hide="true">
+				  <div ng-message="required">
+					Este campo es necesario.
+				  </div>
+				</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container flex>
+				<md-icon md-font-icon="contrasena">contrasena</md-icon>
+				<input name="contrasena" required type="text" placeholder="Contraseña" ng-model="$ctrl.form.contrasena"/>
+				<div ng-messages="register.contrasena.$error" multiple md-auto-hide="true">
+				  <div ng-message="required">
+					Este campo es necesario.
+				  </div>
+				</div>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container flex>
+				<md-icon md-font-icon="confirmacontrasena">confirmacontrasena</md-icon>
+				<input name="confirmacontrasena" required type="text" placeholder="Confirma tu contraseña" ng-model="$ctrl.form.confirmacontrasena"  ng-blur="$ctrl.checkPass()"/>
+				<div ng-messages="register.confirmacontrasena.$error" multiple md-auto-hide="true">
+				  <div ng-message="required">
+					Este campo es necesario.
+				  </div>
+				  <div ng-message="blur">
+					Las contraseñas no coinciden
+				  </div>
+				</div>
+			</md-input-container>
+		</div>
+	</form>
+</div>

@@ -8,6 +8,9 @@ function routeConfig ($routeProvider) {
 		.when('/new-offer', {
 			templateUrl : "./app/views/new-offer.html"
 		})
+		.when('/register', {
+			templateUrl : "./app/views/register.html"
+		})
 		.when('/detail/:orderId', {
 			template : "<offer-detail></offer-detail>"
 		})
