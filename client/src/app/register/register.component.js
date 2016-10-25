@@ -1,14 +1,25 @@
 'use strict';
 
-function registerCtrl (	 Utils) {
+function registerCtrl (Utils) {
 	var vm = this;
 
 	vm.$onInit = function () {
+		vm.form = {}
 
-		//cargar aquí las variables 
 		
 		
 	};
+
+	vm.checkPass = function(  ) {
+
+		if(vm.form.contrasena == vm.form.confirmacontrasena 
+			&& angular.isDefined(vm.form.confirmacontrasena)
+			 && angular.isDefined(vm.form.contrasena)){
+			//contraseña coincide y no está vacía
+		}else{
+			//contraseña no coincide o está vacía
+		}
+	}
 
 }
 
@@ -18,7 +29,3 @@ angular.module('graduatesApp').component('register', {
 });
 
 
-function checkPass ( pass, cpass ) {
-	alert("Estoydentro");
-
-}
