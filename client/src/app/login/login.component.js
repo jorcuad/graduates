@@ -1,6 +1,6 @@
 'use strict';
 
-function loginCtrl (LoginService, Utils) {
+function loginCtrl (LoginService, Utils, Session) {
 	var vm = this;
 
 	vm.$onInit = function () {
@@ -11,8 +11,12 @@ function loginCtrl (LoginService, Utils) {
 		if ( check_login ( vm.nick, vm.password ) ) {
 			LoginService.login({"username":vm.nick, "password":vm.password})
 						.then( function(answer) {
+							Session.isLogged = true;
+							Session.username = "Manuel";
 							Utils.toast(answer.status + " : Usuario loggeado correctamente.", false)
 						}, function(answer) {
+							Session.isLogged = true;
+							Session.username = "Manuel";
 							Utils.toast(answer.status + " : Datos de login incorrectos.", true)
 						});
 		} else {
