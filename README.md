@@ -10,7 +10,7 @@ Create a virtualenv to isolate our package dependencies locally
   $ source env/bin/activate
   
   $ pip install --upgrade pip
-  $ pip install django-cors-headers django djangorestframework
+  $ pip install django-cors-headers django djangorestframework==3.4.7
   
   $ cd server
   $ python manage.py runserver
