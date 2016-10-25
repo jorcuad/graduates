@@ -30,4 +30,10 @@ Create a virtualenv to isolate our package dependencies locally
    
    #To init client server
    $ npm start
+   
+   #If bower install doesn't work, run
+   $ sudo apt-get remove node
+   $ sudo apt-get autoremove
+   $ sudo apt-get install nodejs-legacy
+
 ```
