@@ -14,6 +14,7 @@ class Offer(models.Model):
 	modified_date =  models.DateTimeField(auto_now_add=False, auto_now=True)
 	active = models.BooleanField(default=True)
 	private = models.BooleanField(default=False)
+	favorites = models.ManyToManyField(User, related_name='favorites')
 
 	class Meta:
 		verbose_name = "Offer"
@@ -31,6 +32,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_name
+
 
 class Favorite(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)

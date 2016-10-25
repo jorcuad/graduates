@@ -30,12 +30,28 @@ class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class OfferViewSet(ModelViewSet):
+class OfferReadViewSet(ModelViewSet):
     """
     API endpoint that allows offers to be viewed or edited.
     """
     queryset = Offer.objects.all()
-    serializer_class = OfferSerializer
+    serializer_class = OfferReadSerializer
+
+class OfferWriteViewSet(ModelViewSet):
+    """
+    API endpoint that allows offers to be viewed or edited.
+    """
+    queryset = Offer.objects.all()
+    serializer_class = OfferWriteSerializer
+
+class FavsByUserViewSet(ModelViewSet):
+    """
+    API endpoint that allows offers to be viewed or edited.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserFavsSerializer
+
+
 
 class FavoriteViewSet(ModelViewSet):
     """
