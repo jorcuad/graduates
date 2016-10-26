@@ -4,12 +4,12 @@ function offersCtrl ($http, $scope, Offers, Utils) {
 	var vm = this;
 	$scope.formData = {};
 
-	vm.search = ""
+	vm.search = ""	
 	vm.categories = ""
 	vm.category = ""
 
 	vm.$onInit = function () {
-		$scope.logged = false;
+		$scope.logged = true;
 		$scope.username = "Manuel";
 		$scope.offerform = {}
 		Offers.get().then(function (answer) { 

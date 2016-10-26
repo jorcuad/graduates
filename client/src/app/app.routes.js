@@ -14,6 +14,11 @@ function routeConfig ($routeProvider) {
 		.when('/detail/:orderId', {
 			template : "<offer-detail></offer-detail>"
 		})
+		.when('/edit/:orderId', {
+			template : "<offer-detail></offer-detail>"
+		})
+
+
 		.when('/404', {
 			template: '<h1 class="text-center text-warning">404</h1>'
 		})
