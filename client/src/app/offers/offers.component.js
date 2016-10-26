@@ -10,9 +10,13 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 
 	vm.$onInit = function () {
 		$scope.logged = true;
-		$scope.username = "Manuel";
+		$scope.username = "Jaime";
+		$scope.user_id = 1;
+
+
 		$scope.offerform = {}
 		Offers.get().then(function (offers) { vm.offers = offers; })
+		Offers.getFavorites($scope.user_id).then(function (favorites) { vm.favorites = favorites; })
 		// Get all categories
 		Offers.getCategories().then(function (categories) { vm.categories = categories; })
 	};
@@ -45,9 +49,9 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 			$scope.status = 'You cancelled the dialog.';
 		});
 	};
-	
+
 	function DialogController($scope, $mdDialog) {
-		
+
 		$scope.hide = function() {
 			$mdDialog.hide();
 		};
@@ -116,4 +120,3 @@ angular.module('graduatesApp').component('offers', {
 	templateUrl: 'app/offers/offers.html',
 	controller: offersCtrl
 });
-

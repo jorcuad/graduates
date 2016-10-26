@@ -26,7 +26,7 @@ router.register(r'offers_edit', views.OfferWriteViewSet) # modificar usuarios o 
 router.register(r'favs_user', views.FavsByUserViewSet) # ver la lista de favoritos por usuario ya serializada
 
 router.register(r'users', views.UserViewSet)
-router.register(r'favs', views.FavoriteViewSet)
+#router.register(r'favs', views.FavoriteViewSet)
 
 
 urlpatterns = [

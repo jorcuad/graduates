@@ -65,7 +65,7 @@
       <md-tab label="Ofertas">
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'!5' } }">
+						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'!{{ user_id }}' } }">
 							<md-card flex layout-padding>
 								<md-card-title>
 									<md-card-title-text>
@@ -86,7 +86,7 @@
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
 						<!--cambiar filtro por el id que corresponda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1-->
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'5' } }">
+						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'{{ user_id }}' } }">
 							<md-card flex layout-padding>
 								<md-card-title>
 									<md-card-title-text>
@@ -105,13 +105,12 @@
 			<md-tab label="Favoritos">
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
-						<!--cambiar filtro por el id que corresponda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1-->
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'5' } }">
+						<md-list-item ng-repeat="fav in $ctrl.favorites">
 							<md-card flex layout-padding>
 								<md-card-title>
 									<md-card-title-text>
-										<span class="md-headline">{{offer.offer_name}}</span>
-										<span class="md-subhead">{{offer.description}}</span>
+										<span class="md-headline">{{fav.offer_name}}</span>
+										<span class="md-subhead">{{fav.description}}</span>
 									</md-card-title-text>
 								</md-card-title>
 								<md-card-actions layout="row" layout-align="end center">

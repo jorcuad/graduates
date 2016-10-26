@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
 
 class Offer(models.Model):
     # TODO: buscar problema null
@@ -14,7 +15,8 @@ class Offer(models.Model):
 	modified_date =  models.DateTimeField(auto_now_add=False, auto_now=True)
 	active = models.BooleanField(default=True)
 	private = models.BooleanField(default=False)
-	favorites = models.ManyToManyField(User, related_name='favorites')
+	favorites = models.ManyToManyField(User, related_name='favorites', blank=True)
+	#favorites = models.ManyToManyField(User, through='Favorite', related_name='favorites')
 
 	class Meta:
 		verbose_name = "Offer"
@@ -34,10 +36,14 @@ class Category(models.Model):
         return self.category_name
 
 
+'''
 class Favorite(models.Model):
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	offer = models.ForeignKey(Offer, on_delete=models.CASCADE)
 
 	class Meta:
+		unique_together = ("user", "offer")
 		verbose_name = "Favorite"
 		verbose_name_plural = "Favorites"
+'''

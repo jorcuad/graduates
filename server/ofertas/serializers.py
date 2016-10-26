@@ -3,12 +3,16 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 
+class UserSerializer(serializers.ModelSerializer):
+    #favorites = OfferSerializer(many=True)
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email')
 
 class OfferFavsSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = Offer
-
-
 
 class UserFavsSerializer(serializers.ModelSerializer):
     favorites = OfferFavsSerializer(many=True)
@@ -16,12 +20,6 @@ class UserFavsSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'email','favorites')
 
-
-class UserSerializer(serializers.ModelSerializer):
-    #favorites = OfferSerializer(many=True)
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email','favorites')
 
 
 class OfferReadSerializer(serializers.ModelSerializer):
@@ -41,8 +39,8 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
 
 
-
-
+'''
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favorite
+'''
