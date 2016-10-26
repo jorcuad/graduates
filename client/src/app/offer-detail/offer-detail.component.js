@@ -2,8 +2,9 @@
 
 function offerDetailCtrl ($scope, $routeParams, OfferDetailService) {
 	var vm = this;
-
+	$scope.userlogged={};
 	vm.$onInit = function () {
+
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (result) {
 				vm.offer = result;
@@ -11,6 +12,9 @@ function offerDetailCtrl ($scope, $routeParams, OfferDetailService) {
 				var dateReadable = dateObject.toLocaleDateString();
 				vm.offer.pub_date = dateReadable
 			})
+		$scope.userlogged.id=2;
+		$scope.userlogged.name="pablo";
+		$scope.userlogged.email="";
 	};
 }
 

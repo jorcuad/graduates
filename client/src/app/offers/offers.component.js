@@ -3,6 +3,7 @@
 function offersCtrl ($http, $mdDialog, $scope, Offers) {
 	var vm = this;
 	$scope.formData = {};
+	$scope.userlogged= {};
 
 	vm.search = ""
 	vm.categories = ""
@@ -10,7 +11,10 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 
 	vm.$onInit = function () {
 		$scope.logged = true;
-		$scope.username = "Manuel";
+//		$scope.username = "Manuel";
+		$scope.userlogged.id=2;
+		$scope.userlogged.name="pablo";
+		$scope.userlogged.email="";
 		$scope.offerform = {}
 		Offers.get().then(function (offers) { vm.offers = offers; })
 		// Get all categories

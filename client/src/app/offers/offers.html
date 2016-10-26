@@ -65,7 +65,7 @@
       <md-tab label="Ofertas">
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'!5' } }">
+						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'!userlogged.id' } }">
 							<md-card flex layout-padding>
 								<md-card-title>
 									<md-card-title-text>
@@ -87,7 +87,7 @@
 					<md-list flex="100">
 
 		       <!--cambiar filtro por el id que corresponda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1-->
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'2' } }">
+						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:userlogged.id } }">
 							<md-card flex layout-padding>
 								<div layout-align="end start">
 									<md-card-actions layout="row" layout-align="end start">
