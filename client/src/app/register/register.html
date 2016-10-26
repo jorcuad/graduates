@@ -2,9 +2,9 @@
 	<form name="register">
 		<div layout="row">
 			<md-input-container flex>
-				<md-icon md-font-icon="name">name</md-icon>
-				<input name="name" required type="text" placeholder="Nombre" ng-pattern="/^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$/" ng-model="ctrl.form.name"/>
-				<div ng-messages="register.name.$error" multiple md-auto-hide="true">
+				<md-icon md-font-icon="nombre">name</md-icon>
+				<input name="nombre" required type="text" placeholder="Nombre" ng-pattern="/^\w+$/" ng-model="ctrl.form.nombre"/>
+				<div ng-messages="register.nombre.$error" multiple md-auto-hide="true">
 				  <div ng-message="required">
 					Este campo es necesario.
 				  </div>
@@ -16,30 +16,37 @@
 		</div>
 		<div layout="row">
 			<md-input-container flex>
-				<md-icon md-font-icon="lastname">lastname</md-icon>
-				<input name="lastname" required type="text" placeholder="Apellidos" ng-model="$ctrl.form.lastname"/>
-				<div ng-messages="register.lastname.$error" multiple md-auto-hide="true">
+				<md-icon md-font-icon="apellido">apellido</md-icon>
+				<input name="apellido" required type="text" placeholder="Apellidos"  ng-pattern="/^\w+$/" ng-model="$ctrl.form.apellido"/>
+				<div ng-messages="register.apellido.$error" multiple md-auto-hide="true">
 				  <div ng-message="required">
 					Este campo es necesario.
 				  </div>
+				  <div ng-message="pattern">
+					Este campo no admite símbolos.
+		  		  </div>
 				</div>
 			</md-input-container>
 		</div>
 		<div layout="row">
 			<md-input-container flex>
 				<md-icon md-font-icon="email">email</md-icon>
-				<input name="email" required type="text" placeholder="Email" ng-model="$ctrl.form.email"/>
+				<input name="email" required type="text" ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' placeholder="Email" ng-model="$ctrl.form.email"/>
 				<div ng-messages="register.email.$error" multiple md-auto-hide="true">
 				  <div ng-message="required">
 					Este campo es necesario.
 				  </div>
+				  <div ng-message="pattern">
+					Email no válido
+		  		  </div>
+
 				</div>
 			</md-input-container>
 		</div>
 		<div layout="row">
 			<md-input-container flex>
 				<md-icon md-font-icon="contrasena">contrasena</md-icon>
-				<input name="contrasena" required type="text" placeholder="Contraseña" ng-model="$ctrl.form.contrasena"/>
+				<input type="password" name="contrasena" required type="text" placeholder="Contraseña" ng-model="$ctrl.form.contrasena"/>
 				<div ng-messages="register.contrasena.$error" multiple md-auto-hide="true">
 				  <div ng-message="required">
 					Este campo es necesario.
@@ -50,7 +57,7 @@
 		<div layout="row">
 			<md-input-container flex>
 				<md-icon md-font-icon="confirmacontrasena">confirmacontrasena</md-icon>
-				<input name="confirmacontrasena" required type="text" placeholder="Confirma tu contraseña" ng-model="$ctrl.form.confirmacontrasena"  ng-blur="$ctrl.checkPass()"/>
+				<input type="password" name="confirmacontrasena" required type="text" placeholder="Confirma tu contraseña" ng-model="$ctrl.form.confirmacontrasena"  ng-blur="$ctrl.checkPass()"/>
 				<div ng-messages="register.confirmacontrasena.$error" multiple md-auto-hide="true">
 				  <div ng-message="required">
 					Este campo es necesario.
@@ -60,6 +67,10 @@
 				  </div>
 				</div>
 			</md-input-container>
+
+		</div>
+		<div layout="row">
+			<md-button type="submit" ng-click="$ctrl.register()" class="md-raised md-primary">Registro</md-button>
 		</div>
 	</form>
 </div>
