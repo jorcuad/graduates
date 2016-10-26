@@ -1,5 +1,7 @@
 <div layout-padding layout="row" layout-align="center">
 	<md-content layout-padding flex="95">
+	<p> {{$ctrl.offer}}</p>
+	{{$ctrl.offer.active}}
 		<md-card>
 			<md-card-header>
 				<md-card-avatar>
@@ -10,10 +12,24 @@
 					<span class="md-subhead">Publicado: {{$ctrl.offer.pub_date}} por {{$ctrl.offer.user.username}}</span>
 				</md-card-header-text>
 				<div layout-align="center">
-					<md-button ng-show="!$ctrl.favorite" class="md-icon-button" aria-label="Favorite">
+					<md-button ng-show="$ctrl.offer.active" class="md-icon-button" aria-label="Lock">
+						<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
+					</md-button>
+					<md-button ng-show="!$ctrl.offer.active" class="md-icon-button" aria-label="Open">
+						<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="Edit">
+						<md-icon md-svg-icon="../assets/icons/edit.svg"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="Delete">
+						<md-icon md-svg-icon="../assets/icons/delete.svg"></md-icon>
+					</md-button>
+				</div>
+				<div layout-align="center">
+					<md-button ng-show="!$ctrl.offer.favorite" class="md-icon-button" aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorite.svg"></md-icon>
 					</md-button>
-					<md-button ng-show="$ctrl.favorite" class="md-icon-button" aria-label="Favorite">
+					<md-button ng-show="$ctrl.offer.favorite" class="md-icon-button" aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorited.svg"></md-icon>
 					</md-button>
 					<md-button class="md-icon-button" aria-label="Share">
