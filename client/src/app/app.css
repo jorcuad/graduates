@@ -17,3 +17,11 @@ body {
 .app .app-views .btn-group.actions {
 	margin-bottom: 20px;
 }
+
+md-toast.md-success-toast-theme .md-toast-content {
+        background-color: green;
+}
+
+md-toast.md-error-toast-theme .md-toast-content {
+        background-color: red;
+}

@@ -7,7 +7,9 @@ angular.module('graduatesApp').service('LoginService', function ($http) {
 	this.login = function (loginData) {
 		return $http.post(loginEndpoint, loginData)
 					.then(function(result) {
-						return result.data;
+						return result;
+					}, function (result) {
+						return result;
 					});
 	}
 

@@ -10,21 +10,27 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 	this.get = function () {
 		return $http.get(offersEndpoint)
 					.then(function(result) {
-						return result.data;
+						return result;
+					}, function (result) {
+						return result;
 					});
 	}
 
 	this.search = function (filters) {
 		return $http.get(searchEndpoint+filters)
 					.then(function(result) {
-						return result.data;
+						return result;
+					}, function (result) {
+						return result;
 					});
 	}
 
 	this.getCategories = function () {
 		return $http.get(categoriesEndpoint)
 					.then(function(result) {
-						return result.data;
+						return result;
+					}, function (result) {
+						return result;
 					});
 	}
 
