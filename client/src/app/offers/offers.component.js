@@ -1,6 +1,6 @@
 'use strict';
 
-function offersCtrl ($http, $scope, Offers, Utils) {
+function offersCtrl ($http, $scope, Offers, Utils, Session) {
 	var vm = this;
 	$scope.formData = {};
 
@@ -9,8 +9,12 @@ function offersCtrl ($http, $scope, Offers, Utils) {
 	vm.category = ""
 
 	vm.$onInit = function () {
-		$scope.logged = false;
-		$scope.username = "Manuel";
+		$scope.logged = Session.isLogged()
+
+		if($scope.logged) {
+			$scope.username = Session.getUser()
+		}
+		
 		$scope.offerform = {}
 		Offers.get().then(function (answer) { 
 			vm.offers = answer.data; 
