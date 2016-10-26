@@ -1,6 +1,6 @@
 'use strict';
 
-function offersCtrl ($http, $mdDialog, $scope, Offers) {
+function offersCtrl ($http, $mdDialog, $scope,$route, Offers) {
 	var vm = this;
 	$scope.formData = {};
 	$scope.userlogged= {};
@@ -114,13 +114,17 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 			return false;
 		}
 	};
-	$scope.closeOffer=function (offer){
+	$scope.changeStateOffer =function (offer){
 		offer.active = !offer.active;
-		$http.put("http://localhost:8000/offers_edit/", offer)
+		$http.put("http://localhost:8000/offers/", offer)
 				.then(function(result) {
 					$mdDialog.cancel();
 					return result.data;
 				});
+	};
+
+	$scope.getStateOffer = function (offer){
+		return offer.active;
 	};
 }
 

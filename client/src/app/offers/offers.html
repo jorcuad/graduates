@@ -87,14 +87,14 @@
 					<md-list flex="100">
 
 		       <!--cambiar filtro por el id que corresponda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1-->
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:userlogged.id } }">
+						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:userlogged.id } } track by offer.active">
 							<md-card flex layout-padding>
 								<div layout-align="end start">
 									<md-card-actions layout="row" layout-align="end start">
-									<md-button ng-click="closeOffer($ctrl.offer)" ng-show="$ctrl.offer.active" class="md-icon-button" aria-label="Lock">
+									<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
 										<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
 									</md-button>
-									<md-button ng-click="closeOffer(offer)" ng-show="!$ctrl.offer.active" class="md-icon-button" aria-label="Open">
+									<md-button ng-click="changeStateOffer(offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
 										<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
 									</md-button>
 									<md-button class="md-icon-button" aria-label="Edit">

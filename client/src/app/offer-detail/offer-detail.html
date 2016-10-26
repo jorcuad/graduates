@@ -10,10 +10,10 @@
 					<span class="md-subhead">Publicado: {{$ctrl.offer.pub_date}} por {{$ctrl.offer.user.username}}</span>
 				</md-card-header-text>
 				<div layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
-					<md-button ng-show="$ctrl.offer.active" class="md-icon-button" aria-label="Lock">
+					<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
 						<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
 					</md-button>
-					<md-button ng-show="!$ctrl.offer.active" class="md-icon-button" aria-label="Open">
+					<md-button ng-click="changeStateOffer(offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
 						<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
 					</md-button>
 					<md-button class="md-icon-button" aria-label="Edit">
@@ -24,10 +24,10 @@
 					</md-button>
 				</div>
 				<div layout-align="center">
-					<md-button ng-show="!$ctrl.offer.favorite" class="md-icon-button" aria-label="Favorite">
+					<md-button class="md-icon-button" ng-show="!$ctrl.offer.favorite"  aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorite.svg"></md-icon>
 					</md-button>
-					<md-button ng-show="$ctrl.offer.favorite" class="md-icon-button" aria-label="Favorite">
+					<md-button class="md-icon-button" ng-show="$ctrl.offer.favorite" aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorited.svg"></md-icon>
 					</md-button>
 					<md-button class="md-icon-button" aria-label="Share">
