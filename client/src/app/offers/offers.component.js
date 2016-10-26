@@ -9,20 +9,21 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 	vm.category = ""
 
 	vm.$onInit = function () {
+
 		$scope.logged = Session.isLogged()
 
 		if($scope.logged) {
 			$scope.username = Session.getUser()
 		}
-		
+
 		$scope.offerform = {}
-		Offers.get().then(function (answer) { 
-			vm.offers = answer.data; 
+		Offers.get().then(function (answer) {
+			vm.offers = answer.data;
 		}, function(answer) {
 			Utils.toast(answer.status + " : Error al obtener las ofertas, recargue la página e intentelo de nuevo.")
 		})
-		Offers.getCategories().then(function (answer) { 
-			vm.categories = answer.data; 
+		Offers.getCategories().then(function (answer) {
+			vm.categories = answer.data;
 		}, function (answer) {
 			Utils.toast(answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
 		})
@@ -40,7 +41,7 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 			query = query+"category="+vm.category
 		}
 		Offers.search(query).then(function (answer) {
-			vm.offers = answer.data; 
+			vm.offers = answer.data;
 		}, function(answer) {
 			Utils.toast(answer.status + " : Error al buscar ofertas, recargue la página e intentelo de nuevo.", true)
 		})
@@ -51,4 +52,3 @@ angular.module('graduatesApp').component('offers', {
 	templateUrl: 'app/offers/offers.html',
 	controller: offersCtrl
 });
-

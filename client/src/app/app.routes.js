@@ -11,6 +11,9 @@ function routeConfig ($routeProvider) {
 				factory: checkRouting
 			}
 		})
+		.when('/register', {
+			templateUrl : "./app/views/register.html"
+		})
 		.when('/detail/:orderId', {
 			template : "<offer-detail></offer-detail>"
 		})
