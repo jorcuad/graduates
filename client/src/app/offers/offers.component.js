@@ -114,6 +114,14 @@ function offersCtrl ($http, $mdDialog, $scope, Offers) {
 			return false;
 		}
 	};
+	$scope.closeOffer=function (offer){
+		offer.active = !offer.active;
+		$http.put("http://localhost:8000/offers_edit/", offer)
+				.then(function(result) {
+					$mdDialog.cancel();
+					return result.data;
+				});
+	};
 }
 
 angular.module('graduatesApp').component('offers', {

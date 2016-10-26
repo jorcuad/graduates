@@ -16,6 +16,14 @@ function offerDetailCtrl ($scope, $routeParams, OfferDetailService) {
 		$scope.userlogged.name="pablo";
 		$scope.userlogged.email="";
 	};
+	function closeOffer(offer){
+		alert(offer);
+		$http.put("http://localhost:8000/offers/", offer)
+				.then(function(result) {
+					$mdDialog.cancel();
+					return result.data;
+				});
+	}
 }
 
 angular.module('graduatesApp').component('offerDetail', {

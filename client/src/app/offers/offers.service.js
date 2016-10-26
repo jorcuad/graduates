@@ -27,5 +27,4 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 						return result.data;
 					});
 	}
-
 });

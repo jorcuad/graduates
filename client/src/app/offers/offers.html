@@ -91,10 +91,10 @@
 							<md-card flex layout-padding>
 								<div layout-align="end start">
 									<md-card-actions layout="row" layout-align="end start">
-									<md-button ng-show="$ctrl.offer.active" class="md-icon-button" aria-label="Lock">
+									<md-button ng-click="closeOffer($ctrl.offer)" ng-show="$ctrl.offer.active" class="md-icon-button" aria-label="Lock">
 										<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
 									</md-button>
-									<md-button ng-show="!$ctrl.offer.active" class="md-icon-button" aria-label="Open">
+									<md-button ng-click="closeOffer(offer)" ng-show="!$ctrl.offer.active" class="md-icon-button" aria-label="Open">
 										<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
 									</md-button>
 									<md-button class="md-icon-button" aria-label="Edit">
