@@ -119,5 +119,5 @@ def offer_search(request):
         qFilter.add( Q(categories=categories), Q.AND)
 
     results = Offer.objects.filter(qFilter).order_by('pub_date')
-    serializer = OfferReadSerializer(results, many=True)
+    serializer = OfferSerializer(results, many=True)
     return Response(serializer.data)
