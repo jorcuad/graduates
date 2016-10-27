@@ -45,12 +45,22 @@
 					</md-card-content>
 				</md-card>
 			</div>
-
-			<section ng-show="logged" layout="row">
-				<md-button md-colors="{background: 'green'}" ng-disabled="!logged" href="#/new-offer" class="md-raised md-primary">
-					Crear Oferta
-				</md-button>
-			</section>
+			<div ng-show="logged" layout="row">
+				<md-card layout-padding>
+					<md-card-header flex>
+						<md-card-header-text>
+							<span class="md-title">Hola, {{user.username}} :</span>
+						</md-card-header-text>
+					</md-card-header>
+					<md-card-content flex>
+						<section>
+							<md-button md-colors="{background: 'green'}" ng-disabled="!logged" href="#/new-offer" class="md-raised md-primary">
+								Crear Oferta
+							</md-button>
+						</section>
+					</md-card-content>
+				</md-card>
+			</div>
 		</div>
 		<!-- end login form -->
 	</md-content>
@@ -66,8 +76,8 @@
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
 						<md-list-item ng-repeat="offer in $ctrl.offers">
-							<md-card flex layout-padding>
-								<md-card-title>
+							<md-card flex layout-padding layout="row">
+								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
 											{{offer.offer_name}}
@@ -80,7 +90,7 @@
 										</span>
 									</md-card-title-text>
 								</md-card-title>
-								<md-card-actions layout="row" layout-align="end center">
+								<md-card-actions layout="column" layout-align="end center">
 									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
 							</md-card>
@@ -98,8 +108,8 @@
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
 						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id: '!' + user.id } }">
-							<md-card flex layout-padding>
-								<md-card-title>
+							<md-card flex layout-padding layout="row">
+								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
 											{{offer.offer_name}}
@@ -112,7 +122,7 @@
 										</span>
 									</md-card-title-text>
 								</md-card-title>
-								<md-card-actions layout="row" layout-align="end center">
+								<md-card-actions layout="column" layout-align="end center">
 									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
 							</md-card>
@@ -124,14 +134,14 @@
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
 						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:user.id } }">
-							<md-card flex layout-padding>
-								<md-card-title>
+							<md-card flex layout-padding layout="row">
+								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline" layout="row">
 											<div layout="column" flex="70">
 												{{offer.offer_name}}
 											</div>
-											<div layout="column" flex="30">
+											<!--div layout="column" flex="30">
 												<md-card-actions layout="row" layout-align="end start">
 												<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
 													<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
@@ -146,7 +156,7 @@
 													<md-icon md-svg-icon="../assets/icons/delete.svg"></md-icon>
 												</md-button>
 												</md-card-actions>
-											</div>
+											</div-->
 										</span>
 										<span class="md-subhead">
 											<md-icon md-font-icon="event">event</md-icon>
@@ -157,7 +167,7 @@
 									</md-card-title-text>
 								</md-card-title>
 								
-								<md-card-actions layout="row" layout-align="end center">
+								<md-card-actions layout="column" layout-align="end center">
 									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
 							</md-card>
@@ -169,8 +179,8 @@
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
 						<md-list-item ng-repeat="fav in $ctrl.favorites">
-							<md-card flex layout-padding>
-								<md-card-title>
+							<md-card flex layout-padding layout="row">
+								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
 											{{fav.offer_name}}
@@ -183,7 +193,7 @@
 										</span>
 									</md-card-title-text>
 								</md-card-title>
-								<md-card-actions layout="row" layout-align="end center">
+								<md-card-actions layout="column" layout-align="end center">
 									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
 							</md-card>
@@ -191,7 +201,7 @@
 					</md-list>
 				</md-content>
 			</md-tab>
-	</md-tabs>
-  </md-content>
+		</md-tabs>
+	</md-content>
 </div>
 <!--end Offer list -->
