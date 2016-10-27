@@ -6,7 +6,7 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 	$scope.formData = {};
 	$scope.userlogged= {};
 
-	vm.search = ""
+	vm.search = ""	
 	vm.categories = ""
 	vm.category = ""
 

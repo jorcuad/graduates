@@ -39,7 +39,7 @@
 			<span flex="10"></span>
 			<md-input-container flex="45">
 				<md-icon md-font-icon="place">category</md-icon>
-				<md-select placeholder="Categoría" ng-model="$ctrl.form.category">
+				<md-select placeholder="{{$ctrl.form.categories}}"  style="font-color: black;" ng-model="$ctrl.form.categories">
 					<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">
 						{{cat.category_name}}
 					</md-option>
@@ -84,7 +84,8 @@
 			</div>
 		</div>
 		<div layout="row" layout-align="center center">
-			<md-button class="md-raised md-primary"  ng-click="$ctrl.create()" type="submit">Submit</md-button>
+			<md-button class="md-raised md-primary"  ng-click="$ctrl.create()" ng-show="!$ctrl.editar" type="submit">Crear Oferta</md-button>
+			<md-button class="md-raised md-primary"  ng-click="$ctrl.update()" ng-show="$ctrl.editar" type="submit">Actualizar Oferta</md-button>
 		</div>
 	</form>
 </div>
