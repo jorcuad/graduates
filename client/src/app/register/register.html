@@ -2,8 +2,24 @@
 	<form name="register">
 		<div layout="row">
 			<md-input-container flex>
-				<md-icon md-font-icon="nombre">name</md-icon>
-				<input name="nombre" required type="text" placeholder="Nombre" ng-pattern="/^\w+$/" ng-model="ctrl.form.nombre"/>
+				<md-icon md-font-icon="Usuario">username</md-icon>
+				<input name="username" required type="text" placeholder="Usuario" ng-pattern="/^\w+$/" ng-model="$ctrl.form.username"/>
+				<div ng-messages="register.username.$error" multiple md-auto-hide="true">
+					<div ng-message="required">
+					Este campo es necesario.
+					</div>
+					<div ng-message="pattern">
+					Este campo no admite símbolos.
+						</div>
+				</div>
+			</md-input-container>
+		</div>
+
+
+		<div layout="row">
+			<md-input-container flex>
+				<md-icon md-font-icon="nombre">nombre</md-icon>
+				<input name="nombre" required type="text" placeholder="Nombre" ng-pattern="/^\w+$/" ng-model="$ctrl.form.nombre"/>
 				<div ng-messages="register.nombre.$error" multiple md-auto-hide="true">
 				  <div ng-message="required">
 					Este campo es necesario.
@@ -14,6 +30,8 @@
 				</div>
 			</md-input-container>
 		</div>
+
+
 		<div layout="row">
 			<md-input-container flex>
 				<md-icon md-font-icon="apellido">apellido</md-icon>
@@ -28,6 +46,8 @@
 				</div>
 			</md-input-container>
 		</div>
+
+
 		<div layout="row">
 			<md-input-container flex>
 				<md-icon md-font-icon="email">email</md-icon>
@@ -43,6 +63,8 @@
 				</div>
 			</md-input-container>
 		</div>
+
+
 		<div layout="row">
 			<md-input-container flex>
 				<md-icon md-font-icon="contrasena">contrasena</md-icon>
@@ -54,6 +76,7 @@
 				</div>
 			</md-input-container>
 		</div>
+
 		<div layout="row">
 			<md-input-container flex>
 				<md-icon md-font-icon="confirmacontrasena">confirmacontrasena</md-icon>
