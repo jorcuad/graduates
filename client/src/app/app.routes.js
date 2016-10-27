@@ -6,7 +6,10 @@ function routeConfig ($routeProvider) {
 			template : "<offers></offers>"
 		})
 		.when('/new-offer', {
-			templateUrl : "./app/views/new-offer.html"
+			templateUrl : "./app/views/new-offer.html",
+			resolve: {
+				factory: checkRouting
+			}
 		})
 		.when('/register', {
 			templateUrl : "./app/views/register.html"
@@ -24,5 +27,16 @@ function routeConfig ($routeProvider) {
 			redirectTo: '/404'
 		});
 }
+
+var checkRouting= function ($q, $rootScope, $location, Session, Utils) {
+	if (Session.isLogged()) {
+		return true;
+	} else {
+		Utils.toast("Inicia sesión en la aplicación antes de poder crear una tarea.", true)
+		$location.path("/");
+			
+		return false;
+	}
+};
 
 angular.module('graduatesApp').config(routeConfig);
