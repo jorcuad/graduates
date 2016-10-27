@@ -56,6 +56,7 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER':
     'ofertas.views.jwt_response_payload_handler',
+    'JWT_VERIFY_EXPIRATION': False,
 }
 
 
@@ -142,3 +143,9 @@ STATIC_URL = '/static/'
 
 # Allow all CORS
 CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = ('127.0.0.1:8000','127.0.0.1:3000', )
+
+SESSION_COOKIE_DOMAIN = '127.0.0.1'
+CSRF_COOKIE_DOMAIN = '127.0.0.1'

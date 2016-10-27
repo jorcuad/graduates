@@ -15,9 +15,10 @@ function loginCtrl (LoginService, Utils, Session, $route) {
 
 	vm.do_login = function () {
 		if ( check_login ( vm.nick, vm.password ) ) {
+			console.log(vm.nick +" "+ vm.password)
 			LoginService.login({"username":vm.nick, "password":vm.password})
 						.then( function(answer) {
-							Session.create("asdasdasdasd", dummy_user) //FIXME poner token traido por server
+							Session.create(answer.data.token, answer.data.user) //FIXME poner token traido por server
 							$route.reload()
 							Utils.toast(answer.status + " : Usuario loggeado correctamente.", false)
 						}, function(answer) {
