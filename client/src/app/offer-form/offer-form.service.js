@@ -1,4 +1,4 @@
-'use strict';
+ 	'use strict';
 
 angular.module('graduatesApp').service('OfferForm', function ($http) {
 	$http.defaults.useXDomain = true;
@@ -34,7 +34,7 @@ angular.module('graduatesApp').service('OfferForm', function ($http) {
 	}
 
 	this.update = function (offerData) {
-		return $http.put(offersEndpoint, offerData)
+		return $http.put(offersEndpoint + offerData.id + "/", offerData)
 					.then(function(result) {
 						return result;
 					}, function (result) {

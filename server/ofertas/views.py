@@ -102,8 +102,6 @@ class FavsEdit(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
-@authentication_classes((JSONWebTokenAuthentication, ))
-@permission_classes((IsAuthenticated,))
 def offer_search(request):
     """
     List all snippets, or create a new snippet.
@@ -133,7 +131,7 @@ def offer_search(request):
         qFilter.add( Q(categories=categories), Q.AND)
 
     results = Offer.objects.filter(qFilter).order_by('pub_date')
-    serializer = OfferSerializer(results, many=True)
+    serializer = OfferReadSerializer(results, many=True)
     return Response(serializer.data)
 
 

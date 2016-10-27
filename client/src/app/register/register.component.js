@@ -4,16 +4,17 @@ function registerCtrl (Utils, RegisterService) {
 	var vm = this;
 
 	vm.$onInit = function () {
-		vm.form = {}		
+		vm.form = {}
 	};
 
 
 	vm.register = function(){
 		RegisterService.register({
-				"nombre":vm.form.nombre,
-				"apellido":vm.form.apellido,
+				"username":vm.form.username,
+				"first_name":vm.form.nombre,
+				"last_name":vm.form.apellido,
 				"email": vm.form.email,
-				"contrasena":vm.form.contrasena
+				"password":vm.form.contrasena
 			})
 
 	}

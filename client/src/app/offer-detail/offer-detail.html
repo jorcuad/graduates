@@ -11,15 +11,15 @@
 				</md-card-header-text>
 				<div layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
 					<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
-						<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
-					</md-button>
-					<md-button ng-click="changeStateOffer(offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
 						<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
+					</md-button>
+					<md-button ng-click="changeStateOffer($ctrl.offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
+						<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
 					</md-button>
 					<md-button class="md-icon-button" aria-label="Edit" href="#/edit/{{$ctrl.offer.id}}">
 						<md-icon md-svg-icon="../assets/icons/edit.svg"></md-icon>
 					</md-button>
-					<md-button class="md-icon-button" aria-label="Delete">
+					<md-button class="md-icon-button" aria-label="Delete" ng-click="showConfirm($event)">
 						<md-icon md-svg-icon="../assets/icons/delete.svg"></md-icon>
 					</md-button>
 				</div>

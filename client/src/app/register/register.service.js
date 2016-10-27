@@ -2,7 +2,7 @@
 
 angular.module('graduatesApp').service('RegisterService', function ($http) {
 	$http.defaults.useXDomain = true;
-	var registerEndpoint = 'http://localhost:8000/register'
+	var registerEndpoint = 'http://localhost:8000/users/'
 
 	this.register = function (registerData) {
 		return $http.post(registerEndpoint, registerData)

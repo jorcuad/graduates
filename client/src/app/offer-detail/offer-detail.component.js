@@ -1,15 +1,17 @@
 'use strict';
 
-function offerDetailCtrl ($http, $scope, $routeParams, OfferDetailService, Utils, Session) {
+function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
 
 	var vm = this;
 	$scope.offer={};
+	$scope.offer.active=true;
 	$scope.userlogged={};
-	vm.$onInit = function () {
 
+	vm.$onInit = function () {
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
 				vm.offer = answer.data;
+				$scope.offer= vm.offer;
 				var dateObject = new Date(Date.parse(vm.offer.pub_date));
 				var dateReadable = dateObject.toLocaleDateString();
 				vm.offer.pub_date = dateReadable
@@ -17,8 +19,29 @@ function offerDetailCtrl ($http, $scope, $routeParams, OfferDetailService, Utils
 				Utils.toast(answer.status + " : Error al obtener la información de la oferta, recargue la página.", true)
 			})
 
-		$scope.userlogged = Session.getUser()
+		$scope.userlogged = Session.getUser();
+		log($scope.userlogged)
 	};
+
+	$scope.showConfirm = function(ev) {
+		// Appending dialog to document.body to cover sidenav in docs app
+		var confirm = $mdDialog.confirm()
+				.title('¿Desea eliminar esta oferta?')
+				.textContent('Si elimina esta oferta no podrá recuperarla posteriormente.')
+				.targetEvent(ev)
+				.ok('Aceptar')
+				.cancel('Cancelar');
+
+		$mdDialog.show(confirm).then(function() {
+			OfferDetailService.deleteOffer($routeParams.orderId)
+				.then(function (answer) { //TODO readable date
+					Utils.toast(answer.status + "Se ha borrado", false)
+				}, function (answer) {
+					Utils.toast(answer.status + "No se ha borrado	.", true)
+				});
+		})
+	};
+
 
 	$scope.changeStateOffer=function (offer){
 		offer.active = !offer.active;
@@ -27,11 +50,23 @@ function offerDetailCtrl ($http, $scope, $routeParams, OfferDetailService, Utils
 					$mdDialog.cancel();
 					return result.data;
 				});
-	};
+	}
 
 	$scope.getStateOffer = function (offer){
-		return offer.active;
+		$scope.offer = offer;
+		return  offer.active;
 	};
+
+	$scope.changeStateOffer = function (offer){
+		$scope.offer.active = !offer.active;
+		OfferDetailService.changeStateOffer($scope.offer);
+		if(offer.active)
+		Utils.toast("Oferta abierta.");
+		else
+		Utils.toast("Oferta cerrada.");
+
+	};
+
 }
 
 angular.module('graduatesApp').component('offerDetail', {
