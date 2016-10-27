@@ -1,6 +1,6 @@
 'use strict';
 
-function offerDetailCtrl ($http, $scope, $routeParams, OfferDetailService, Utils, Session) {
+function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
 
 	var vm = this;
 	$scope.offer={};
@@ -19,7 +19,22 @@ function offerDetailCtrl ($http, $scope, $routeParams, OfferDetailService, Utils
 
 		$scope.userlogged = Session.getUser()
 	};
-
+	 $scope.showConfirm = function(ev) {
+	     // Appending dialog to document.body to cover sidenav in docs app
+	     var confirm = $mdDialog.confirm()
+	           .title('¿Desea eliminar esta oferta?')
+	           .textContent('Si elimina esta oferta no podrá recuperarla posteriormente.')
+	           .targetEvent(ev)
+	           .ok('Aceptar')
+	           .cancel('Cancelar');
+	     $mdDialog.show(confirm).then(function() {
+	 		OfferDetailService.deleteOffer($routeParams.orderId)
+	 			.then(function (answer) { //TODO readable date
+	 				Utils.toast(answer.status + "Se ha borrado", false)
+	 			}, function (answer) {
+	 				Utils.toast(answer.status + "No se ha borrado	.", true)
+	 			})
+ 
 	$scope.changeStateOffer=function (offer){
 		offer.active = !offer.active;
 		$http.put("http://localhost:8000/offers_edit/", offer)
