@@ -1,7 +1,7 @@
 <div layout-padding>
 	<form name="offer">
-		<div layout="row"  layout-padding>
-			<md-input-container flex>
+		<div layout="row" >
+			<md-input-container flex style="margin-top: 0">
 				<md-icon md-font-icon="event">event</md-icon>
 				<input name="name" required type="text" placeholder="Nombre de la oferta" ng-model="$ctrl.form.offer_name"/>
 
@@ -12,8 +12,8 @@
 				</div>
 			</md-input-container>
 		</div>
-		<div layout="row"  layout-padding>
-			<md-input-container flex>
+		<div layout="row">
+			<md-input-container flex style="margin-top: 0; margin-bottom: 0">
 				<md-icon md-font-icon="description" class="description">description</md-icon>
 				<textarea name="description" required type="text" ng-maxlenght="400" placeholder="Descripción" ng-model="$ctrl.form.description"></textarea>
 
@@ -25,11 +25,11 @@
 			</md-input-container>
 		</div>
 
-		<div layout="row" layout-padding>
-			<div flex="50">
+		<div layout="row">
+			<div flex="45">
 				<h4>¿Dónde es?</h4>
-				<div flex layout="row" layout-padding>
-					<md-input-container>
+				<div flex layout="row">
+					<md-input-container style="margin-bottom: 0;margin-top: 0;">
 						<md-icon md-font-icon="place">place</md-icon>
 						<input name="place" required type="text" placeholder="Lugar" ng-model="$ctrl.form.place"/>
 
@@ -41,10 +41,11 @@
 					</md-input-container>
 				</div>
 			</div>
-			<div flex="50">
+			<div flex="10"></div>
+			<div flex="45">
 				<h4>¿Qué tipo de actividad es?</h4>
 				<div flex layout="row">
-					<md-input-container>
+					<md-input-container style="margin-top: 0;">
 						<md-icon md-font-icon="place">category</md-icon>
 						<md-select placeholder="{{$ctrl.form.categories}}" ng-model="$ctrl.form.categories">
 							<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">
@@ -61,13 +62,13 @@
 				</div>
 			</div>
 		</div>
-		<div layout="row" layout-padding>
-			<div layout="column" layout-padding flex="50">
+		<div layout="row">
+			<div layout="column" flex="45">
 				<h4>¿Cuándo va a ser?</h4>
 				<md-datepicker flex ng-model="$ctrl.form.activity_date" md-placeholder="Fecha de la oferta"
 				md-min-date="$ctrl.minDate"></md-datepicker>
 				<div layout="row">
-					<md-input-container>
+					<md-input-container style="margin-bottom: 0;">
 						<input name="hour" required type="number" min="0" max="23" placeholder="Hora" ng-model="$ctrl.activity_hour"/>
 
 						<div ng-messages="offer.hour.$error" multiple md-auto-hide="true">
@@ -76,7 +77,7 @@
 						  </div>
 						</div>
 					</md-input-container>
-					<md-input-container>
+					<md-input-container style="margin-bottom: 0;">
 						<input name="min" required type="number" min="0" max="59" placeholder="Minutos" ng-model="$ctrl.activity_min"/>
 
 						<div ng-messages="offer.min.$error" multiple md-auto-hide="true">
@@ -87,11 +88,11 @@
 					</md-input-container>
 				</div>
 			</div>
-			
-			<div layout="column" flex layout-padding flex="50">
+			<div flex="10"></div>
+			<div layout="column" flex="45">
 				<h4>¿Quién lo puede ver?</h4>
-				<md-switch ng-model="$ctrl.form.active" aria-label="Activa">Activa</md-switch>
-				<md-switch ng-model="$ctrl.form.private" aria-label="Privada">Privada</md-switch>
+				<md-switch style="margin-top: 0;" ng-model="$ctrl.form.active" aria-label="Activa">Activa</md-switch>
+				<md-switch style="margin-top: 0;" ng-model="$ctrl.form.private" aria-label="Privada">Privada</md-switch>
 			</div>
 		</div>
 		<div layout="row" layout-align="center center">
