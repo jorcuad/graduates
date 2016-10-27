@@ -10,4 +10,13 @@ angular.module('graduatesApp').service('Utils', function ($http, $mdToast) {
 		}
 	}
 
+	this.isError = function ( httpcode ) {
+		var code = parseInt(httpcode)
+		if ( code >= 200 && code < 300) {
+			return false
+		} else if ( code >= 400 ) {
+			return true
+		}
+	}
+
 });

@@ -18,9 +18,14 @@ function loginCtrl (LoginService, Utils, Session, $route) {
 			console.log(vm.nick +" "+ vm.password)
 			LoginService.login({"username":vm.nick, "password":vm.password})
 						.then( function(answer) {
-							Session.create(answer.data.token, answer.data.user) //FIXME poner token traido por server
-							$route.reload()
-							Utils.toast(answer.status + " : Usuario loggeado correctamente.", false)
+							if ( !Utils.isError(answer.status) ) {
+								Session.create(answer.data.token, answer.data.user) //FIXME poner token traido por server
+								$route.reload()
+								Utils.toast(answer.status + " : Usuario loggeado correctamente.", false)
+							} else {
+								Utils.toast(answer.status + " : Datos de login incorrectos.", true)
+							}
+							
 						}, function(answer) {
 							Utils.toast(answer.status + " : Datos de login incorrectos.", true)
 						});
