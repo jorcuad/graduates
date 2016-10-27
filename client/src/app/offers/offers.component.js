@@ -9,7 +9,7 @@ function offersCtrl ($http, $scope, Offers, Utils) {
 	vm.category = ""
 
 	vm.$onInit = function () {
-		$scope.logged = true;
+		$scope.logged = false;
 		$scope.username = "Manuel";
 		$scope.offerform = {}
 		Offers.get().then(function (answer) { 

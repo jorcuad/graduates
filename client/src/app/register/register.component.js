@@ -26,6 +26,11 @@ function registerCtrl (Utils) {
 
 		}
 	}
+	vm.caseSensitiveAlert = function(){
+			Utils.toast("La clave es case sensitive.", false)
+
+		
+	}
 
 }
 

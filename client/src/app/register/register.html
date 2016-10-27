@@ -46,7 +46,7 @@
 		<div layout="row">
 			<md-input-container flex>
 				<md-icon md-font-icon="contrasena">contrasena</md-icon>
-				<input type="password" name="contrasena" required type="text" placeholder="Contraseña" ng-model="$ctrl.form.contrasena"/>
+				<input type="password" name="contrasena" ng-focus="$ctrl.caseSensitiveAlert()" required type="text" placeholder="Contraseña" ng-model="$ctrl.form.contrasena"/>
 				<div ng-messages="register.contrasena.$error" multiple md-auto-hide="true">
 				  <div ng-message="required">
 					Este campo es necesario.
