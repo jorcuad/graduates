@@ -11,14 +11,8 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 	vm.category = ""
 
 	vm.$onInit = function () {
+		$scope.user = {}
 
-		$scope.logged = Session.isLogged()
-
-		if($scope.logged) {
-			$scope.user = Session.getUser()
-		}
-
-		$scope.offerform = {}
 		Offers.get().then(function (answer) {
 			vm.offers = answer.data;
 		}, function(answer) {
@@ -29,6 +23,15 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 		}, function (answer) {
 			Utils.toast(answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
 		})
+
+		$scope.offerform = {}
+		$scope.logged = Session.isLogged()
+
+		if(Session.isLogged()) {
+			$scope.user = Session.getUser()
+			Offers.getFavorites($scope.user.id).then(function (favorites) { vm.favorites = favorites; })
+		}
+
 	};
 
 	vm.filter = function() {
@@ -47,6 +50,13 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 		}, function(answer) {
 			Utils.toast(answer.status + " : Error al buscar ofertas, recargue la página e intentelo de nuevo.", true)
 		})
+	};
+}
+
+function DialogController($scope, $mdDialog) {
+
+	$scope.hide = function() {
+		$mdDialog.hide();
 	};
 
 	$scope.changeStateOffer =function (offer){

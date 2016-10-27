@@ -2,7 +2,7 @@
 
 angular.module('graduatesApp').service('OfferForm', function ($http) {
 	$http.defaults.useXDomain = true;
-	var offersEndpoint = 'http://localhost:8000/offers/'
+	var offersEndpoint = 'http://localhost:8000/offers_list/'
 	var categoriesEndpoint = 'http://localhost:8000/categories/'
 
 

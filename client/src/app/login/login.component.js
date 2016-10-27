@@ -3,6 +3,12 @@
 function loginCtrl (LoginService, Utils, Session, $route) {
 	var vm = this;
 
+	var dummy_user = {
+        "id": 2,
+        "username": "Salamo",
+        "email": "salamo@i4s.com"
+    }
+
 	vm.$onInit = function () {
 		
 	};
@@ -11,7 +17,7 @@ function loginCtrl (LoginService, Utils, Session, $route) {
 		if ( check_login ( vm.nick, vm.password ) ) {
 			LoginService.login({"username":vm.nick, "password":vm.password})
 						.then( function(answer) {
-							Session.create("asdasdasdasd") //FIXME poner token traido por server
+							Session.create("asdasdasdasd", dummy_user) //FIXME poner token traido por server
 							$route.reload()
 							Utils.toast(answer.status + " : Usuario loggeado correctamente.", false)
 						}, function(answer) {

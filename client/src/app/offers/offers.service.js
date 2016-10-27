@@ -2,9 +2,10 @@
 
 angular.module('graduatesApp').service('Offers', function ($http) {
 	$http.defaults.useXDomain = true;
-	var offersEndpoint = 'http://localhost:8000/offers'
+	var offersEndpoint = 'http://localhost:8000/offers_list'
 	var searchEndpoint = 'http://localhost:8000/offersearch/?'
 	var categoriesEndpoint = 'http://localhost:8000/categories/'
+	var favoritesListEndpoint = 'http://localhost:8000/favs_user/'
 
 
 	this.get = function () {
@@ -33,4 +34,12 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 						return result;
 					});
 	}
+
+	this.getFavorites = function (user_id) {
+		return $http.get(favoritesListEndpoint + user_id)
+					.then(function(result) {
+						return result.data.favorites;
+					});
+	}
+
 });

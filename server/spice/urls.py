@@ -21,9 +21,12 @@ from rest_framework.routers import SimpleRouter
 
 router = SimpleRouter()
 router.register(r'categories', views.CategoryViewSet)
-router.register(r'offers', views.OfferViewSet)
+router.register(r'offers_list', views.OfferReadViewSet) # Se usa para mostrar las ofertas y su usuario ya serializado
+router.register(r'offers_edit', views.OfferWriteViewSet) # modificar usuarios o agregar, se serializa sin nested para poder agregar por id
+router.register(r'favs_user', views.FavsByUserViewSet) # ver la lista de favoritos por usuario ya serializada
+
 router.register(r'users', views.UserViewSet)
-router.register(r'favs', views.FavoriteViewSet)
+#router.register(r'favs', views.FavoriteViewSet)
 
 
 urlpatterns = [

@@ -10,7 +10,6 @@ function offerDetailCtrl ($http, $scope, $routeParams, OfferDetailService, Utils
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
 				vm.offer = answer.data;
-				$scope.offer=vm.offer;
 				var dateObject = new Date(Date.parse(vm.offer.pub_date));
 				var dateReadable = dateObject.toLocaleDateString();
 				vm.offer.pub_date = dateReadable
@@ -20,6 +19,7 @@ function offerDetailCtrl ($http, $scope, $routeParams, OfferDetailService, Utils
 
 		$scope.userlogged = Session.getUser()
 	};
+
 	$scope.changeStateOffer=function (offer){
 		offer.active = !offer.active;
 		$http.put("http://localhost:8000/offers_edit/", offer)

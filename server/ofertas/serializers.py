@@ -3,21 +3,44 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 
+class UserSerializer(serializers.ModelSerializer):
+    #favorites = OfferSerializer(many=True)
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email')
 
-class OfferSerializer(serializers.ModelSerializer):
+class OfferFavsSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = Offer
-        depth = 1
+
+class UserFavsSerializer(serializers.ModelSerializer):
+    favorites = OfferFavsSerializer(many=True)
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email','favorites')
+
+
+
+class OfferReadSerializer(serializers.ModelSerializer):
+    #favorites = UserSerializer(many=True)
+    user = UserSerializer()
+    class Meta:
+        model = Offer
+
+class OfferWriteSerializer(serializers.ModelSerializer):
+    #favorites = UserSerializer(many=True)
+    #user = UserSerializer()
+    class Meta:
+        model = Offer
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email')
 
+'''
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favorite
+'''
