@@ -32,7 +32,7 @@ class UserViewSet(ModelViewSet):
     """
     API endpoint that allows clients to be viewed or edited.
     """
-    authentication_classes = (JSONWebTokenAuthentication, )
+    #authentication_classes = (JSONWebTokenAuthentication, )
     #permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer

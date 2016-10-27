@@ -56,6 +56,7 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER':
     'ofertas.views.jwt_response_payload_handler',
+    'JWT_VERIFY_EXPIRATION': False,
 }
 
 

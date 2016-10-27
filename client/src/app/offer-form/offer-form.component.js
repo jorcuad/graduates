@@ -6,14 +6,14 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 	vm.$onInit = function () {
 		vm.categories = ""
 		vm.minDate = new Date();
-		
+
 		//FIXME recuperar horas en caso de que sea edicion
 		vm.activity_hour = ""
 		vm.activity_min = ""
 		vm.search = ""
 
-		OfferForm.getCategories().then(function (answer) { 
-			vm.categories = answer.data; 
+		OfferForm.getCategories().then(function (answer) {
+			vm.categories = answer.data;
 		}, function (answer) {
 			Utils.toast(answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
 		})
@@ -21,24 +21,21 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
 				if (answer.status == 200){
-					vm.editar = true; 
+					vm.editar = true;
 					vm.offer = answer.data;
 					var dateObject = new Date(Date.parse(vm.offer.pub_date));
 					var dateReadable = dateObject.toLocaleDateString();
 					vm.offer.pub_date = dateReadable
-					vm.form = {"id": vm.offer.id, "user":vm.offer.user.id,"active":vm.offer.active, "private":vm.offer.private,"activity_date":new Date(vm.offer.activity_date), 
+					vm.form = {"id": vm.offer.id, "user":vm.offer.user.id,"active":vm.offer.active, "private":vm.offer.private,"activity_date":new Date(vm.offer.activity_date),
 					"offer_name":vm.offer.offer_name, "description":vm.offer.description,
 					"place":vm.offer.place, "categories":vm.offer.categories}
 				}else{
 					vm.editar = false;
-					vm.form = {"user":"","active":"", "private":"","activity_date":"", 
+					vm.form = {"user":"","active":"", "private":"","activity_date":"",
 					"offer_name":"", "description":"", "place":"", "categories":"Categoría"}
 					vm.form.active = true;
 					vm.form.private = false;
-					vm.form.user_id = Session.getUser().id
-					console.log(Session.getUser().id)
-					console.log(Session.getUser())
-					console.log(vm.form.user_id)
+					vm.form.user = Session.getUser().id
 				}
 
 			}, function (answer) {
@@ -52,7 +49,7 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 
 			vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour-1, vm.activity_min)
 
-			OfferForm.create(vm.form).then(function (answer) { 
+			OfferForm.create(vm.form).then(function (answer) {
 				Utils.toast(answer.status + " : Offerta creada correctamente.", false)
 				//TODO redirect a inicio
 			}, function(answer) {
@@ -69,7 +66,7 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 
 			vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour-1, vm.activity_min)
 
-			OfferForm.update(vm.form).then(function (answer) { 
+			OfferForm.update(vm.form).then(function (answer) {
 				Utils.toast(answer.status + " : Oferta actualizada correctamente.", false)
 				//TODO redirect a inicio
 			}, function(answer) {
@@ -106,7 +103,7 @@ function check_form(form) {
 	if ( form.categories === "Categoría") {
 		is_ok = false
 	}
-	
+
 	return is_ok
 }
 
@@ -123,6 +120,3 @@ function add_time(date, hour, min) { //FIXME
 	date.setHours(date.getHours()+hour)
 	return new Date(date.getTime() + (min * min_sec))
 }
-
-
-

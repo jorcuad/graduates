@@ -7,7 +7,7 @@ angular.module('graduatesApp').service('OfferForm', function ($http) {
 
 
 	this.get = function (id) {
-		return $http.get(offersEndpoint+id)
+		return $http.get(offersEndpoint+id+"/")
 					.then(function(result) {
 						return result;
 					}, function (result) {
