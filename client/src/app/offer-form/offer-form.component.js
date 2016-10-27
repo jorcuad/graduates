@@ -26,16 +26,19 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 					var dateObject = new Date(Date.parse(vm.offer.pub_date));
 					var dateReadable = dateObject.toLocaleDateString();
 					vm.offer.pub_date = dateReadable
-					vm.form = {"id": vm.offer.id, "user_id":vm.offer.user_id,"active":vm.offer.active, "private":vm.offer.private,"activity_date":new Date(vm.offer.activity_date), 
+					vm.form = {"id": vm.offer.id, "user":vm.offer.user.id,"active":vm.offer.active, "private":vm.offer.private,"activity_date":new Date(vm.offer.activity_date), 
 					"offer_name":vm.offer.offer_name, "description":vm.offer.description,
 					"place":vm.offer.place, "categories":vm.offer.categories}
 				}else{
 					vm.editar = false;
-					vm.form = {"user_id":"","active":"", "private":"","activity_date":"", 
+					vm.form = {"user":"","active":"", "private":"","activity_date":"", 
 					"offer_name":"", "description":"", "place":"", "categories":"Categoría"}
 					vm.form.active = true;
 					vm.form.private = false;
 					vm.form.user_id = Session.getUser().id
+					console.log(Session.getUser().id)
+					console.log(Session.getUser())
+					console.log(vm.form.user_id)
 				}
 
 			}, function (answer) {
@@ -95,6 +98,7 @@ function check_form(form) {
 	var is_ok = true
 	for(var field in form) {
 		if( String(form[field]) == "" || angular.isUndefined(String(form[field]))) {
+			console.log(field)
 			is_ok = false
 		}
 	}

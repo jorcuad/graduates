@@ -8,7 +8,7 @@ angular.module('graduatesApp').factory('authInterceptorService', ['$q', 'Session
 		config.headers = config.headers || {};
 
 		if (Session.isLogged()) {
-			config.headers.Authorization = 'Bearer ' + Session.getToken();
+			config.headers.Authorization = 'JWT ' + Session.getToken();
 		}
 
 		return config;
