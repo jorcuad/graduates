@@ -1,8 +1,10 @@
 'use strict';
 
 function offersCtrl ($http, $scope, Offers, Utils, Session) {
+
 	var vm = this;
 	$scope.formData = {};
+	$scope.userlogged= {};
 
 	vm.search = ""
 	vm.categories = ""
@@ -13,7 +15,7 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 		$scope.logged = Session.isLogged()
 
 		if($scope.logged) {
-			$scope.username = Session.getUser()
+			$scope.user = Session.getUser()
 		}
 
 		$scope.offerform = {}
@@ -45,6 +47,19 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 		}, function(answer) {
 			Utils.toast(answer.status + " : Error al buscar ofertas, recargue la página e intentelo de nuevo.", true)
 		})
+	};
+
+	$scope.changeStateOffer =function (offer){
+		offer.active = !offer.active;
+		$http.put("http://localhost:8000/offers/", offer)
+				.then(function(result) {
+					$mdDialog.cancel();
+					return result.data;
+				});
+	};
+
+	$scope.getStateOffer = function (offer){
+		return offer.active;
 	};
 }
 
