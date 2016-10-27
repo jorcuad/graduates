@@ -18,7 +18,7 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 	}
 
 	this.search = function (filters) {
-		return $http.get(searchEndpoint+filters+"/")
+		return $http.get(searchEndpoint+filters)
 					.then(function(result) {
 						return result;
 					}, function (result) {
