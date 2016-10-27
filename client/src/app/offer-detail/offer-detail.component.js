@@ -50,6 +50,7 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 					$mdDialog.cancel();
 					return result.data;
 				});
+	}
 
 	$scope.getStateOffer = function (offer){
 		$scope.offer = offer;
