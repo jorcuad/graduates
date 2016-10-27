@@ -1,14 +1,14 @@
 <div layout-padding layout="row" layout-align="center">
 	<md-content layout="row" layout-padding flex="95">
 		<!-- Search bar -->
-		<div layout="column" layout-padding flex>
+		<div layout="column" layout-padding flex="50">
 			<div layout="row" flex>
 				<md-input-container flex>
 					<label>Búsqueda de ofertas</label>
 					<input name="search" ng-model="$ctrl.search">
 				</md-input-container>
 				<div>
-					<md-button class="md-raised" ng-click="$ctrl.filter()">Buscar</md-button>
+					<md-button class="md-raised md-primary" ng-click="$ctrl.filter()">Buscar</md-button>
 				</div>
 			</div>
 			<div layout="row">
@@ -21,13 +21,14 @@
 		</div>
 		<!-- end search bar -->
 		<!-- login form -->
-		<div layout="column" flex="30" layout-padding>
+		<span flex="10"></span>
+		<div layout="column" flex="40" layout-padding>
 			<div ng-show="!logged" layout="row">
 				<login></login>
 			</div>
 
 			<section ng-show="logged" layout="row">
-				<md-button ng-disabled="!logged" href="#/new-offer" class="md-raised md-primary">
+				<md-button md-colors="{background: 'green'}" ng-disabled="!logged" href="#/new-offer" class="md-raised md-primary">
 					Crear Oferta
 				</md-button>
 			</section>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('graduatesApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngCookies']).config(function($httpProvider){
+angular.module('graduatesApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngCookies']).config(function($httpProvider, $mdThemingProvider){
     //Enable cross domain calls
       $httpProvider.defaults.useXDomain = true;
 
@@ -8,4 +8,6 @@ angular.module('graduatesApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngCookie
       delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
       $httpProvider.interceptors.push('authInterceptorService');
+
+      $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('green');
 });
