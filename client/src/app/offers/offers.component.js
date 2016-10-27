@@ -23,7 +23,9 @@ function offersCtrl ($http, $scope, Offers, Utils) {
 			Utils.toast(answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
 		})
 	};
-
+	vm.getDate = function(d){
+		return new Date(d)
+	}
 	vm.filter = function() {
 		var query = ""
 		if (vm.search !== "") {
