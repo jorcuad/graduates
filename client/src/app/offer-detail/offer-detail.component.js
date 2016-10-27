@@ -4,12 +4,13 @@ function offerDetailCtrl ($http, $scope, $routeParams, OfferDetailService, Utils
 
 	var vm = this;
 	$scope.offer={};
+	$scope.offer.active=true;
 	$scope.userlogged={};
 	vm.$onInit = function () {
-
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
 				vm.offer = answer.data;
+				$scope.offer= vm.offer;
 				var dateObject = new Date(Date.parse(vm.offer.pub_date));
 				var dateReadable = dateObject.toLocaleDateString();
 				vm.offer.pub_date = dateReadable
@@ -20,17 +21,18 @@ function offerDetailCtrl ($http, $scope, $routeParams, OfferDetailService, Utils
 		$scope.userlogged = Session.getUser()
 	};
 
-	$scope.changeStateOffer=function (offer){
-		offer.active = !offer.active;
-		$http.put("http://localhost:8000/offers_edit/", offer)
-				.then(function(result) {
-					$mdDialog.cancel();
-					return result.data;
-				});
-	};
-
 	$scope.getStateOffer = function (offer){
-		return offer.active;
+		$scope.offer = offer;
+		return  offer.active;
+	};
+	$scope.changeStateOffer = function (offer){
+		$scope.offer.active = !offer.active;
+		OfferDetailService.changeStateOffer($scope.offer);
+		if(offer.active)
+		Utils.toast("Oferta abierta.");
+		else
+		Utils.toast("Oferta cerrada.");
+
 	};
 }
 

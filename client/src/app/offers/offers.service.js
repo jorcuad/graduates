@@ -6,6 +6,7 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 	var searchEndpoint = 'http://localhost:8000/offersearch/?'
 	var categoriesEndpoint = 'http://localhost:8000/categories/'
 	var favoritesListEndpoint = 'http://localhost:8000/favs_user/'
+	var offersEditEndpoint = 'http://localhost:8000/offers_edit'
 
 
 	this.get = function () {
@@ -39,6 +40,12 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 		return $http.get(favoritesListEndpoint + user_id +"/")
 					.then(function(result) {
 						return result.data.favorites;
+					});
+	}
+	this.changeStateOffer = function (offer) {
+		return $http.put(offersEditEndpoint + offer.id + '/',offer,config)
+					.then(function(offer) {
+						return offer.data;
 					});
 	}
 

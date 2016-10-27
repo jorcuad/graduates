@@ -59,17 +59,14 @@ function DialogController($scope, $mdDialog) {
 		$mdDialog.hide();
 	};
 
-	$scope.changeStateOffer =function (offer){
-		offer.active = !offer.active;
-		$http.put("http://localhost:8000/offers/", offer)
-				.then(function(result) {
-					$mdDialog.cancel();
-					return result.data;
-				});
-	};
-
 	$scope.getStateOffer = function (offer){
+		$scope.offer = offer;
 		return offer.active;
+	};
+	$scope.changeStateOffer = function (offer){
+		$offer.active = !offer.active;
+		OfferDetailService.changeStateOffer($scope.offer);
+		
 	};
 }
 
