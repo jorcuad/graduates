@@ -49,8 +49,15 @@
 							<md-card flex layout-padding>
 								<md-card-title>
 									<md-card-title-text>
-										<span class="md-headline">{{offer.offer_name}}</span>
-										<span class="md-subhead">{{offer.activity_date | date: medium}}</span>
+										<span class="md-headline">
+											{{offer.offer_name}}
+										</span>
+										<span class="md-subhead">
+											<md-icon md-font-icon="event">event</md-icon>
+											{{offer.activity_date | date: medium}}
+											<md-icon md-font-icon="place">place</md-icon>
+											{{offer.place}}
+										</span>
 									</md-card-title-text>
 								</md-card-title>
 								<md-card-actions layout="row" layout-align="end center">
@@ -74,8 +81,15 @@
 							<md-card flex layout-padding>
 								<md-card-title>
 									<md-card-title-text>
-										<span class="md-headline">{{offer.offer_name}}</span>
-										<span class="md-subhead">{{offer.activity_date | date: medium}}</span>
+										<span class="md-headline">
+											{{offer.offer_name}}
+										</span>
+										<span class="md-subhead">
+											<md-icon md-font-icon="event">event</md-icon>
+											{{offer.activity_date | date: medium}}
+											<md-icon md-font-icon="place">place</md-icon>
+											{{offer.place}}
+										</span>
 									</md-card-title-text>
 								</md-card-title>
 								<md-card-actions layout="row" layout-align="end center">
@@ -91,26 +105,35 @@
 					<md-list flex="100">
 						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:user.id } }">
 							<md-card flex layout-padding>
-								<div layout-align="end start">
-									<md-card-actions layout="row" layout-align="end start">
-									<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
-										<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
-									</md-button>
-									<md-button ng-click="changeStateOffer(offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
-										<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
-									</md-button>
-									<md-button class="md-icon-button" aria-label="Edit" href="#/edit/{{offer.id}}">
-										<md-icon md-svg-icon="../assets/icons/edit.svg"></md-icon>
-									</md-button>
-									<md-button class="md-icon-button" aria-label="Delete">
-										<md-icon md-svg-icon="../assets/icons/delete.svg"></md-icon>
-									</md-button>
-									</md-card-actions>
-								</div>
 								<md-card-title>
 									<md-card-title-text>
-										<span class="md-headline">{{offer.offer_name}}</span>
-										<span class="md-subhead">{{offer.activity_date | date: medium}}</span>
+										<span class="md-headline" layout="row">
+											<div layout="column" flex="70">
+												{{offer.offer_name}}
+											</div>
+											<div layout="column" flex="30">
+												<md-card-actions layout="row" layout-align="end start">
+												<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
+													<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
+												</md-button>
+												<md-button ng-click="changeStateOffer(offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
+													<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
+												</md-button>
+												<md-button class="md-icon-button" aria-label="Edit" href="#/edit/{{offer.id}}">
+													<md-icon md-svg-icon="../assets/icons/edit.svg"></md-icon>
+												</md-button>
+												<md-button class="md-icon-button" aria-label="Delete">
+													<md-icon md-svg-icon="../assets/icons/delete.svg"></md-icon>
+												</md-button>
+												</md-card-actions>
+											</div>
+										</span>
+										<span class="md-subhead">
+											<md-icon md-font-icon="event">event</md-icon>
+											{{offer.activity_date | date: medium}}
+											<md-icon md-font-icon="place">place</md-icon>
+											{{offer.place}}
+										</span>
 									</md-card-title-text>
 								</md-card-title>
 								
@@ -129,8 +152,15 @@
 							<md-card flex layout-padding>
 								<md-card-title>
 									<md-card-title-text>
-										<span class="md-headline">{{fav.offer_name}}</span>
-										<span class="md-subhead">{{fav.activity_date | date: medium}}</span>
+										<span class="md-headline">
+											{{fav.offer_name}}
+										</span>
+										<span class="md-subhead">
+											<md-icon md-font-icon="event">event</md-icon>
+											{{fav.activity_date | date: medium}}
+											<md-icon md-font-icon="place">place</md-icon>
+											{{fav.place}}
+										</span>
 									</md-card-title-text>
 								</md-card-title>
 								<md-card-actions layout="row" layout-align="end center">
