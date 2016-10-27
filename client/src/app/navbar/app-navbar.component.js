@@ -20,7 +20,8 @@ function navbarCtrl ($scope,$route,Utils,Session) {
 		Session.delete();
 		$scope.logged = Session.isLogged();
 		$route.reload();
-		Utils.toast("¡¡HASTA LUEGO!!");
+
+		Utils.toast("¡¡HASTA PRONTO!!");
 	}
 }
 
