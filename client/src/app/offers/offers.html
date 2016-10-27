@@ -1,30 +1,49 @@
-<div layout-padding layout="row" layout-align="center">
+<div layout-padding  layout-align="center">
 	<md-content layout="row" layout-padding flex="95">
 		<!-- Search bar -->
-		<div layout="column" layout-padding flex="50">
-			<div layout="row" flex>
-				<md-input-container flex>
-					<label>Búsqueda de ofertas</label>
-					<input name="search" ng-model="$ctrl.search">
-				</md-input-container>
-				<div>
-					<md-button class="md-raised md-primary" ng-click="$ctrl.filter()">Buscar</md-button>
-				</div>
-			</div>
-			<div layout="row">
-				<div layout="column" flex>
-					<md-select placeholder="Categoría" style="font-weight: bold;" ng-model="$ctrl.category">
-						<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name}}</md-option>
-					</md-select>
-				</div>
-			</div>
+		<div layout="column" layout-padding flex="55">
+			<md-card>
+				<md-card-header>
+					<md-card-header-text>
+						<span class="md-title">Buscador</span>
+					</md-card-header-text>
+				</md-card-header>
+				<md-card-content>
+					<div layout="row">
+						<md-input-container flex>
+							<label>Búsqueda de ofertas</label>
+							<input name="search" ng-model="$ctrl.search">
+						</md-input-container>
+						<div>
+							<md-button class="md-raised md-primary" ng-click="$ctrl.filter()">Buscar</md-button>
+						</div>
+					</div>
+					<div layout="row">
+						<div layout="column" flex>
+							<md-select placeholder="Categoría" style="font-weight: bold;" ng-model="$ctrl.category">
+								<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name}}</md-option>
+							</md-select>
+						</div>
+					</div>
+				</md-card-content>
+			</md-card>
 		</div>
 		<!-- end search bar -->
+
 		<!-- login form -->
-		<span flex="10"></span>
-		<div layout="column" flex="40" layout-padding>
+		<span flex="5"></span>
+		<div layout="column" flex="30" layout-padding>
 			<div ng-show="!logged" layout="row">
-				<login></login>
+				<md-card>
+					<md-card-header>
+						<md-card-header-text>
+							<span class="md-title">Login</span>
+						</md-card-header-text>
+					</md-card-header>
+					<md-card-content>
+						<login></login>
+					</md-card-content>
+				</md-card>
 			</div>
 
 			<section ng-show="logged" layout="row">
