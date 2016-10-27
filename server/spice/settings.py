@@ -42,10 +42,22 @@ INSTALLED_APPS = [
     'corsheaders', # module for managing cors permissions
 ]
 
-#REST_FRAMEWORK = {
-#    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-#    'PAGE_SIZE': 10
-#}
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        #'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'ofertas.views.jwt_response_payload_handler',
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
