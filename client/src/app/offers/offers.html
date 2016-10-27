@@ -13,7 +13,7 @@
 			</div>
 			<div layout="row">
 				<div layout="column" flex>
-					<md-select placeholder="category" ng-model="$ctrl.category">
+					<md-select placeholder="Categoría" style="font-weight: bold;" ng-model="$ctrl.category">
 						<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name}}</md-option>
 					</md-select>
 	        	</div>
@@ -27,7 +27,7 @@
 			</div>
 
 			<section ng-show="logged" layout="row">
-				<md-button ng-disabled="!logged" ng-click="showAdvanced($event)" class="md-raised md-primary">
+				<md-button ng-disabled="!logged" href="#/new-offer" class="md-raised md-primary">
 					Crear Oferta
 				</md-button>
 			</section>
@@ -63,37 +63,52 @@
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Ofertas">
-				<md-content layout-padding flex="100">
-					<md-list flex="100">
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'!{{ user_id }}' } }">
-							<md-card flex layout-padding>
-								<md-card-title>
-									<md-card-title-text>
-										<span class="md-headline">{{offer.offer_name}}</span>
-										<span class="md-subhead">{{offer.description}}</span>
-									</md-card-title-text>
-								</md-card-title>
-								<md-card-actions layout="row" layout-align="end center">
-									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
-								</md-card-actions>
-							</md-card>
-						</md-list-item>
-					</md-list>
-				</md-content>
+			<md-content layout-padding flex="100">
+				<md-list flex="100">
+					<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id: '!' + user.id } }">
+						<md-card flex layout-padding>
+							<md-card-title>
+								<md-card-title-text>
+									<span class="md-headline">{{offer.offer_name}}</span>
+									<span class="md-subhead">{{offer.description}}</span>
+								</md-card-title-text>
+							</md-card-title>
+							<md-card-actions layout="row" layout-align="end center">
+								<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
+							</md-card-actions>
+						</md-card>
+					</md-list-item>
+				</md-list>
+			</md-content>
       </md-tab>
-
       <md-tab label="Creadas por mi">
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
-						<!--cambiar filtro por el id que corresponda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1-->
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:'{{ user_id }}' } }">
+						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:user.id } }">
 							<md-card flex layout-padding>
+								<div layout-align="end start">
+									<md-card-actions layout="row" layout-align="end start">
+									<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
+										<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
+									</md-button>
+									<md-button ng-click="changeStateOffer(offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
+										<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
+									</md-button>
+									<md-button class="md-icon-button" aria-label="Edit" href="#/edit/{{offer.id}}">
+										<md-icon md-svg-icon="../assets/icons/edit.svg"></md-icon>
+									</md-button>
+									<md-button class="md-icon-button" aria-label="Delete">
+										<md-icon md-svg-icon="../assets/icons/delete.svg"></md-icon>
+									</md-button>
+									</md-card-actions>
+								</div>
 								<md-card-title>
 									<md-card-title-text>
 										<span class="md-headline">{{offer.offer_name}}</span>
 										<span class="md-subhead">{{offer.description}}</span>
 									</md-card-title-text>
 								</md-card-title>
+								
 								<md-card-actions layout="row" layout-align="end center">
 									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
