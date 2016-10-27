@@ -44,7 +44,6 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 	};
 
 	vm.create = function(){
-		alert(vm.form.categories)
 		if(check_form(vm.form) && check_time(vm.activity_hour, vm.activity_min)) {
 
 			vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour-1, vm.activity_min)
@@ -61,7 +60,6 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 	}
 
 	vm.update = function(){
-		alert(vm.form.categories)
 		if(check_form(vm.form) && check_time(vm.activity_hour, vm.activity_min)) {
 
 			vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour-1, vm.activity_min)
