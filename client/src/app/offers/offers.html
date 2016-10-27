@@ -16,10 +16,10 @@
 					<md-select placeholder="Categoría" style="font-weight: bold;" ng-model="$ctrl.category">
 						<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name}}</md-option>
 					</md-select>
-	        	</div>
-        	</div>
-        </div>
-        <!-- end search bar -->
+				</div>
+			</div>
+		</div>
+		<!-- end search bar -->
 		<!-- login form -->
 		<div layout="column" flex="30" layout-padding>
 			<div ng-show="!logged" layout="row">
@@ -39,49 +39,54 @@
 <md-divider></md-divider>
 
 <!-- Offer list -->
-<div ng-show="!logged" layout-padding layout="row" layout-align="center">
-	<md-content layout-padding flex="100">
-		<md-list flex="100">
-			<md-list-item ng-repeat="offer in $ctrl.offers">
-				<md-card flex layout-padding>
-					<md-card-title>
-						<md-card-title-text>
-							<span class="md-headline">{{offer.offer_name}}</span>
-							<span class="md-subhead">{{offer.activity_date | date: medium}}</span>
-						</md-card-title-text>
-					</md-card-title>
-					<md-card-actions layout="row" layout-align="end center">
-	 					<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
- 					</md-card-actions>
-				</md-card>
-			</md-list-item>
-		</md-list>
+<div ng-cloak ng-show="!logged">
+	<md-content>
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="Ofertas">
+				<md-content layout-padding flex="100">
+					<md-list flex="100">
+						<md-list-item ng-repeat="offer in $ctrl.offers">
+							<md-card flex layout-padding>
+								<md-card-title>
+									<md-card-title-text>
+										<span class="md-headline">{{offer.offer_name}}</span>
+										<span class="md-subhead">{{offer.activity_date | date: medium}}</span>
+									</md-card-title-text>
+								</md-card-title>
+								<md-card-actions layout="row" layout-align="end center">
+									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
+								</md-card-actions>
+							</md-card>
+						</md-list-item>
+					</md-list>
+				</md-content>
+			</md-tab>
+		</md-tabs>
 	</md-content>
 </div>
-
-<div ng-show="logged" ng-cloak>
-  <md-content>
-    <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="Ofertas">
-			<md-content layout-padding flex="100">
-				<md-list flex="100">
-					<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id: '!' + user.id } }">
-						<md-card flex layout-padding>
-							<md-card-title>
-								<md-card-title-text>
-									<span class="md-headline">{{offer.offer_name}}</span>
-									<span class="md-subhead">{{offer.activity_date | date: medium}}</span>
-								</md-card-title-text>
-							</md-card-title>
-							<md-card-actions layout="row" layout-align="end center">
-								<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
-							</md-card-actions>
-						</md-card>
-					</md-list-item>
-				</md-list>
-			</md-content>
-      </md-tab>
-      <md-tab label="Creadas por mi">
+<div ng-cloak ng-show="logged">
+	<md-content>
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="Ofertas">
+				<md-content layout-padding flex="100">
+					<md-list flex="100">
+						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id: '!' + user.id } }">
+							<md-card flex layout-padding>
+								<md-card-title>
+									<md-card-title-text>
+										<span class="md-headline">{{offer.offer_name}}</span>
+										<span class="md-subhead">{{offer.activity_date | date: medium}}</span>
+									</md-card-title-text>
+								</md-card-title>
+								<md-card-actions layout="row" layout-align="end center">
+									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
+								</md-card-actions>
+							</md-card>
+						</md-list-item>
+					</md-list>
+				</md-content>
+			</md-tab>
+			<md-tab label="Creadas por mi" >
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
 						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:user.id } }">
@@ -116,8 +121,8 @@
 						</md-list-item>
 					</md-list>
 				</md-content>
-      </md-tab>
-			<md-tab label="Favoritos">
+			</md-tab>
+			<md-tab label="Favoritos" >
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
 						<md-list-item ng-repeat="fav in $ctrl.favorites">
@@ -136,7 +141,7 @@
 					</md-list>
 				</md-content>
 			</md-tab>
-    </md-tabs>
+	</md-tabs>
   </md-content>
 </div>
 <!--end Offer list -->
