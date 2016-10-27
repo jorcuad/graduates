@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from ofertas import views
 from rest_framework.routers import SimpleRouter
+from rest_framework_jwt.views import obtain_jwt_token
 
 
 router = SimpleRouter()
@@ -32,6 +33,7 @@ router.register(r'users', views.UserViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
+    url(r'^login/', obtain_jwt_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('ofertas.urls'))
 ]

@@ -2,12 +2,12 @@
 
 angular.module('graduatesApp').service('OfferForm', function ($http) {
 	$http.defaults.useXDomain = true;
-	var offersEndpoint = 'http://localhost:8000/offers_list/'
+	var offersEndpoint = 'http://localhost:8000/offers_edit/'
 	var categoriesEndpoint = 'http://localhost:8000/categories/'
 
 
 	this.get = function (id) {
-		return $http.get(offersEndpoint+id)
+		return $http.get(offersEndpoint+id+"/")
 					.then(function(result) {
 						return result;
 					}, function (result) {
@@ -34,7 +34,7 @@ angular.module('graduatesApp').service('OfferForm', function ($http) {
 	}
 
 	this.update = function (offerData) {
-		return $http.put(offersEndpoint, offerData)
+		return $http.put(offersEndpoint + offerData.id + "/", offerData)
 					.then(function(result) {
 						return result;
 					}, function (result) {

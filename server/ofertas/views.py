@@ -1,5 +1,7 @@
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet, GenericViewSet
 from django.contrib.auth.models import User, Group
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from functools import reduce
 
@@ -11,7 +13,7 @@ from ofertas.models import *
 from ofertas.serializers import *
 
 from rest_framework import status, mixins
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 
 from django.http import Http404
@@ -30,6 +32,8 @@ class UserViewSet(ModelViewSet):
     """
     API endpoint that allows clients to be viewed or edited.
     """
+    #authentication_classes = (JSONWebTokenAuthentication, )
+    #permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -45,6 +49,9 @@ class OfferWriteViewSet(mixins.CreateModelMixin,mixins.UpdateModelMixin,mixins.D
     """
     API endpoint that allows offers to be edited.
     """
+
+    authentication_classes = (JSONWebTokenAuthentication, )
+    permission_classes = (IsAuthenticated,)
     queryset = Offer.objects.all()
     serializer_class = OfferWriteSerializer
 
@@ -54,6 +61,8 @@ class FavsByUserViewSet(mixins.RetrieveModelMixin,
     """
     API endpoint that allows offers to be viewed or retrieve.
     """
+    authentication_classes = (JSONWebTokenAuthentication, )
+    permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserFavsSerializer
 
@@ -62,6 +71,9 @@ class FavsEdit(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
+    authentication_classes = (JSONWebTokenAuthentication, )
+    permission_classes = (IsAuthenticated,)
+
     def get_offer(self, pk):
         try:
             return Offer.objects.get(pk=pk)
@@ -119,5 +131,12 @@ def offer_search(request):
         qFilter.add( Q(categories=categories), Q.AND)
 
     results = Offer.objects.filter(qFilter).order_by('pub_date')
-    serializer = OfferSerializer(results, many=True)
+    serializer = OfferReadSerializer(results, many=True)
     return Response(serializer.data)
+
+
+def jwt_response_payload_handler(token, user=None, request=None):
+    return {
+        'token': token,
+        'user': UserSerializer(user, context={'request': request}).data
+    }
