@@ -1,6 +1,6 @@
 'use strict';
 
-function registerCtrl (Utils) {
+function registerCtrl (Utils, RegisterService) {
 	var vm = this;
 
 	vm.$onInit = function () {
@@ -10,14 +10,13 @@ function registerCtrl (Utils) {
 
 	vm.register = function(){
 		RegisterService.register({
-									"nombre":vm.form.nombre, 
-									"apellido":vm.form.apellido, 
-									"email": vm.form.email,
-									"contrasena":vm.form.contrasena
-								})
+				"nombre":vm.form.nombre,
+				"apellido":vm.form.apellido,
+				"email": vm.form.email,
+				"contrasena":vm.form.contrasena
+			})
 
 	}
-
 
 	vm.checkPass = function() {
 
