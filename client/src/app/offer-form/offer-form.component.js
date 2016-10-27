@@ -1,6 +1,6 @@
 'use strict';
 
-function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Utils) {
+function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Utils, Session) {
 	var vm = this;
 
 	vm.$onInit = function () {
@@ -35,7 +35,7 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 					"offer_name":"", "description":"", "place":"", "categories":"Categoría"}
 					vm.form.active = true;
 					vm.form.private = false;
-					vm.form.user_id = 1
+					vm.form.user_id = Session.getUser().id
 				}
 
 			}, function (answer) {

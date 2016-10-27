@@ -1,6 +1,6 @@
 <div layout-padding>
 	<form name="offer">
-		<div layout="row">
+		<div layout="row"  layout-padding>
 			<md-input-container flex>
 				<md-icon md-font-icon="name">name</md-icon>
 				<input name="name" required type="text" placeholder="Nombre de la oferta" ng-model="$ctrl.form.offer_name"/>
@@ -12,7 +12,7 @@
 				</div>
 			</md-input-container>
 		</div>
-		<div layout="row">
+		<div layout="row"  layout-padding>
 			<md-input-container flex>
 				<md-icon md-font-icon="description" class="description">description</md-icon>
 				<textarea name="description" required type="text" ng-maxlenght="400" placeholder="Descripción" ng-model="$ctrl.form.description"></textarea>
@@ -25,41 +25,47 @@
 			</md-input-container>
 		</div>
 
-		<div layout="row">
-			<md-input-container flex="45">
-				<md-icon md-font-icon="place">place</md-icon>
-				<input name="place" required type="text" placeholder="Lugar" ng-model="$ctrl.form.place"/>
+		<div layout="row" layout-padding>
+			<div flex>
+				<h3>¿Dónde es?</h3>
+				<div flex layout="row" layout-padding>
+					<md-input-container>
+						<md-icon md-font-icon="place">place</md-icon>
+						<input name="place" required type="text" placeholder="Lugar" ng-model="$ctrl.form.place"/>
 
-				<div ng-messages="offer.place.$error" multiple md-auto-hide="true">
-				  <div ng-message="required">
-					Este campo es necesario.
-				  </div>
+						<div ng-messages="offer.place.$error" multiple md-auto-hide="true">
+						  <div ng-message="required">
+							Este campo es necesario.
+						  </div>
+						</div>
+					</md-input-container>
 				</div>
-			</md-input-container>
-			<span flex="10"></span>
-			<md-input-container flex="45">
-				<md-icon md-font-icon="place">category</md-icon>
-				<md-select placeholder="{{$ctrl.form.categories}}"  style="font-color: black;" ng-model="$ctrl.form.categories">
-					<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">
-						{{cat.category_name}}
-					</md-option>
-				</md-select>
+			</div>
+			<div flex>
+				<h3>¿Qué tipo de actividad es?</h3>
+				<div>
+					<md-input-container>
+						<md-icon md-font-icon="place">category</md-icon>
+						<md-select placeholder="{{$ctrl.form.categories}}"  style="font-color: black;" ng-model="$ctrl.form.categories">
+							<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">
+								{{cat.category_name}}
+							</md-option>
+						</md-select>
 
-				<div ng-messages="offer.category.$error" multiple md-auto-hide="true">
-				  <div ng-message="required">
-					Este campo es necesario.
-				  </div>
+						<div ng-messages="offer.category.$error" multiple md-auto-hide="true">
+						  <div ng-message="required">
+							Este campo es necesario.
+						  </div>
+						</div>
+					</md-input-container>
 				</div>
-			</md-input-container>
+			</div>
 		</div>
-
-		<div layout="row">
-			<div layout="column" flex="25">
+		<div layout="row" layout-padding>
+			<div layout="column" flex layout-padding>
+				<h3>¿Cuándo va a ser?</h3>
 				<md-datepicker ng-model="$ctrl.form.activity_date" md-placeholder="Fecha de la oferta"
 				md-min-date="$ctrl.minDate"></md-datepicker>
-			</div>
-			<span flex="10"></span>
-			<div layout="column" flex="25">
 				<md-input-container>
 					<input name="hour" required type="number" min="0" max="23" placeholder="Hora" ng-model="$ctrl.activity_hour"/>
 
@@ -69,9 +75,6 @@
 					  </div>
 					</div>
 				</md-input-container>
-			</div>
-			<span flex="10"></span>
-			<div layout="column" flex="25">
 				<md-input-container>
 					<input name="min" required type="number" min="0" max="59" placeholder="Minutos" ng-model="$ctrl.activity_min"/>
 
@@ -81,6 +84,13 @@
 					  </div>
 					</div>
 				</md-input-container>
+			</div>
+			<div layout="column" flex="15">
+			</div>
+			<div layout="column" flex layout-padding>
+				<h3>¿Quién lo puede ver?</h3>
+				<md-switch ng-model="$ctrl.form.active" aria-label="Activa">Activa</md-switch>
+				<md-switch ng-model="$ctrl.form.private" aria-label="Privada">Privada</md-switch>
 			</div>
 		</div>
 		<div layout="row" layout-align="center center">
