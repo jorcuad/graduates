@@ -7,7 +7,7 @@
 				</md-card-avatar>
 				<md-card-header-text>
 					<span class="md-title">{{$ctrl.offer.offer_name}}</span>
-					<span class="md-subhead">Publicado: {{$ctrl.offer.pub_date}} por {{$ctrl.offer.user.username}}</span>
+					<span class="md-subhead">Publicado: {{$ctrl.offer.pub_date| date: "MM/dd/yyyy"}} por {{$ctrl.offer.user.username}}</span>
 				</md-card-header-text>
 				<div layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
 					<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
@@ -24,10 +24,10 @@
 					</md-button>
 				</div>
 				<div layout-align="center">
-					<md-button class="md-icon-button" ng-show="!$ctrl.offer.favorite"  aria-label="Favorite">
+					<md-button class="md-icon-button" ng-show="!$ctrl.offer.favorite && $ctrl.offer.user.id != userlogged.id"  aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorite.svg"></md-icon>
 					</md-button>
-					<md-button class="md-icon-button" ng-show="$ctrl.offer.favorite" aria-label="Favorite">
+					<md-button class="md-icon-button" ng-show="$ctrl.offer.favorite && $ctrl.offer.user.id != userlogged.id" aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorited.svg"></md-icon>
 					</md-button>
 					<md-button class="md-icon-button" aria-label="Share">
@@ -43,8 +43,8 @@
 			<md-divider></md-divider>
 			<md-card-content>
 				<div layout-padding>
-				<p><b>Fecha:</b> {{$ctrl.offer.activity_date}}</p>
-				<p><b>Hora:</b> {{$ctrl.offer.time}}</p>
+				<p><b>Fecha:</b> {{$ctrl.offer.activity_date | date: medium}}</p>
+				<p><b>Hora:</b> {{$ctrl.offer.activity_date | date: 'HH:mm'}}</p>
 				<p><b>Categorías:</b> {{$ctrl.offer.categories}}</p>
 				<p><b>Lugar:</b> {{$ctrl.offer.place}}</p>
 				</div>
