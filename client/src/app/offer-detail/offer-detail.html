@@ -11,10 +11,10 @@
 				</md-card-header-text>
 				<div layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
 					<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
-						<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
-					</md-button>
-					<md-button ng-click="changeStateOffer(offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
 						<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
+					</md-button>
+					<md-button ng-click="changeStateOffer($ctrl.offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
+						<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
 					</md-button>
 					<md-button class="md-icon-button" aria-label="Edit" href="#/edit/{{$ctrl.offer.id}}">
 						<md-icon md-svg-icon="../assets/icons/edit.svg"></md-icon>
@@ -50,7 +50,7 @@
 				</div>
 			</md-card-content>
 			<md-card-actions layout="row" layout-align="center">
-				<md-button class="md-raised md-primary">Contactar</md-button>
+				<md-button ng-disable=true class="md-raised md-primary >Contactar</md-button>
 			</md-card-actions>
 		</md-card>
 	</md-content>

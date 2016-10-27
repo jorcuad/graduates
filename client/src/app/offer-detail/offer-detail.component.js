@@ -4,12 +4,14 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 
 	var vm = this;
 	$scope.offer={};
+	$scope.offer.active=true;
 	$scope.userlogged={};
 
 	vm.$onInit = function () {
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
 				vm.offer = answer.data;
+				$scope.offer= vm.offer;
 				var dateObject = new Date(Date.parse(vm.offer.pub_date));
 				var dateReadable = dateObject.toLocaleDateString();
 				vm.offer.pub_date = dateReadable
@@ -22,21 +24,21 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 	};
 
 	$scope.showConfirm = function(ev) {
-	     // Appending dialog to document.body to cover sidenav in docs app
-	     var confirm = $mdDialog.confirm()
-	           .title('¿Desea eliminar esta oferta?')
-	           .textContent('Si elimina esta oferta no podrá recuperarla posteriormente.')
-	           .targetEvent(ev)
-	           .ok('Aceptar')
-	           .cancel('Cancelar');
+		// Appending dialog to document.body to cover sidenav in docs app
+		var confirm = $mdDialog.confirm()
+				.title('¿Desea eliminar esta oferta?')
+				.textContent('Si elimina esta oferta no podrá recuperarla posteriormente.')
+				.targetEvent(ev)
+				.ok('Aceptar')
+				.cancel('Cancelar');
 
-	  $mdDialog.show(confirm).then(function() {
-	 		OfferDetailService.deleteOffer($routeParams.orderId)
-	 			.then(function (answer) { //TODO readable date
-	 				Utils.toast(answer.status + "Se ha borrado", false)
-	 			}, function (answer) {
-	 				Utils.toast(answer.status + "No se ha borrado	.", true)
-	 			});
+		$mdDialog.show(confirm).then(function() {
+			OfferDetailService.deleteOffer($routeParams.orderId)
+				.then(function (answer) { //TODO readable date
+					Utils.toast(answer.status + "Se ha borrado", false)
+				}, function (answer) {
+					Utils.toast(answer.status + "No se ha borrado	.", true)
+				});
 		})
 	};
 
@@ -48,10 +50,20 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 					$mdDialog.cancel();
 					return result.data;
 				});
-	};
 
 	$scope.getStateOffer = function (offer){
-		return offer.active;
+		$scope.offer = offer;
+		return  offer.active;
+	};
+
+	$scope.changeStateOffer = function (offer){
+		$scope.offer.active = !offer.active;
+		OfferDetailService.changeStateOffer($scope.offer);
+		if(offer.active)
+		Utils.toast("Oferta abierta.");
+		else
+		Utils.toast("Oferta cerrada.");
+
 	};
 
 }
