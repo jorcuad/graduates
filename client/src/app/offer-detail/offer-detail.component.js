@@ -38,28 +38,14 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
           .ok('Aceptar')
           .cancel('Cancelar');
 
-    $mdDialog.show(confirm).then(function() {
-    		    	alert("has dicho que si")
-
-
-	
+    $mdDialog.show(confirm).then(function() {	
 		OfferDetailService.deleteOffer($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
 				Utils.toast(answer.status + "Se ha borrado", false)
-
-
 			}, function (answer) {
-				Utils.toast(answer.status + "No se ha borrado	.", true)
+				Utils.toast(answer.status + "No se ha borrado.", true)
 			})
-
-
-
-	    }, function() {
-
-
-	    	alert("has dicho que no")
-
-    });
+	    });
   };
 
 

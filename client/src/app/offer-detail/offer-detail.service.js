@@ -6,7 +6,7 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http) {
 	var offersEditEndpoint = 'http://localhost:8000/offers_edit/'
 
 	this.get = function (id) {
-		return $http.get(offersReadEndpoint+id)
+		return $http.get(offersReadEndpoint+id+"/")
 					.then(function(result) {
 						return result;
 					}, function (result) {
@@ -18,7 +18,7 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http) {
 
 	this.deleteOffer = function (id) {
 		console.log(offersEditEndpoint+id)
-		return $http.delete(offersEditEndpoint+id)
+		return $http.delete(offersEditEndpoint+id+"/")
 					.then(function(result) {
 						return result;
 					}, function (result) {

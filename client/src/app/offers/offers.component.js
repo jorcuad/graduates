@@ -1,6 +1,6 @@
 'use strict';
 
-function offersCtrl ($http, $scope, Offers, Utils, Session) {
+function offersCtrl ($http, $scope, Offers, Utils, Session, $mdDialog) {
 
 	var vm = this;
 	$scope.formData = {};
@@ -27,6 +27,31 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 		$scope.offerform = {}
 		$scope.logged = Session.isLogged()
 
+		$scope.showConfirm = function(ev) {
+		  // Appending dialog to document.body to cover sidenav in docs app
+		  var confirm = $mdDialog.confirm()
+		        .title('¿Desea eliminar esta oferta?')
+		        .textContent('Si elimina esta oferta no podrá recuperarla posteriormente.')
+		        .targetEvent(ev)
+		        .ok('Aceptar')
+		        .cancel('Cancelar');
+
+		  $mdDialog.show(confirm).then(function() {
+			Offers.deleteOffer($scope.offer.id)
+				.then(function (answer) { //TODO readable date
+
+					Utils.toast(answer.status + "Se ha borrado", false)
+				}, function (answer) {
+
+					Utils.toast(answer.status + "No se ha borrado.", true)
+				})
+				  });
+		};
+
+
+	$scope.getStateOffer = function (offer){
+		return offer.active;
+	};
 		if(Session.isLogged()) {
 			$scope.user = Session.getUser()
 			Offers.getFavorites($scope.user.id).then(function (favorites) { vm.favorites = favorites; })

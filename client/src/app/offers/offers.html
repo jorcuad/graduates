@@ -14,7 +14,7 @@
 			<div layout="row">
 				<div layout="column" flex>
 					<md-select placeholder="Categoría" style="font-weight: bold;" ng-model="$ctrl.category">
-						<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name}}</md-option>
+						<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name }}</md-option>
 					</md-select>
 	        	</div>
         	</div>
@@ -91,13 +91,13 @@
 									<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
 										<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
 									</md-button>
-									<md-button ng-click="changeStateOffer(offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
+									<md-button ng-click="changeStateOffer(offer)"  ng-hide="true" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
 										<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
 									</md-button>
-									<md-button class="md-icon-button" aria-label="Edit" href="#/edit/{{offer.id}}">
+									<md-button class="md-icon-button" aria-label="Edit" href="#/edit/{{offer.id  ng-hide="true"}}">
 										<md-icon md-svg-icon="../assets/icons/edit.svg"></md-icon>
 									</md-button>
-									<md-button class="md-icon-button" aria-label="Delete">
+									<md-button class="md-icon-button" aria-label="Delete" ng-hide="true" ng-click="showConfirm($event)">
 										<md-icon md-svg-icon="../assets/icons/delete.svg"></md-icon>
 									</md-button>
 									</md-card-actions>
