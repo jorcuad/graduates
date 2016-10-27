@@ -2,7 +2,7 @@
 	<form name="offer">
 		<div layout="row"  layout-padding>
 			<md-input-container flex>
-				<md-icon md-font-icon="name">name</md-icon>
+				<md-icon md-font-icon="event">event</md-icon>
 				<input name="name" required type="text" placeholder="Nombre de la oferta" ng-model="$ctrl.form.offer_name"/>
 
 				<div ng-messages="offer.name.$error" multiple md-auto-hide="true">
@@ -26,8 +26,8 @@
 		</div>
 
 		<div layout="row" layout-padding>
-			<div flex>
-				<h3>¿Dónde es?</h3>
+			<div flex="50">
+				<h4>¿Dónde es?</h4>
 				<div flex layout="row" layout-padding>
 					<md-input-container>
 						<md-icon md-font-icon="place">place</md-icon>
@@ -41,12 +41,12 @@
 					</md-input-container>
 				</div>
 			</div>
-			<div flex>
-				<h3>¿Qué tipo de actividad es?</h3>
-				<div>
+			<div flex="50">
+				<h4>¿Qué tipo de actividad es?</h4>
+				<div flex layout="row">
 					<md-input-container>
 						<md-icon md-font-icon="place">category</md-icon>
-						<md-select placeholder="{{$ctrl.form.categories}}"  style="font-color: black;" ng-model="$ctrl.form.categories">
+						<md-select placeholder="{{$ctrl.form.categories}}" ng-model="$ctrl.form.categories">
 							<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">
 								{{cat.category_name}}
 							</md-option>
@@ -62,33 +62,34 @@
 			</div>
 		</div>
 		<div layout="row" layout-padding>
-			<div layout="column" flex layout-padding>
-				<h3>¿Cuándo va a ser?</h3>
-				<md-datepicker ng-model="$ctrl.form.activity_date" md-placeholder="Fecha de la oferta"
+			<div layout="column" layout-padding flex="50">
+				<h4>¿Cuándo va a ser?</h4>
+				<md-datepicker flex ng-model="$ctrl.form.activity_date" md-placeholder="Fecha de la oferta"
 				md-min-date="$ctrl.minDate"></md-datepicker>
-				<md-input-container>
-					<input name="hour" required type="number" min="0" max="23" placeholder="Hora" ng-model="$ctrl.activity_hour"/>
+				<div layout="row">
+					<md-input-container>
+						<input name="hour" required type="number" min="0" max="23" placeholder="Hora" ng-model="$ctrl.activity_hour"/>
 
-					<div ng-messages="offer.hour.$error" multiple md-auto-hide="true">
-					  <div ng-message="required">
-						Este campo es necesario.
-					  </div>
-					</div>
-				</md-input-container>
-				<md-input-container>
-					<input name="min" required type="number" min="0" max="59" placeholder="Minutos" ng-model="$ctrl.activity_min"/>
+						<div ng-messages="offer.hour.$error" multiple md-auto-hide="true">
+						  <div ng-message="required">
+							Este campo es necesario.
+						  </div>
+						</div>
+					</md-input-container>
+					<md-input-container>
+						<input name="min" required type="number" min="0" max="59" placeholder="Minutos" ng-model="$ctrl.activity_min"/>
 
-					<div ng-messages="offer.min.$error" multiple md-auto-hide="true">
-					  <div ng-message="required">
-						Este campo es necesario.
-					  </div>
-					</div>
-				</md-input-container>
+						<div ng-messages="offer.min.$error" multiple md-auto-hide="true">
+						  <div ng-message="required">
+							Este campo es necesario.
+						  </div>
+						</div>
+					</md-input-container>
+				</div>
 			</div>
-			<div layout="column" flex="15">
-			</div>
-			<div layout="column" flex layout-padding>
-				<h3>¿Quién lo puede ver?</h3>
+			
+			<div layout="column" flex layout-padding flex="50">
+				<h4>¿Quién lo puede ver?</h4>
 				<md-switch ng-model="$ctrl.form.active" aria-label="Activa">Activa</md-switch>
 				<md-switch ng-model="$ctrl.form.private" aria-label="Privada">Privada</md-switch>
 			</div>
