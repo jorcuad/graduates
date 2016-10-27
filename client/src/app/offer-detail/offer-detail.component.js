@@ -5,8 +5,8 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 	var vm = this;
 	$scope.offer={};
 	$scope.userlogged={};
-	vm.$onInit = function () {
 
+	vm.$onInit = function () {
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
 				vm.offer = answer.data;
@@ -17,9 +17,11 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 				Utils.toast(answer.status + " : Error al obtener la información de la oferta, recargue la página.", true)
 			})
 
-		$scope.userlogged = Session.getUser()
+		$scope.userlogged = Session.getUser();
+		log($scope.userlogged)
 	};
-	 $scope.showConfirm = function(ev) {
+
+	$scope.showConfirm = function(ev) {
 	     // Appending dialog to document.body to cover sidenav in docs app
 	     var confirm = $mdDialog.confirm()
 	           .title('¿Desea eliminar esta oferta?')
@@ -27,14 +29,18 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 	           .targetEvent(ev)
 	           .ok('Aceptar')
 	           .cancel('Cancelar');
-	     $mdDialog.show(confirm).then(function() {
+
+	  $mdDialog.show(confirm).then(function() {
 	 		OfferDetailService.deleteOffer($routeParams.orderId)
 	 			.then(function (answer) { //TODO readable date
 	 				Utils.toast(answer.status + "Se ha borrado", false)
 	 			}, function (answer) {
 	 				Utils.toast(answer.status + "No se ha borrado	.", true)
-	 			})
- 
+	 			});
+		})
+	};
+
+
 	$scope.changeStateOffer=function (offer){
 		offer.active = !offer.active;
 		$http.put("http://localhost:8000/offers_edit/", offer)
@@ -47,6 +53,7 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 	$scope.getStateOffer = function (offer){
 		return offer.active;
 	};
+
 }
 
 angular.module('graduatesApp').component('offerDetail', {
