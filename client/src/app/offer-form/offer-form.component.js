@@ -49,12 +49,14 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 			vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour-1, vm.activity_min)
 
 			OfferForm.create(vm.form).then(function (answer) {
-				Utils.toast(answer.status + " : Offerta creada correctamente.", false)
-				//TODO redirect a inicio
-			}, function(answer) {
-				Utils.toast(answer.status + " : Error al crear la oferta.", true)
-			});
-		} else {
+							if (answer.status != -1 && answer.status != 400){
+					Utils.toast(answer.status + "El registro se ha realizado.", false);
+					//$location.path( "/" );
+					window.location ="http://localhost:3000/#";
+				}else{
+					Utils.toast(answer.status +"Error al registrarse. Vuelva a intentarlo.", true)
+				}})
+
 			Utils.toast("Error : El formato de los datos no es correcto.", true)
 		}
 	}
@@ -66,7 +68,7 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 
 			OfferForm.update(vm.form).then(function (answer) {
 				Utils.toast(answer.status + " : Oferta actualizada correctamente.", false)
-				//TODO redirect a inicio
+				window.location ="http://localhost:3000/#";
 			}, function(answer) {
 				Utils.toast(answer.status + " : Error al actualizar la oferta.", true)
 			});
