@@ -5,6 +5,7 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 	var vm = this;
 	$scope.offer={};
 	$scope.offer.active=true;
+	$scope.offer.favorites=[];
 	$scope.userlogged={};
 
 	vm.$onInit = function () {
@@ -57,6 +58,25 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 		return  offer.active;
 	};
 
+	$scope.isFavorite = function (offer){
+		console.log(offer.favorites);
+		if(offer.favorites.lenght >0){
+			if (offer.favorites.indexOf($scope.userlogged.id) == -1){
+				console.log("Es favorute");
+				return true;
+			}
+			console.log("No favorute");
+			return false;
+		}
+		console.log("no favorute, vacio");
+		return false;
+	};
+	$scope.addFavorite = function (userId,offerId){
+		OfferDetailService.addFavorite(userId,offerId);
+	}
+	$scope.deleteFavorite = function (userId,offerId){
+		OfferDetailService.deleteFavorite(userId,offerId);
+	}	
 	$scope.changeStateOffer = function (offer){
 		$scope.offer.active = !offer.active;
 		OfferDetailService.changeStateOffer($scope.offer);

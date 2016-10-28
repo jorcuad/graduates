@@ -5,6 +5,7 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http) {
 	
 	var offersReadEndpoint = 'http://localhost:8000/offers_list/'
  	var offersEditEndpoint = 'http://localhost:8000/offers_edit/'
+ 	var favoritesEditEndpoint = 'http://localhost:8000/favs_edit/'
 
 	this.get = function (id) {
 		return $http.get(offersReadEndpoint+id+"/")
@@ -23,6 +24,25 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http) {
 						return result.data;
 					});
 	}
+
+	this.addFavorite = function (userId,offerId) {
+		return $http.get(favoritesEditEndpoint + userId + "/" + offerId + "/")
+			.then(function(result) {
+				return result;
+			}, function (result) {
+				return result;
+			});
+	}
+
+	this.deleteFavorite = function (userId,offerId) {
+		return $http.delete(favoritesEditEndpoint + userId + "/" + offerId + "/")
+			.then(function(result) {
+				return result;
+			}, function (result) {
+				return result;
+			});
+	}
+
 
 	this.deleteOffer = function (id) {
  		console.log(offersEditEndpoint+id)
