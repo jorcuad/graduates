@@ -1,6 +1,6 @@
 'use strict';
 
-function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
+function offerDetailCtrl ($http,$route, $scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
 
 	var vm = this;
 	$scope.offer={};
@@ -59,10 +59,10 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 	};
 
 	$scope.isFavorite = function (offer){
-		console.log(offer.favorites);
-		if(offer.favorites.lenght >0){
-			if (offer.favorites.indexOf($scope.userlogged.id) == -1){
-				console.log("Es favorute");
+		$scope.offer = offer;
+
+		if(offer.favorites != null){
+			if (offer.favorites.indexOf($scope.userlogged.id) != -1){
 				return true;
 			}
 			console.log("No favorute");
@@ -73,6 +73,7 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 	};
 	$scope.addFavorite = function (userId,offerId){
 		OfferDetailService.addFavorite(userId,offerId);
+		$route.reload();
 	}
 	$scope.deleteFavorite = function (userId,offerId){
 		OfferDetailService.deleteFavorite(userId,offerId);
