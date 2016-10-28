@@ -77,6 +77,8 @@ function offerDetailCtrl ($http,$route, $scope, $mdDialog, $routeParams, OfferDe
 	}
 	$scope.deleteFavorite = function (userId,offerId){
 		OfferDetailService.deleteFavorite(userId,offerId);
+		$route.reload();
+		
 	}	
 	$scope.changeStateOffer = function (offer){
 		$scope.offer.active = !offer.active;
