@@ -1,6 +1,6 @@
 'use strict';
 
-function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Utils, Session) {
+function offerFormCtrl ($scope, $http, $routeParams, OfferForm, OfferDetailService, Utils, Session) {
 	var vm = this;
 
 	vm.$onInit = function () {
@@ -17,7 +17,11 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 		}, function (answer) {
 			Utils.toast(answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
 		})
-
+		//////////////////////////////////////////////////////
+		$scope.onChange = function(cbState) {
+			$scope.message = cbState;
+		};
+		//////////////////////////////////////////////////////
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
 				if (answer.status == 200){
