@@ -1,19 +1,6 @@
 <div layout-padding>
 	<form name="register">
-		<div layout="row">
-			<md-input-container flex>
-				<md-icon md-font-icon="Usuario">username</md-icon>
-				<input name="username" required type="text" placeholder="Usuario" ng-pattern="/^\w+$/" ng-model="$ctrl.form.username"/>
-				<div ng-messages="register.username.$error" multiple md-auto-hide="true">
-					<div ng-message="required">
-					Este campo es necesario.
-					</div>
-					<div ng-message="pattern">
-					Este campo no admite símbolos.
-						</div>
-				</div>
-			</md-input-container>
-		</div>
+
 
 
 		<div layout="row">
@@ -59,12 +46,24 @@
 				  <div ng-message="pattern">
 					Email no válido
 		  		  </div>
-
 				</div>
 			</md-input-container>
 		</div>
 
-
+		<div layout="row">
+			<md-input-container flex>
+				<md-icon md-font-icon="Usuario">username</md-icon>
+				<input name="username" required type="text" placeholder="Usuario" ng-pattern="/^\w+$/" ng-model="$ctrl.form.username"/>
+				<div ng-messages="register.username.$error" multiple md-auto-hide="true">
+					<div ng-message="required">
+					Este campo es necesario.
+					</div>
+					<div ng-message="pattern">
+					Este campo no admite símbolos.
+						</div>
+				</div>
+			</md-input-container>
+		</div>
 		<div layout="row">
 			<md-input-container flex>
 				<md-icon md-font-icon="contrasena">contrasena</md-icon>
@@ -93,7 +92,7 @@
 
 		</div>
 		<div layout="row">
-			<md-button type="submit" ng-click="$ctrl.register()" class="md-raised md-primary">Registro</md-button>
+			<md-button type="submit" href="#/" ng-click="$ctrl.register()" class="md-raised md-primary">Registro</md-button>
 		</div>
 	</form>
 </div>

@@ -15,8 +15,12 @@ function registerCtrl (Utils, RegisterService) {
 				"last_name":vm.form.apellido,
 				"email": vm.form.email,
 				"password":vm.form.contrasena
-			})
+			}).then(function (answer) { //TODO readable date
+				Utils.toast(answer + "El registro se ha realizado.", false)
 
+			}, function (answer) {
+				Utils.toast("Error al registrarse. Vuelva a intentarlo.", true)
+			})
 	}
 
 	vm.checkPass = function() {

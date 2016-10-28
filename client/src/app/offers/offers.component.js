@@ -63,7 +63,7 @@ function DialogController($scope, $mdDialog) {
 		$scope.offer = offer;
 		return offer.active;
 	};
-	$scope.changeStateOffer = function (offer){
+	$scope.changeStateOffer = function ($offer,offer){
 		$offer.active = !offer.active;
 		OfferDetailService.changeStateOffer($scope.offer);
 		

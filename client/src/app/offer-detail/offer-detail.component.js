@@ -1,6 +1,6 @@
 'use strict';
 
-function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
+function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session, $location) {
 
 	var vm = this;
 	$scope.offer={};
@@ -36,6 +36,8 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 			OfferDetailService.deleteOffer($routeParams.orderId)
 				.then(function (answer) { //TODO readable date
 					Utils.toast(answer.status + "Se ha borrado", false)
+					$location.path( "/" );
+
 				}, function (answer) {
 					Utils.toast(answer.status + "No se ha borrado	.", true)
 				});
