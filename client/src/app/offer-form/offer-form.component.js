@@ -25,10 +25,19 @@ function offerFormCtrl ($http, $location, $routeParams, OfferForm, OfferDetailSe
 					vm.offer = answer.data;
 					var dateObject = new Date(Date.parse(vm.offer.pub_date));
 					var dateReadable = dateObject.toLocaleDateString();
-					vm.offer.pub_date = dateReadable
+					vm.offer.pub_date = dateReadable;
+					if(vm.offer.maxContacts == -1){
+						vm.withoutLimit= true;						
+					}
+					else{
+						vm.withoutLimit= false;
+					}
+					if(vm.withoutLimit){
+						vm.offer.maxContacts="";
+					}
 					vm.form = {"id": vm.offer.id, "user":vm.offer.user.id,"active":vm.offer.active, "private":vm.offer.private,"activity_date":new Date(vm.offer.activity_date),
 					"offer_name":vm.offer.offer_name, "description":vm.offer.description,
-					"place":vm.offer.place, "categories":vm.offer.categories}
+					"place":vm.offer.place, "categories":vm.offer.categories, "maxContacts":vm.offer.maxContacts}
 				}else{
 					vm.editar = false;
 					vm.form = {"user":"","active":"", "private":"","activity_date":"",
@@ -82,6 +91,20 @@ function offerFormCtrl ($http, $location, $routeParams, OfferForm, OfferDetailSe
 			return false
 		}
 	}
+	vm.checkLimit = function(){
+		return vm.withoutLimit;
+	}
+	vm.changeLimit = function(){
+		vm.withoutLimit = !vm.withoutLimit;
+		if(vm.withoutLimit){
+			vm.disableInput=true;
+			vm.offer.maxContacts=-1;
+			vm.form.maxContacts = "";
+		}
+	}
+	vm.checkMaxContacts = function(){
+		return vm.offer.maxContacts;
+	}
 }
 
 angular.module('graduatesApp').component('offerForm', {
@@ -91,9 +114,12 @@ angular.module('graduatesApp').component('offerForm', {
 
 function check_form(form) {
 	var is_ok = true
+	//Para no poner limite
+	if(form.maxContacts ==""){
+		form.maxContacts = -1;
+	}
 	for(var field in form) {
 		if( String(form[field]) == "" || angular.isUndefined(String(form[field]))) {
-			console.log(field)
 			is_ok = false
 		}
 	}
