@@ -1,16 +1,10 @@
 'use strict';
 
-function loginCtrl (LoginService, Utils, Session, $route) {
+function loginCtrl (LoginService, Utils, Session, Panels, $route, $scope) {
 	var vm = this;
 
-	var dummy_user = {
-        "id": 2,
-        "username": "Salamo",
-        "email": "salamo@i4s.com"
-    }
-
 	vm.$onInit = function () {
-		
+
 	};
 
 	vm.do_login = function () {
@@ -32,6 +26,10 @@ function loginCtrl (LoginService, Utils, Session, $route) {
 		} else {
 			Utils.toast("Error : Datos de login incorrectos.", true)
 		}
+	}
+
+	vm.closeLogin = function() {
+		Panels.closePanel()
 	}
 }
 
