@@ -1,19 +1,23 @@
 <div layout-align="center">
 	<md-content flex="95">
 		<!-- Search bar -->
-		<div flex layout="row">
-			<div layout="row" flex style="margin-top: 50px">
-				<div layout="column" flex>
-					<md-input-container style="margin-bottom: 0;">
-						<label>Búsqueda de ofertas</label>
-						<input name="search" ng-model="$ctrl.search">
-					</md-input-container>
-				</div>
-				<div layout="column">
-					<md-button class="md-raised md-primary" ng-click="$ctrl.filter()">Buscar</md-button>
+		<form layout="row">
+			<div flex layout="row">
+				<div layout="row" flex style="margin-top: 50px">
+					<div layout="column" flex>
+						<md-input-container style="margin-bottom: 0;">
+							<label>Búsqueda de ofertas</label>
+							<input name="search" ng-model="$ctrl.search">
+						</md-input-container>
+					</div>
+					<div layout="column">
+						<md-button type="submit" class="md-raised md-primary" ng-click="$ctrl.filter()">
+							Buscar
+						</md-button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 		<!-- end search bar -->
 	</md-content>
 </div>
@@ -54,6 +58,7 @@
 		<div layout="column" flex>
 			<div layout="row" layout-align="center center" style="height: 49px; border-bottom: 1px solid #DCDCDC">
 				<md-select placeholder="Categoría" style="font-weight: bold;" ng-model="$ctrl.category">
+					<md-option value="{{cat.category_name}}">Categoría</md-option>
 					<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name}}</md-option>
 				</md-select>
 			</div>
@@ -62,7 +67,7 @@
 </div>
 <div ng-cloak ng-show="logged">
 	<md-content layout="row">
-		<md-tabs md-dynamic-height md-border-bottom flex="75" layout="column">
+		<md-tabs md-dynamic-height md-border-bottom flex layout="column">
 			<md-tab label="Ofertas">
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
@@ -161,9 +166,10 @@
 				</md-content>
 			</md-tab>
 		</md-tabs>
-		<div layout="column" flex>
+		<div layout="column" flex="25">
 			<div layout="row" layout-align="center center" style="height: 49px; border-bottom: 1px solid #DCDCDC">
-				<md-select placeholder="Categoría" style="font-weight: bold;" ng-model="$ctrl.category">
+				<md-select ng-change="$ctrl.filter()" placeholder="Categoría" style="font-weight: bold;" ng-model="$ctrl.category">
+					<md-option value="{{cat.category_name}}">Categoría</md-option>
 					<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">{{cat.category_name}}</md-option>
 				</md-select>
 			</div>

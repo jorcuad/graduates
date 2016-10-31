@@ -39,11 +39,12 @@ function offersCtrl ($http, $scope, Offers, Utils, Session) {
 		if (vm.search !== "") {
 			query = "search="+vm.search
 		}
-		if (vm.category !== "") {
-			if ( query !== "") {
-				query = query+"&"
+		if (vm.category !== "" && vm.category !== "Categoría") {
+			if(vm.search !== "") {
+				query = query+"&category="+vm.category
+			} else {
+				query = "category="+vm.category
 			}
-			query = query+"category="+vm.category
 		}
 		Offers.search(query).then(function (answer) {
 			vm.offers = answer.data;
