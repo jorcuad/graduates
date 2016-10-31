@@ -30,7 +30,7 @@
 					<md-button class="md-icon-button" ng-show="isFavorite(offer)" ng-click="deleteFavorite(userlogged.id,$ctrl.offer.id)" aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorited.svg"></md-icon>
 					</md-button>
-					<md-button class="md-icon-button" aria-label="Share">
+					<md-button ng-click="shareLink($event)" class="md-icon-button" aria-label="Share">
 						<md-icon md-svg-icon="../assets/icons/share.svg"></md-icon>
 					</md-button>
 				</div>

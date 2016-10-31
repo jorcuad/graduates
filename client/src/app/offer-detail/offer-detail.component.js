@@ -58,6 +58,25 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 		$scope.offer = offer;
 		return  offer.active;
 	};
+/*	$scope.shareLink = function (){
+		alert(window.location.href)
+	};
+
+*/  $scope.shareLink = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Copia la siguiente URl para compartir esta oferta')
+        .textContent(window.location.href)
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Cerrar')
+        .targetEvent(ev)
+    );
+  };
 
 	$scope.isFavorite = function (offer){
 		$scope.offer = offer;
