@@ -89,8 +89,16 @@
 			<div flex="10"></div>
 			<div layout="column" flex="45">
 				<h4>¿Quién lo puede ver?</h4>
-				<md-switch style="margin-top: 0;" ng-model="$ctrl.form.active" aria-label="Activa">Activa</md-switch>
-				<md-switch ng-disabled="true" style="margin-top: 0;" ng-model="$ctrl.form.private" aria-label="Privada">Privada</md-switch>
+				<!--md-switch style="margin-top: 0;" ng-model="$ctrl.form.active" aria-label="Activa" ng-change="onChange($ctrl.form.active)"> {{$ctrl.form.active}} </md-switch-->
+				<md-switch ng-model="$ctrl.form.active" aria-label="Activa" ng-change="onChange()">
+				{{ $ctrl.form.active2 }}
+				</md-switch>
+
+
+
+				<md-switch style="margin-top: 0;" ng-model="$ctrl.form.private" ng-change="onChange2()" aria-label="Privada">
+				{{ $ctrl.form.private2 }}
+				</md-switch>
 			</div>
 		</div>
 		<div layout="row">

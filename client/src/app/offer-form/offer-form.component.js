@@ -1,6 +1,6 @@
 'use strict';
 
-function offerFormCtrl ($http, $location, $routeParams, OfferForm, OfferDetailService, Utils, Session) {
+function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, OfferDetailService, Utils, Session) {
 	var vm = this;
 
 	vm.$onInit = function () {
@@ -20,12 +20,16 @@ function offerFormCtrl ($http, $location, $routeParams, OfferForm, OfferDetailSe
 
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
+				vm.form = {};
 				if (answer.status == 200){
 					vm.editar = true;
 					vm.offer = answer.data;
+					
+					
 					var dateObject = new Date(Date.parse(vm.offer.pub_date));
 					var dateReadable = dateObject.toLocaleDateString();
 					vm.offer.pub_date = dateReadable;
+
 					if(vm.offer.maxContacts == -1){
 						vm.withoutLimit= true;						
 					}
@@ -35,9 +39,23 @@ function offerFormCtrl ($http, $location, $routeParams, OfferForm, OfferDetailSe
 					if(vm.withoutLimit){
 						vm.offer.maxContacts="";
 					}
-					vm.form = {"id": vm.offer.id, "user":vm.offer.user.id,"active":vm.offer.active, "private":vm.offer.private,"activity_date":new Date(vm.offer.activity_date),
+					vm.form = {"id": vm.offer.id, "user":vm.offer.user.id,
+					"active":vm.offer.active, "private":vm.offer.private,
+					"activity_date":new Date(vm.offer.activity_date),
 					"offer_name":vm.offer.offer_name, "description":vm.offer.description,
-					"place":vm.offer.place, "categories":vm.offer.categories, "maxContacts":vm.offer.maxContacts}
+					"place":vm.offer.place, "categories":vm.offer.categories,
+					"maxContacts":vm.offer.maxContacts}
+					if (vm.offer.active == true){
+						vm.form.active2 = "Activa";
+					}else {
+						vm.form.active2 = "Inactiva";
+					}
+
+					if (vm.offer.private ==true){
+						vm.form.private2 = "Privada";
+					}else {
+						vm.form.private2 = "Pública";
+					}
 				}else{
 					vm.editar = false;
 					vm.form = {"user":"","active":"", "private":"","activity_date":"",
@@ -51,7 +69,21 @@ function offerFormCtrl ($http, $location, $routeParams, OfferForm, OfferDetailSe
 				Utils.toast(answer.status + " : Error al obtener la información de la oferta, recargue la página.", true)
 			})
 	};
-
+  	$scope.onChange = function() {
+  		if(vm.form.active == true){
+			vm.form.active2 = "Activa";
+  		}else{
+			vm.form.active2 = "Inactiva";
+  		}
+	};
+ 
+  	$scope.onChange2 = function() {
+  		if(vm.form.private == true){
+			vm.form.private2  = "Pública";
+  		}else{
+			vm.form.private2  = "Privada";
+  		}
+  	};
 	vm.create = function(){
 		if(check_form(vm.form) && check_time(vm.activity_hour, vm.activity_min)) {
 
