@@ -52,9 +52,9 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 					}
 
 					if (vm.offer.private ==true){
-						vm.form.private2 = "Privada";
-					}else {
 						vm.form.private2 = "Pública";
+					}else {
+						vm.form.private2 = "Privada";
 					}
 				}else{
 					vm.editar = false;
