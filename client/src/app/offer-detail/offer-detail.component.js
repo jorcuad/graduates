@@ -1,10 +1,12 @@
 'use strict';
 
-function offerDetailCtrl ($http,$scope, $location, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
+
+function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
 
 	var vm = this;
 	$scope.offer={};
 	$scope.offer.active=true;
+	$scope.offer.favorites=[];
 	$scope.userlogged={};
 
 	vm.$onInit = function () {
@@ -26,7 +28,7 @@ function offerDetailCtrl ($http,$scope, $location, $mdDialog, $routeParams, Offe
 			})
 
 		$scope.userlogged = Session.getUser();
-		log($scope.userlogged)
+		console.log($scope.userlogged)
 	};
 
 	$scope.showConfirm = function(ev) {
@@ -41,9 +43,10 @@ function offerDetailCtrl ($http,$scope, $location, $mdDialog, $routeParams, Offe
 		$mdDialog.show(confirm).then(function() {
 			OfferDetailService.deleteOffer($routeParams.orderId)
 				.then(function (answer) { //TODO readable date
-					Utils.toast(answer.status + "Se ha borrado", false)
+					$location.path('/')
+					Utils.toast(answer.status + ": La oferta ha sido borrada correctamente.", false)
 				}, function (answer) {
-					Utils.toast(answer.status + "No se ha borrado	.", true)
+					Utils.toast(answer.status + ": La oferta no ha podido ser borrada, vuelva a intentarlo", true)
 				});
 		})
 	};
@@ -62,7 +65,45 @@ function offerDetailCtrl ($http,$scope, $location, $mdDialog, $routeParams, Offe
 		$scope.offer = offer;
 		return  offer.active;
 	};
+/*	$scope.shareLink = function (){
+		alert(window.location.href)
+	};
 
+*/  $scope.shareLink = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Copia la siguiente URL para compartir esta oferta')
+        .textContent(window.location.href)
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Cerrar')
+        .targetEvent(ev)
+    );
+  };
+
+	$scope.isFavorite = function (offer){
+		$scope.offer = offer;
+
+		if(offer.favorites != null){
+			if (offer.favorites.indexOf($scope.userlogged.id) != -1){
+				return true;
+			}
+			console.log("No favorute");
+			return false;
+		}
+		console.log("no favorute, vacio");
+		return false;
+	};
+	$scope.addFavorite = function (userId,offerId){
+		OfferDetailService.addFavorite(userId,offerId);
+	}
+	$scope.deleteFavorite = function (userId,offerId){
+		OfferDetailService.deleteFavorite(userId,offerId);
+	}
 	$scope.changeStateOffer = function (offer){
 		$scope.offer.active = !offer.active;
 		OfferDetailService.changeStateOffer($scope.offer);
