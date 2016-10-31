@@ -5,6 +5,8 @@ function registerCtrl (Utils, RegisterService) {
 
 	vm.$onInit = function () {
 		vm.form = {}
+		$scope.disableSubmit = true;
+
 	};
 
 
@@ -23,8 +25,12 @@ function registerCtrl (Utils, RegisterService) {
 
 		if(vm.form.contrasena != vm.form.confirmacontrasena ){
 			Utils.toast("Error : Las contraseñas no coinciden.", true)
+			$scope.disableSubmit = true;
+		}else{
+			$scope.disableSubmit = false;
 
 		}
+
 	}
 
 }
