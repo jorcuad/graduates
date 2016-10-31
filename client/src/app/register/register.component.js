@@ -5,7 +5,6 @@ function registerCtrl (Utils, RegisterService) {
 
 	vm.$onInit = function () {
 		vm.form = {}
-		$scope.disableSubmit = true;
 
 	};
 
