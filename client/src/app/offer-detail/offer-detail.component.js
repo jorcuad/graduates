@@ -1,10 +1,11 @@
 'use strict';
 
-function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
+function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
 
 	var vm = this;
 	$scope.offer={};
 	$scope.offer.active=true;
+	$scope.offer.favorites=[];
 	$scope.userlogged={};
 
 	vm.$onInit = function () {
@@ -20,7 +21,7 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 			})
 
 		$scope.userlogged = Session.getUser();
-		log($scope.userlogged)
+		console.log($scope.userlogged)
 	};
 
 	$scope.showConfirm = function(ev) {
@@ -35,9 +36,10 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 		$mdDialog.show(confirm).then(function() {
 			OfferDetailService.deleteOffer($routeParams.orderId)
 				.then(function (answer) { //TODO readable date
-					Utils.toast(answer.status + "Se ha borrado", false)
+					$location.path('/')
+					Utils.toast(answer.status + ": La oferta ha sido borrada correctamente.", false)
 				}, function (answer) {
-					Utils.toast(answer.status + "No se ha borrado	.", true)
+					Utils.toast(answer.status + ": La oferta no ha podido ser borrada, vuelva a intentarlo", true)
 				});
 		})
 	};
@@ -57,6 +59,25 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 		return  offer.active;
 	};
 
+	$scope.isFavorite = function (offer){
+		$scope.offer = offer;
+
+		if(offer.favorites != null){
+			if (offer.favorites.indexOf($scope.userlogged.id) != -1){
+				return true;
+			}
+			console.log("No favorute");
+			return false;
+		}
+		console.log("no favorute, vacio");
+		return false;
+	};
+	$scope.addFavorite = function (userId,offerId){
+		OfferDetailService.addFavorite(userId,offerId);
+	}
+	$scope.deleteFavorite = function (userId,offerId){
+		OfferDetailService.deleteFavorite(userId,offerId);
+	}	
 	$scope.changeStateOffer = function (offer){
 		$scope.offer.active = !offer.active;
 		OfferDetailService.changeStateOffer($scope.offer);

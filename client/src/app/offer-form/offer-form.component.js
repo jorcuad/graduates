@@ -1,6 +1,6 @@
 'use strict';
 
-function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Utils, Session) {
+function offerFormCtrl ($http, $location, $routeParams, OfferForm, OfferDetailService, Utils, Session) {
 	var vm = this;
 
 	vm.$onInit = function () {
@@ -49,8 +49,8 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 			vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour-1, vm.activity_min)
 
 			OfferForm.create(vm.form).then(function (answer) {
+				$location.path("/")
 				Utils.toast(answer.status + " : Offerta creada correctamente.", false)
-				//TODO redirect a inicio
 			}, function(answer) {
 				Utils.toast(answer.status + " : Error al crear la oferta.", true)
 			});
@@ -65,8 +65,8 @@ function offerFormCtrl ($http, $routeParams, OfferForm, OfferDetailService, Util
 			vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour-1, vm.activity_min)
 
 			OfferForm.update(vm.form).then(function (answer) {
+				$location.path("/")
 				Utils.toast(answer.status + " : Oferta actualizada correctamente.", false)
-				//TODO redirect a inicio
 			}, function(answer) {
 				Utils.toast(answer.status + " : Error al actualizar la oferta.", true)
 			});
