@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet, GenericViewSet
+from django.core.mail import send_mail
 from django.contrib.auth.models import User, Group
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
@@ -65,6 +66,58 @@ class FavsByUserViewSet(mixins.RetrieveModelMixin,
     permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserFavsSerializer
+
+
+
+
+class SendEmail(APIView):
+
+    authentication_classes = (JSONWebTokenAuthentication, )
+    permission_classes = (IsAuthenticated,)
+
+    def get_user(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get_offer(self, pk):
+        try:
+            return Offer.objects.get(pk=pk)
+        except Offer.DoesNotExist:
+            raise Http404
+
+    def post(self, request, format=None):
+        send_email = SendEmailSerializer(data=request.data)
+
+        if send_email.is_valid():
+            offer = self.get_offer(send_email.data["offer"])
+            sender_user = UserOfferSerializer(request.user)
+
+            message_user = send_email.data["message"]
+
+            email_sender = sender_user.data["email"]
+            sender_username = sender_user.data["username"]
+
+            email_receiver = offer.user.email
+            offer_name = offer.offer_name
+
+            subject = "Un usuario quiere ponerse en contacto contigo"
+            message = ('El usuario ' + sender_username + ' le ha enviado un mensaje ' +
+                        ' en relación a la oferta con título "' + offer_name +
+                        '". \nPara contestar envie un email a: ' + email_sender +
+                        '\n\nMENSAJE:\n' + message_user)
+
+            if offer.maxContacts > 0 or offer.maxContacts == -1:
+                send_mail(subject, message, email_sender, [email_receiver], fail_silently=False)
+                if offer.maxContacts > 0:
+                    offer.maxContacts -= 1
+                    offer.save()
+                return Response(status=status.HTTP_200_OK)
+            else :
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class FavsEdit(APIView):
