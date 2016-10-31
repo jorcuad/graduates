@@ -24,10 +24,10 @@
 					</md-button>
 				</div>
 				<div layout-align="center">
-					<md-button class="md-icon-button" ng-click="addFavorite(userlogged.id,$ctrl.offer.id)" ng-show="!isFavorite(offer)"  aria-label="Favorite">
+					<md-button ng-show="$ctrl.offer.user.id != userlogged.id && !isFavorite(offer)" class="md-icon-button" ng-click="addFavorite(userlogged.id,$ctrl.offer.id)" aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorite.svg"></md-icon>
 					</md-button>
-					<md-button class="md-icon-button" ng-show="isFavorite(offer)" ng-click="deleteFavorite(userlogged.id,$ctrl.offer.id)" aria-label="Favorite">
+					<md-button ng-show="$ctrl.offer.user.id != userlogged.id && isFavorite(offer)" class="md-icon-button" ng-click="deleteFavorite(userlogged.id,$ctrl.offer.id)" aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorited.svg"></md-icon>
 					</md-button>
 					<md-button class="md-icon-button" aria-label="Share">
@@ -49,8 +49,11 @@
 				<p><md-icon md-font-icon="place" style="margin-right:10px">category</md-icon>	<b>Categorías:</b> {{$ctrl.offer.categories}}</p>
 				</div>
 			</md-card-content>
-			<md-card-actions layout="row" layout-align="center">
+			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id != userlogged.id">
 				<md-button ng-disabled="true" class="md-raised md-primary">Contactar</md-button>
+			</md-card-actions>
+			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
+				<md-button class="md-raised md-primary" href="#/edit/{{$ctrl.offer.id}}">Editar</md-button>
 			</md-card-actions>
 		</md-card>
 	</md-content>
