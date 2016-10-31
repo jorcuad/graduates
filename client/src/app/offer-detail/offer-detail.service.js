@@ -2,11 +2,11 @@
 
 angular.module('graduatesApp').service('OfferDetailService', function ($http, $route) {
 	$http.defaults.useXDomain = true;
-	
+
 	var offersReadEndpoint = 'http://localhost:8000/offers_list/'
  	var offersEditEndpoint = 'http://localhost:8000/offers_edit/'
  	var favoritesEditEndpoint = 'http://localhost:8000/favs_edit/'
- 	var sendMailEndpoint = 'http://localhost:8000/sendmail/'
+ 	var sendMailEndpoint = 'http://localhost:8000/contact/'
 
 	this.get = function (id) {
 		return $http.get(offersReadEndpoint+id+"/")
@@ -59,7 +59,7 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http, $r
  	}
 
  	this.sendMail = function (offerId, message) {
- 		var json = {"offerId":offerId,"message":message}
+ 		var json = {"offer":offerId,"message":message}
  		return $http.post(sendMailEndpoint,json)
 					.then(function(result) {
  						return result;
