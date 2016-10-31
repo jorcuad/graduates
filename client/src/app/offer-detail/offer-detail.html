@@ -30,7 +30,7 @@
 					<md-button ng-show="$ctrl.offer.user.id != userlogged.id && isFavorite(offer)" class="md-icon-button" ng-click="deleteFavorite(userlogged.id,$ctrl.offer.id)" aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorited.svg"></md-icon>
 					</md-button>
-					<md-button class="md-icon-button" aria-label="Share">
+					<md-button ng-click="shareLink($event)" class="md-icon-button" aria-label="Share">
 						<md-icon md-svg-icon="../assets/icons/share.svg"></md-icon>
 					</md-button>
 				</div>
@@ -50,7 +50,7 @@
 				</div>
 			</md-card-content>
 			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id != userlogged.id">
-				<md-button ng-disabled="true" class="md-raised md-primary">Contactar</md-button>
+				<md-button ng-click="contact($event)" class="md-raised md-primary">Contactar</md-button>
 			</md-card-actions>
 			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
 				<md-button class="md-raised md-primary" href="#/edit/{{$ctrl.offer.id}}">Editar</md-button>

@@ -149,3 +149,9 @@ CORS_ORIGIN_WHITELIST = ('127.0.0.1:8000','127.0.0.1:3000', )
 
 SESSION_COOKIE_DOMAIN = '127.0.0.1'
 CSRF_COOKIE_DOMAIN = '127.0.0.1'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'spice.people.graduates@gmail.com'
+EMAIL_HOST_PASSWORD = 'i4sgraduates'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

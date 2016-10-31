@@ -1,5 +1,6 @@
 'use strict';
 
+
 function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
 
 	var vm = this;
@@ -11,6 +12,12 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 	vm.$onInit = function () {
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
+
+				if(answer.data.detail != null){
+					console.log("no existe")
+					$location.path("/404")
+				}
+
 				vm.offer = answer.data;
 				$scope.offer= vm.offer;
 				var dateObject = new Date(Date.parse(vm.offer.pub_date));
@@ -21,7 +28,6 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 			})
 
 		$scope.userlogged = Session.getUser();
-		console.log($scope.userlogged)
 	};
 
 	$scope.showConfirm = function(ev) {
@@ -44,20 +50,29 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 		})
 	};
 
-
-	$scope.changeStateOffer=function (offer){
-		offer.active = !offer.active;
-		$http.put("http://localhost:8000/offers_edit/", offer)
-				.then(function(result) {
-					$mdDialog.cancel();
-					return result.data;
-				});
-	}
-
 	$scope.getStateOffer = function (offer){
 		$scope.offer = offer;
 		return  offer.active;
 	};
+/*	$scope.shareLink = function (){
+		alert(window.location.href)
+	};
+
+*/  $scope.shareLink = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Copia la siguiente URL para compartir esta oferta')
+        .textContent(window.location.href)
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Cerrar')
+        .targetEvent(ev)
+    );
+  };
 
 	$scope.isFavorite = function (offer){
 		$scope.offer = offer;
@@ -66,10 +81,8 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 			if (offer.favorites.indexOf($scope.userlogged.id) != -1){
 				return true;
 			}
-			console.log("No favorute");
 			return false;
 		}
-		console.log("no favorute, vacio");
 		return false;
 	};
 	$scope.addFavorite = function (userId,offerId){
@@ -77,15 +90,41 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 	}
 	$scope.deleteFavorite = function (userId,offerId){
 		OfferDetailService.deleteFavorite(userId,offerId);
-	}	
+	}
 	$scope.changeStateOffer = function (offer){
 		$scope.offer.active = !offer.active;
-		OfferDetailService.changeStateOffer($scope.offer);
-		if(offer.active)
-		Utils.toast("Oferta abierta.");
-		else
-		Utils.toast("Oferta cerrada.");
+		OfferDetailService.changeStateOffer($scope.offer)
+		.then(function(answer) {
+			if(offer.active)
+				Utils.toast(answer.status+": Oferta abierta.");
+			else
+				Utils.toast(answer.status+": Oferta cerrada.");
+		}, function(answer) {
+			Utils.toast(answer.status + ": Ha habido un problema cambiando el estado de la oferta.");
+		});
+		
 
+	};
+
+	$scope.contact = function(ev) {
+		var confirm = $mdDialog.prompt()
+			.title('Contactar con el creador de la oferta.')
+			.textContent('Presentate y concreta los detalles.')
+			.placeholder('Mensaje')
+			.ariaLabel('Mensaje')
+			.initialValue('Hola, me llamo ' + $scope.userlogged.username + ' y me gustaría apuntarme a tu oferta.')
+			.targetEvent(ev)
+			.ok('Enviar')
+			.cancel('Cancelar');
+
+		$mdDialog.show(confirm).then(function(result) {
+			OfferDetailService.sendMail($scope.offer.id, result)
+			.then(function(result) {
+				Utils.toast(result.status + ": Mensaje enviado correctamente.");
+			}, function(result) {
+				Utils.toast(result.status + ": El mensaje no ha podido enviarse.");
+			})	
+		});
 	};
 
 }
