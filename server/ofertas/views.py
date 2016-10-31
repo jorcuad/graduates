@@ -101,15 +101,31 @@ class SendEmail(APIView):
 
             email_receiver = offer.user.email
             offer_name = offer.offer_name
+            offer_description = offer.description
+            offer_category = offer.categories
+            offer_user= offer.user.username
+            offer_date= str(offer.activity_date)
 
+            # email al demandante            
+            subject_demand = "Se ha contactado con el creador de la oferta"
+            message_demand = ('Has contactado con el usuario usuario ' + offer_user + ' sobre la oferta ' + offer_name +
+                        ': \n' +
+                        'Descripción: ' + offer_description +'\n'+
+                        'Fecha: '+ offer_date+ '\n'+
+                        'Categoria: ' + offer_category +'\n'+
+                        '\n\n Será contestado por el creador en cuanto pueda.\n Muchas gracias, un saludo.\n')
+
+            # email al ofertante            
             subject = "Un usuario quiere ponerse en contacto contigo"
             message = ('El usuario ' + sender_username + ' le ha enviado un mensaje ' +
                         ' en relación a la oferta con título "' + offer_name +
                         '". \nPara contestar envie un email a: ' + email_sender +
                         '\n\nMENSAJE:\n' + message_user)
-
+            print("aaaaaaaaa"+ email_sender)
             if offer.maxContacts > 0 or offer.maxContacts == -1:
                 send_mail(subject, message, email_sender, [email_receiver], fail_silently=False)
+                send_mail(subject_demand, message_demand, email_sender, [email_sender], fail_silently=False)
+
                 if offer.maxContacts > 0:
                     offer.maxContacts -= 1
                     offer.save()
