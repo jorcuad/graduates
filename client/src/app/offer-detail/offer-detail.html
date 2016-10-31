@@ -24,10 +24,10 @@
 					</md-button>
 				</div>
 				<div layout-align="center">
-					<md-button class="md-icon-button" ng-click="addFavorite($ctrl.offer.user.id,$ctrl.offer.id)" ng-show="!isFavorite(offer)"  aria-label="Favorite">
+					<md-button class="md-icon-button" ng-click="addFavorite(userlogged.id,$ctrl.offer.id)" ng-show="!isFavorite(offer)"  aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorite.svg"></md-icon>
 					</md-button>
-					<md-button class="md-icon-button" ng-show="isFavorite(offer)" ng-click="deleteFavorite($ctrl.offer.user.id,$ctrl.offer.id)" aria-label="Favorite">
+					<md-button class="md-icon-button" ng-show="isFavorite(offer)" ng-click="deleteFavorite(userlogged.id,$ctrl.offer.id)" aria-label="Favorite">
 						<md-icon md-svg-icon="../assets/icons/favorited.svg"></md-icon>
 					</md-button>
 					<md-button class="md-icon-button" aria-label="Share">

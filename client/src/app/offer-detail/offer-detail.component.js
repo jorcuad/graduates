@@ -1,6 +1,6 @@
 'use strict';
 
-function offerDetailCtrl ($http,$route, $scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
+function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
 
 	var vm = this;
 	$scope.offer={};
@@ -21,7 +21,7 @@ function offerDetailCtrl ($http,$route, $scope, $mdDialog, $routeParams, OfferDe
 			})
 
 		$scope.userlogged = Session.getUser();
-		log($scope.userlogged)
+		console.log($scope.userlogged)
 	};
 
 	$scope.showConfirm = function(ev) {
@@ -36,9 +36,10 @@ function offerDetailCtrl ($http,$route, $scope, $mdDialog, $routeParams, OfferDe
 		$mdDialog.show(confirm).then(function() {
 			OfferDetailService.deleteOffer($routeParams.orderId)
 				.then(function (answer) { //TODO readable date
-					Utils.toast(answer.status + "Se ha borrado", false)
+					$location.path('/')
+					Utils.toast(answer.status + ": La oferta ha sido borrada correctamente.", false)
 				}, function (answer) {
-					Utils.toast(answer.status + "No se ha borrado	.", true)
+					Utils.toast(answer.status + ": La oferta no ha podido ser borrada, vuelva a intentarlo", true)
 				});
 		})
 	};
@@ -73,12 +74,9 @@ function offerDetailCtrl ($http,$route, $scope, $mdDialog, $routeParams, OfferDe
 	};
 	$scope.addFavorite = function (userId,offerId){
 		OfferDetailService.addFavorite(userId,offerId);
-		$route.reload();
 	}
 	$scope.deleteFavorite = function (userId,offerId){
 		OfferDetailService.deleteFavorite(userId,offerId);
-		$route.reload();
-		
 	}	
 	$scope.changeStateOffer = function (offer){
 		$scope.offer.active = !offer.active;

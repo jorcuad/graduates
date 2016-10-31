@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('graduatesApp').service('OfferDetailService', function ($http) {
+angular.module('graduatesApp').service('OfferDetailService', function ($http, $route) {
 	$http.defaults.useXDomain = true;
 	
 	var offersReadEndpoint = 'http://localhost:8000/offers_list/'
@@ -28,8 +28,10 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http) {
 	this.addFavorite = function (userId,offerId) {
 		return $http.get(favoritesEditEndpoint + userId + "/" + offerId + "/")
 			.then(function(result) {
+				$route.reload();
 				return result;
 			}, function (result) {
+				$route.reload();
 				return result;
 			});
 	}
@@ -37,8 +39,10 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http) {
 	this.deleteFavorite = function (userId,offerId) {
 		return $http.delete(favoritesEditEndpoint + userId + "/" + offerId + "/")
 			.then(function(result) {
+				$route.reload();
 				return result;
 			}, function (result) {
+				$route.reload();
 				return result;
 			});
 	}
