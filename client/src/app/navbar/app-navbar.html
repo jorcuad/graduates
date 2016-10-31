@@ -10,8 +10,17 @@
     </h2>
     <span flex></span>
     <md-button aria-label="Salir" ng-show="getLogged()" ng-click="logout()">
-      <md-icon md-font-icon="exit_to_app">exit_to_app</md-icon>
+      <md-icon style="margin-right: 5px" class="material-icons">&#xE8AC;</md-icon>
       Salir
+    </md-button>
+    <md-button aria-label="login" ng-show="!getLogged()"  class="login-button" ng-click="showLogin($event)"">
+      <md-icon style="margin-right: 5px" class="material-icons">&#xE890;</md-icon>
+      Entrar
+    </md-button>
+    <p style="margin-right: 15px"></p>
+    <md-button aria-label="login" ng-show="!getLogged()" href="#/register"">
+      <md-icon style="margin-right: 5px" class="material-icons">&#xE24E;</md-icon>
+      Registrarse
     </md-button>
   </div>
 </md-toolbar>
