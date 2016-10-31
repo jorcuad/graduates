@@ -1,6 +1,6 @@
 'use strict';
 
-function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
+function offerDetailCtrl ($http,$scope, $location, $mdDialog, $routeParams, OfferDetailService, Utils, Session) {
 
 	var vm = this;
 	$scope.offer={};
@@ -10,6 +10,12 @@ function offerDetailCtrl ($http,$scope, $mdDialog, $routeParams, OfferDetailServ
 	vm.$onInit = function () {
 		OfferDetailService.get($routeParams.orderId)
 			.then(function (answer) { //TODO readable date
+
+				if(answer.data.detail != null){
+					console.log("no existe")
+					$location.path("/404")
+				}
+
 				vm.offer = answer.data;
 				$scope.offer= vm.offer;
 				var dateObject = new Date(Date.parse(vm.offer.pub_date));
