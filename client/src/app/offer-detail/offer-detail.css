@@ -1,0 +1,22 @@
+.md-dialog-content-body {
+	text-align: center;
+	font-size: 120%;
+	border-radius: 25px;
+	border-style: solid;
+    border-color:#00bfff;
+    background-color: #e6f9ff;
+    margin-top:40px;
+}
+.ng-binding{
+	margin-top: 10px;
+
+}
+.md-transition-in{
+	padding:1.5%;
+}
+.ng-scope{
+	align:center;
+}
+
+
+

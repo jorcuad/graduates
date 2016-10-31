@@ -70,7 +70,7 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('Copia la siguiente URl para compartir esta oferta')
+        .title('Copia la siguiente URL para compartir esta oferta')
         .textContent(window.location.href)
         .ariaLabel('Alert Dialog Demo')
         .ok('Cerrar')
