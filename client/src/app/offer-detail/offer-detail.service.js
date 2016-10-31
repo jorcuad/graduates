@@ -6,6 +6,7 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http, $r
 	var offersReadEndpoint = 'http://localhost:8000/offers_list/'
  	var offersEditEndpoint = 'http://localhost:8000/offers_edit/'
  	var favoritesEditEndpoint = 'http://localhost:8000/favs_edit/'
+ 	var sendMailEndpoint = 'http://localhost:8000/sendmail/'
 
 	this.get = function (id) {
 		return $http.get(offersReadEndpoint+id+"/")
@@ -21,7 +22,7 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http, $r
 		json.user=offer.user.id;
 		return $http.put(offersEditEndpoint + offer.id+ '/',json)
 					.then(function(result) {
-						return result.data;
+						return result;
 					});
 	}
 
@@ -49,13 +50,22 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http, $r
 
 
 	this.deleteOffer = function (id) {
- 		console.log(offersEditEndpoint+id)
  		return $http.delete(offersEditEndpoint+id+"/")
  					.then(function(result) {
  						return result;
- 				}, function (result) {
+	 				}, function (result) {
+	 						return result;
+	 				});
+ 	}
+
+ 	this.sendMail = function (offerId, message) {
+ 		var json = {"offerId":offerId,"message":message}
+ 		return $http.post(sendMailEndpoint,json)
+					.then(function(result) {
  						return result;
- 					});
+	 				}, function (result) {
+	 						return result;
+	 				});
  	}
 
  });
