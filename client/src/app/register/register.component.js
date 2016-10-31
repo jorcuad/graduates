@@ -11,27 +11,23 @@ function registerCtrl (Utils, RegisterService) {
 
 
 	vm.register = function(){
-		RegisterService.register({
-				"username":vm.form.username,
-				"first_name":vm.form.nombre,
-				"last_name":vm.form.apellido,
-				"email": vm.form.email,
-				"password":vm.form.contrasena
-			})
-
-	}
-
-	vm.checkPass = function() {
-
-		if(vm.form.contrasena != vm.form.confirmacontrasena ){
-			Utils.toast("Error : Las contraseñas no coinciden.", true)
-			$scope.disableSubmit = true;
+		if (vm.form.contrasena == vm.form.confirmacontrasena){
+			RegisterService.register({
+					"username":vm.form.username,
+					"first_name":vm.form.nombre,
+					"last_name":vm.form.apellido,
+					"email": vm.form.email,
+					"password":vm.form.contrasena
+				})			
 		}else{
-			$scope.disableSubmit = false;
+			Utils.toast("Error : Las contraseñas no coinciden.", true);
 
 		}
 
+
 	}
+
+
 
 }
 
