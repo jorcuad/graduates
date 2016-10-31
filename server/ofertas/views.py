@@ -1,5 +1,7 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet, GenericViewSet
 from django.contrib.auth.models import User, Group
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from functools import reduce
 
@@ -7,12 +9,15 @@ from django.db.models import Q
 
 from django.views.decorators.csrf import csrf_exempt
 
-from ofertas.models import Offer, Category
-from ofertas.serializers import OfferSerializer, CategorySerializer, UserSerializer
+from ofertas.models import *
+from ofertas.serializers import *
 
-from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework import status, mixins
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
+
+from django.http import Http404
+from rest_framework.views import APIView
 
 
 class CategoryViewSet(ModelViewSet):
@@ -27,16 +32,74 @@ class UserViewSet(ModelViewSet):
     """
     API endpoint that allows clients to be viewed or edited.
     """
+    #authentication_classes = (JSONWebTokenAuthentication, )
+    #permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class OfferViewSet(ModelViewSet):
+class OfferReadViewSet(ReadOnlyModelViewSet):
     """
     API endpoint that allows offers to be viewed or edited.
     """
     queryset = Offer.objects.all()
-    serializer_class = OfferSerializer
+    serializer_class = OfferReadSerializer
 
+class OfferWriteViewSet(mixins.CreateModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin, GenericViewSet):
+
+    """
+    API endpoint that allows offers to be edited.
+    """
+
+    authentication_classes = (JSONWebTokenAuthentication, )
+    permission_classes = (IsAuthenticated,)
+    queryset = Offer.objects.all()
+    serializer_class = OfferWriteSerializer
+
+class FavsByUserViewSet(mixins.RetrieveModelMixin,
+                           mixins.ListModelMixin,
+                           GenericViewSet):
+    """
+    API endpoint that allows offers to be viewed or retrieve.
+    """
+    authentication_classes = (JSONWebTokenAuthentication, )
+    permission_classes = (IsAuthenticated,)
+    queryset = User.objects.all()
+    serializer_class = UserFavsSerializer
+
+
+class FavsEdit(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    authentication_classes = (JSONWebTokenAuthentication, )
+    permission_classes = (IsAuthenticated,)
+
+    def get_offer(self, pk):
+        try:
+            return Offer.objects.get(pk=pk)
+        except Offer.DoesNotExist:
+            raise Http404
+
+    def get_user(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id_user, id_offer, format=None):
+        print("get")
+        user = self.get_user(id_user)
+        offer = self.get_offer(id_offer)
+        user.favorites.add(offer)
+        print(user, offer)
+        return Response(status=status.HTTP_200_OK)
+
+    def delete(self, request, id_user, id_offer, format=None):
+        print("delete")
+        user = self.get_user(id_user)
+        offer = self.get_offer(id_offer)
+        user.favorites.remove(offer)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
 def offer_search(request):
@@ -64,8 +127,16 @@ def offer_search(request):
 
     if categories:
         # categories equals categories
+        # qFilter.add( Q(categories__iexact=categories), Q.AND)
         qFilter.add( Q(categories=categories), Q.AND)
 
     results = Offer.objects.filter(qFilter).order_by('pub_date')
-    serializer = OfferSerializer(results, many=True)
+    serializer = OfferReadSerializer(results, many=True)
     return Response(serializer.data)
+
+
+def jwt_response_payload_handler(token, user=None, request=None):
+    return {
+        'token': token,
+        'user': UserSerializer(user, context={'request': request}).data
+    }

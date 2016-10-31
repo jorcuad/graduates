@@ -1,6 +1,7 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
     <md-button aria-label="Inicio" href="#/">
+      <md-icon md-font-icon="home">home</md-icon>
       Inicio
     </md-button>
     <span flex></span>
@@ -8,7 +9,8 @@
       <span>Spice People</span>
     </h2>
     <span flex></span>
-    <md-button aria-label="Salir">
+    <md-button aria-label="Salir" ng-show="getLogged()" ng-click="logout()">
+      <md-icon md-font-icon="exit_to_app">exit_to_app</md-icon>
       Salir
     </md-button>
   </div>
