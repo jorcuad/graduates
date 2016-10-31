@@ -1,36 +1,43 @@
 <div layout-padding>
+	<md-card  style="padding-left:3%">
+		<md-card-title>
+			<md-card-title-text>
+				<span class="md-headline">Registro de usuario</span>
+			</md-card-title-text>
+		</md-card-title>
+
 	<form name="register">
-
-
 		<div layout="row">
-			<md-input-container flex>
-				<md-icon md-font-icon="nombre">nombre</md-icon>
-				<input name="nombre" required type="text" placeholder="Nombre" ng-pattern="a/^\w+$/" ng-model="$ctrl.form.nombre"/>
-				<div ng-messages="register.nombre.$error" multiple md-auto-hide="true">
-				  <div ng-message="required">
-					Este campo es necesario.
-				  </div>
-				  <div ng-message="pattern">
-					Revise el nombre (no admite símbolos ni acentos).
-		  		  </div>
-				</div>
-			</md-input-container>
-		</div>
+			<div layout="column" flex="45">
+				<md-input-container flex >
+					<md-icon md-font-icon="nombre">nombre</md-icon>
+					<input name="nombre" required type="text" placeholder="Nombre" ng-pattern="a/^\w+$/" ng-model="$ctrl.form.nombre"/>
+					<div ng-messages="register.nombre.$error" multiple md-auto-hide="true">
+					  <div ng-message="required">
+						Este campo es necesario.
+					  </div>
+					  <div ng-message="pattern">
+						Revise el nombre (no admite símbolos ni acentos).
+			  		  </div>
+					</div>
+				</md-input-container>
+			</div>
 
 
-		<div layout="row">
-			<md-input-container flex>
-				<md-icon md-font-icon="apellido">apellido</md-icon>
-				<input name="apellido" required type="text" placeholder="Apellidos"  ng-pattern="/^\w+$/" ng-model="$ctrl.form.apellido"/>
-				<div ng-messages="register.apellido.$error" multiple md-auto-hide="true">
-				  <div ng-message="required">
-					Este campo es necesario.
-				  </div>
-				  <div ng-message="pattern">
-					Revise el apellido (sólo se requiere un apellido y no se admiten símbolos ni acentos).
-		  		  </div>
-				</div>
-			</md-input-container>
+			<div layout="column" flex="45">
+				<md-input-container flex>
+					<md-icon md-font-icon="apellido">apellido</md-icon>
+					<input name="apellido" required type="text" placeholder="Apellido"  ng-pattern="/^\w+$/" ng-model="$ctrl.form.apellido"/>
+					<div ng-messages="register.apellido.$error" multiple md-auto-hide="true">
+					  <div ng-message="required">
+						Este campo es necesario.
+					  </div>
+					  <div ng-message="pattern">
+						Revise el apellido (sólo se requiere un apellido y no se admiten símbolos ni acentos).
+			  		  </div>
+					</div>
+				</md-input-container>
+			</div>
 		</div>
 
 
@@ -66,21 +73,22 @@
 		</div>
 
 		<div layout="row">
-			<md-input-container flex>
-				<md-icon md-font-icon="contrasena">contrasena</md-icon>
-				<input type="password" name="contrasena" required type="text" ng-pattern="/^(?=.{8,20}$)[a-zA-Z0-9@*#]+$/" placeholder="Contraseña" ng-model="$ctrl.form.contrasena"/>
-				<div ng-messages="register.contrasena.$error" multiple md-auto-hide="true">
-				  <div ng-message="required">
-					Este campo es necesario.
-				  </div>
-				  <div ng-message="pattern">
-					Revise la contraseña (mínimo 8 caracteres, sólo caracteres alfanuméricos y algunos símbolos (@*#), siempre que estos no se usen seguidos).
-				  </div>
-				</div>
-			</md-input-container>
-		</div>
+			<div layout="column" flex="45">
+				<md-input-container flex>
+					<md-icon md-font-icon="contrasena">contrasena</md-icon>
+					<input type="password" name="contrasena" required type="text" ng-pattern="/^(?=.{8,20}$)[a-zA-Z0-9@*#]+$/" placeholder="Contraseña" ng-model="$ctrl.form.contrasena"/>
+					<div ng-messages="register.contrasena.$error" multiple md-auto-hide="true">
+					  <div ng-message="required">
+						Este campo es necesario.
+					  </div>
+					  <div ng-message="pattern">
+						Revise la contraseña (mínimo 8 caracteres, sólo caracteres alfanuméricos y algunos símbolos (@*#), siempre que estos no se usen seguidos).
+					  </div>
+					</div>
+				</md-input-container>
+			</div>
 
-		<div layout="row">
+		<div layout="column" flex="45">
 			<md-input-container flex>
 				<md-icon md-font-icon="confirmacontrasena">confirmacontrasena</md-icon>
 				<input type="password" name="confirmacontrasena" required type="text" ng-pattern="/^(?=.{8,20}$)[a-zA-Z0-9@*#]+$/" placeholder="Confirma tu contraseña" ng-model="$ctrl.form.confirmacontrasena"  ng-blur="$ctrl.checkPass()"/>
@@ -95,12 +103,16 @@
 					Revise la contraseña (mínimo 8 caracteres, sólo caracteres alfanuméricos y algunos símbolos (@*#), siempre que estos no se usen seguidos).
 				  </div>
 
-				</div>
-			</md-input-container>
+				</div>				
 
+
+			</md-input-container>
+			</div>
 		</div>
 		<div layout="row">
 			<md-button type="submit" ng-click="$ctrl.register()" class="md-raised md-primary">Registro</md-button>
 		</div>
 	</form>
+		</md-card>
+
 </div>

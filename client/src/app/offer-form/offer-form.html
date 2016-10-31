@@ -4,7 +4,6 @@
 			<md-input-container flex style="margin-top: 0">
 				<md-icon md-font-icon="event">event</md-icon>
 				<input name="name" required type="text" placeholder="Nombre de la oferta" ng-model="$ctrl.form.offer_name"/>
-
 				<div ng-messages="offer.name.$error" multiple md-auto-hide="true">
 				  <div ng-message="required">
 					Este campo es necesario.
@@ -52,7 +51,6 @@
 								{{cat.category_name}}
 							</md-option>
 						</md-select>
-
 						<div ng-messages="offer.category.$error" multiple md-auto-hide="true">
 						  <div ng-message="required">
 							Este campo es necesario.
