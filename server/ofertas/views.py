@@ -213,7 +213,7 @@ def offer_search(request):
             if gt == "today":
                 results = results.filter(activity_date__gte=today)
             else:
-                date = datetime.strptime(gt,'%Y-%m-%d')
+                date = datetime.strptime(gt,'%d/%m/%Y')
                 results = results.filter(activity_date__gte=date)
     except:
         print("formato fecha gt erroneo")
@@ -223,7 +223,7 @@ def offer_search(request):
             if lt == "today":
                 results = results.filter(activity_date__lte=today)
             else:
-                date = datetime.strptime(lt,'%Y-%m-%d')
+                date = datetime.strptime(lt,'%d/%m/%Y')
                 results = results.filter(activity_date__lte=date)
     except:
         print("formato fecha lt erroneo")
