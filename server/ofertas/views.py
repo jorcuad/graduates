@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
+from django.core.exceptions import FieldError
 from functools import reduce
 from datetime import datetime
 from django.db.models import Q
@@ -177,9 +178,10 @@ def offer_search(request):
     """
 
     search = request.GET.get('search', None)
-    categories = request.GET.get('category', None)
+    categories = request.GET.get('categories', None)
     gt = request.GET.get('gt', None)
     lt = request.GET.get('lt', None)
+    sort = request.GET.get('sort', None)
 
     qFilter = Q()
     if search:
@@ -199,11 +201,13 @@ def offer_search(request):
     if categories:
         # categories equals categories
         # qFilter.add( Q(categories__iexact=categories), Q.AND)
-        qFilter.add( Q(categories=categories), Q.AND)
+        arrayCategories = categories.split()
+        qCateFilter = reduce(lambda x, y: x & y, [Q(categories__icontains=cat) for cat in arrayCategories])
+        qFilter.add(qCateFilter, Q.AND)
 
     today = datetime.now()
     results = Offer.objects.filter(qFilter)
-
+    print(qFilter)
     try:
         if gt:
             if gt == "today":
@@ -224,7 +228,14 @@ def offer_search(request):
     except:
         print("formato fecha lt erroneo")
 
-    results = results.order_by('-pub_date')
+    try:
+        Offer._meta.get_field(sort)
+    except:
+        print("cambio de ordenación erroneo, se usa pub_date por defecto")
+        sort = 'pub_date'
+
+    results = results.order_by('-'+sort)
+
     serializer = OfferReadSerializer(results, many=True)
     return Response(serializer.data)
 
