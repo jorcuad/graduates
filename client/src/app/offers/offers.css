@@ -35,7 +35,7 @@
 
 .filter {
   height: 49px; 
-  border-bottom: 1px solid #DCDCDC;
+  /*border-bottom: 1px solid #DCDCDC;*/
   color: rgba(0, 0, 0, 0.5);
 }
 
@@ -63,4 +63,8 @@ md-input-container.md-default-theme .md-input, md-input-container .md-input {
 
 .no_border {
   border: none !important;
+}
+
+.sidenav-color {
+  background-color: rgba(82, 188, 236, 0.1)
 }
