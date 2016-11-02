@@ -14,7 +14,7 @@ class Offer(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	modified_date =  models.DateTimeField(auto_now_add=False, auto_now=True)
 	active = models.BooleanField(default=True)
-	private = models.BooleanField(default=False)
+	public = models.BooleanField(default=True)
 	maxContacts = models.IntegerField(default=-1)
 	favorites = models.ManyToManyField(User, related_name='favorites', blank=True)
 	#favorites = models.ManyToManyField(User, through='Favorite', related_name='favorites')

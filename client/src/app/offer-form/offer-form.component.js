@@ -43,7 +43,7 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 						vm.offer.maxContacts="";
 					}
 					vm.form = {"id": vm.offer.id, "user":vm.offer.user.id,
-					"active":vm.offer.active, "private":vm.offer.private,
+					"active":vm.offer.active, "public":vm.offer.public,
 					"activity_date":new Date(vm.offer.activity_date),
 					"offer_name":vm.offer.offer_name, "description":vm.offer.description,
 					"place":vm.offer.place, "categories":vm.offer.categories,
@@ -54,21 +54,20 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 						vm.form.active2 = "Inactiva";
 					}
 
-					if (vm.offer.private ==true){
-						vm.form.private2 = "Pública";
+					if (vm.offer.public == true){
+						vm.form.public2 = "Pública";
 					}else {
-						vm.form.private2 = "Privada";
+						vm.form.public2 = "Privada";
 					}
 				}else{
 					vm.editar = false;
-					vm.form = {"user":"","active":"", "private":"","activity_date":"",
+					vm.form = {"user":"","active":"", "public":"","activity_date":"",
 					"offer_name":"", "description":"", "place":"", "categories":"Categoría"}
 					vm.form.active = true;
-					vm.form.private = false;
+					vm.form.public = true;
 					vm.form.user = Session.getUser().id
 					vm.form.active2 = "Activa";
-					vm.form.private2 = "Privada";
-
+					vm.form.public2 = "Pública";
 				}
 
 			}, function (answer) {
@@ -84,10 +83,10 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 	};
  
   	$scope.onChange2 = function() {
-  		if(vm.form.private == true){
-			vm.form.private2  = "Pública";
+  		if(vm.form.public == true){
+			vm.form.public2  = "Pública";
   		}else{
-			vm.form.private2  = "Privada";
+			vm.form.public2  = "Privada";
   		}
   	};
 	vm.create = function(){

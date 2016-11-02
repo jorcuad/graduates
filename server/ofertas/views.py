@@ -206,7 +206,7 @@ def offer_search(request):
 
     # solo mostrar activas y no privadas
     qFilter.add(Q(active=True), Q.AND)
-    qFilter.add(Q(private=False), Q.AND)
+    qFilter.add(Q(public=True), Q.AND)
 
     results = Offer.objects.filter(qFilter)
 
