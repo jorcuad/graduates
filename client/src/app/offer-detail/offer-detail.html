@@ -51,7 +51,7 @@
 				<b>Límite de contactos:</b> {{$ctrl.stringLimit}}</p>
 				</div>
 			</md-card-content>
-			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id != userlogged.id">
+			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id != userlogged.id && $ctrl.limit && userlogged!=null">
 				<md-button ng-click="contact($event)" class="md-raised md-primary">Contactar</md-button>
 			</md-card-actions>
 			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
