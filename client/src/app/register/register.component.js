@@ -17,7 +17,16 @@ function registerCtrl (Utils, RegisterService) {
 					"last_name":vm.form.apellido,
 					"email": vm.form.email,
 					"password":vm.form.contrasena
-				})			
+				}).then(function (answer) {
+			vm.register = answer.data;
+				if (answer.status >= 200 && answer.status <=299){
+					Utils.toast(answer.status + " bien", false);
+					window.location="http://localhost:3000/#/";
+
+				}else{
+					Utils.toast(answer.status + " : Error al realizar el registro, recargue la página e intentelo de nuevo.", true)
+				}
+		})			
 		}else{
 			Utils.toast("Error : Las contraseñas no coinciden.", true);
 
@@ -34,3 +43,6 @@ angular.module('graduatesApp').component('register', {
 	templateUrl: 'app/register/register.html',
 	controller: registerCtrl
 });
+
+
+					
