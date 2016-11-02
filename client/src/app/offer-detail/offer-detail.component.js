@@ -21,7 +21,16 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 				$scope.offer= vm.offer;
 				var dateObject = new Date(Date.parse(vm.offer.pub_date));
 				var dateReadable = dateObject.toLocaleDateString();
-				vm.offer.pub_date = dateReadable
+				vm.offer.pub_date = dateReadable;
+				vm.stringLimit = ''
+				if(vm.offer.maxContacts == -1){
+					vm.stringLimit= 'Sin límite'
+				}
+				else{
+					vm.stringLimit = vm.offer.maxContacts
+				}
+
+
 			}, function (answer) {
 				Utils.toast(answer.status + " : Error al obtener la información de la oferta, recargue la página.", true)
 			})
