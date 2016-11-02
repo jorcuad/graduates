@@ -50,7 +50,7 @@
 				</div>
 			</md-card-content>
 			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id != userlogged.id">
-				<md-button ng-click="contact($event)" class="md-raised md-primary">Contactar</md-button>
+				<md-button ng-click="contact($event)" ng-show="$ctrl.limit" class="md-raised md-primary">Contactar</md-button>
 			</md-card-actions>
 			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
 				<md-button class="md-raised md-primary" href="#/edit/{{$ctrl.offer.id}}">Editar</md-button>
