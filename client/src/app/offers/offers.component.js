@@ -1,12 +1,14 @@
 'use strict';
 
+
 function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session) {
+
 
 	var vm = this;
 	$scope.formData = {};
 	$scope.userlogged= {};
 
-	vm.search = ""	
+	vm.search = ""
 	vm.categories = ""
 	vm.category = []
 
@@ -81,7 +83,7 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 	$scope.isVisibleClosed = function () {
 		return (!vm.isClosed && $mdMedia('(min-width: 850px)'))
 	}
-	
+
 	$scope.isVisible = function () {
 		return (!vm.isClosed || !$mdMedia('(min-width: 850px)'))
 	}
@@ -124,17 +126,17 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 
 		if( vm.ini_date != undefined ) {
 			if(query !== "") {
-				query = query + "&gt="+vm.ini_date.toLocaleDateString(); 
+				query = query + "&gt="+vm.ini_date.toLocaleDateString();
 			} else {
-				query = "gt="+vm.ini_date.toLocaleDateString(); 
+				query = "gt="+vm.ini_date.toLocaleDateString();
 			}
 		}
 
 		if( vm.fin_date != undefined ) {
 			if(query !== "") {
-				query = query + "&lt="+vm.fin_date.toLocaleDateString(); 
+				query = query + "&lt="+vm.fin_date.toLocaleDateString();
 			} else {
-				query = "lt="+vm.fin_date.toLocaleDateString(); 
+				query = "lt="+vm.fin_date.toLocaleDateString();
 			}
 		}
 
@@ -147,23 +149,6 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 }
 
 
-
-function DialogController($scope, $mdDialog) {
-
-	$scope.hide = function() {
-		$mdDialog.hide();
-	};
-
-	$scope.getStateOffer = function (offer){
-		$scope.offer = offer;
-		return offer.active;
-	};
-	$scope.changeStateOffer = function (offer){
-		$offer.active = !offer.active;
-		OfferDetailService.changeStateOffer($scope.offer);
-		
-	};
-}
 
 angular.module('graduatesApp').component('offers', {
 	templateUrl: 'app/offers/offers.html',

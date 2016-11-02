@@ -4,8 +4,9 @@ from django.contrib.auth.models import User, Group
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
+from django.core.exceptions import FieldError
 from functools import reduce
-
+from datetime import datetime, timedelta
 from django.db.models import Q
 
 from django.views.decorators.csrf import csrf_exempt
@@ -106,7 +107,7 @@ class SendEmail(APIView):
             offer_user= offer.user.username
             offer_date= str(offer.activity_date)
 
-            # email al demandante            
+            # email al demandante
             subject_demand = "Se ha contactado con el creador de la oferta"
             message_demand = ('Has contactado con el usuario usuario ' + offer_user + ' sobre la oferta ' + offer_name +
                         ': \n' +
@@ -115,13 +116,12 @@ class SendEmail(APIView):
                         'Categoria: ' + offer_category +'\n'+
                         '\n\n Será contestado por el creador en cuanto pueda.\n Muchas gracias, un saludo.\n')
 
-            # email al ofertante            
+            # email al ofertante
             subject = "Un usuario quiere ponerse en contacto contigo"
             message = ('El usuario ' + sender_username + ' le ha enviado un mensaje ' +
                         ' en relación a la oferta con título "' + offer_name +
                         '". \nPara contestar envie un email a: ' + email_sender +
                         '\n\nMENSAJE:\n' + message_user)
-            print("aaaaaaaaa"+ email_sender)
             if offer.maxContacts > 0 or offer.maxContacts == -1:
                 send_mail(subject, message, email_sender, [email_receiver], fail_silently=False)
                 send_mail(subject_demand, message_demand, email_sender, [email_sender], fail_silently=False)
@@ -178,28 +178,62 @@ def offer_search(request):
 
     search = request.GET.get('search', None)
     categories = request.GET.get('category', None)
+    gt = request.GET.get('gt', None)
+    lt = request.GET.get('lt', None)
+    sort = request.GET.get('sort', None)
 
     qFilter = Q()
-    if(search):
+    if search:
         # description or offer_name contains search
         # split the search in words, then remove the
         # words with len < 4
         words = search.split()
-        words = [x for x in words if len(x) > 3]
+        words = [x for x in words if len(x) > 2]
+        if words:
+            # create the q filter for unorder items for description field
+            qDescFilter = reduce(lambda x, y: x & y, [Q(description__icontains=word) for word in words])
+            # same with offer_name field
+            qNameFilter = reduce(lambda x, y: x & y, [Q(offer_name__icontains=word) for word in words])
 
-        # create the q filter for unorder items for description field
-        qDescFilter = reduce(lambda x, y: x & y, [Q(description__icontains=word) for word in words])
-        # same with offer_name field
-        qNameFilter = reduce(lambda x, y: x & y, [Q(offer_name__icontains=word) for word in words])
-
-        qFilter.add( qDescFilter | qNameFilter, Q.AND)
+            qFilter.add( qDescFilter | qNameFilter, Q.AND)
 
     if categories:
         # categories equals categories
         # qFilter.add( Q(categories__iexact=categories), Q.AND)
-        qFilter.add( Q(categories=categories), Q.AND)
+        arrayCategories = categories.split()
+        qCateFilter = reduce(lambda x, y: x & y, [Q(categories__icontains=cat) for cat in arrayCategories])
+        qFilter.add(qCateFilter, Q.AND)
 
-    results = Offer.objects.filter(qFilter).order_by('pub_date')
+    today = datetime.now()
+    results = Offer.objects.filter(qFilter)
+
+    try:
+        if gt:
+            if gt == "today":
+                results = results.filter(activity_date__gte=today)
+            else:
+                date = datetime.strptime(gt,'%d/%m/%Y')
+                results = results.filter(activity_date__gte=date)
+    except:
+        print("formato fecha gt erroneo")
+
+    try:
+        if lt:
+            if lt == "today":
+                results = results.filter(activity_date__lte=today)
+            else:
+                date = datetime.strptime(lt,'%d/%m/%Y') + timedelta(days=1)
+                results = results.filter(activity_date__lte=date)
+    except:
+        print("formato fecha lt erroneo")
+
+    try:
+        Offer._meta.get_field(sort)
+    except:
+        sort = 'pub_date'
+
+    results = results.order_by('-'+sort)
+
     serializer = OfferReadSerializer(results, many=True)
     return Response(serializer.data)
 
