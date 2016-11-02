@@ -7,6 +7,9 @@
 			<md-tab label="Ofertas">
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
+						<md-list-item>
+							<md-button flex ng-disabled="true" class="md-raised md-primary">Debes estar registrado para crear tus ofertas</md-button>
+						</md-list-item>
 						<md-list-item ng-repeat="offer in $ctrl.offers">
 							<md-card flex layout-padding layout="row">
 								<md-card-title layout="column">
@@ -41,15 +44,15 @@
 				<i class="material-icons">search</i>
 			</md-button>
 		</div>
-		<div layout="column" layout-padding ng-show="isVisibleClosed()" class="filter">
+		<div layout="column" layout-padding ng-show="isVisibleClosed()" class="filter_icon">
 			<md-button class="md-icon-button md-accent" aria-label="Cerrar Menu" ng-click="$ctrl.closeBar()">
 				<i class="material-icons">keyboard_arrow_right</i>
 			</md-button>
 		</div>
-		<md-sidenav ng-show="isVisible()" class="md-sidenav-right" style="border-left:1px solid #DCDCDC" md-component-id="right" md-is-locked-open="$mdMedia('(min-width: 850px)')">
+		<md-sidenav ng-show="isVisible()" class="md-sidenav-right sidenav-color" style="border-left:1px solid #DCDCDC" md-component-id="right" md-is-locked-open="$mdMedia('(min-width: 850px)')">
 			<div>
-				<md-content>
-					<div class="filter" class="filter_input" layout-padding>
+				<md-content class="trasparent">
+					<div class="filter" class="filter_input trasparent" layout-padding>
 						<form ng-keypress="$ctrl.filter_bar()">
 							<md-input-container  md-no-float class="filter_input">
 								<md-icon class="material-icons">search</md-icon>
@@ -58,18 +61,18 @@
 						</form>
 					</div>
 					<div layout-padding>
-						<h4 class="filter_header">Categorías</h4>
+						<h4 class="filter_header trasparent">Categorías</h4>
 						<div ng-repeat="cat in $ctrl.categories">
 							<md-checkbox class="filter_input" ng-checked="exists(cat, $ctrl.category)" ng-click="toggle(cat,  $ctrl.category)">
 								{{ cat.category_name }}
 							</md-checkbox>
 						</div>
-						<h4 class="filter_header">Orden de las ofertas</h4>
-						<md-select class="filter_input" ng-change="$ctrl.filter_bar()" placeholder="Orden" ng-model="$ctrl.sort_value">
+						<h4 class="filter_header trasparent">Orden de las ofertas</h4>
+						<md-select class="filter_input trasparent" ng-change="$ctrl.filter_bar()" placeholder="Orden" ng-model="$ctrl.sort_value">
 							<md-option value="pub_date">Fecha de creación</md-option>
 							<md-option value="activity_date">Fecha de la oferta</md-option>
 						</md-select>
-						<h4 class="filter_header">Búsqueda por fecha</h4>
+						<h4 class="filter_header trasparent">Búsqueda por fecha</h4>
 						<md-datepicker flex ng-change="$ctrl.filter_bar()" ng-model="$ctrl.ini_date" md-placeholder="Fecha Inicial" md-min-date="$ctrl.min_date"></md-datepicker>
 						<md-datepicker flex ng-change="$ctrl.filter_bar()" ng-model="$ctrl.fin_date" md-placeholder="Fecha Final" md-min-date="$ctrl.min_date"></md-datepicker>
 					</div>
@@ -84,6 +87,9 @@
 			<md-tab label="Ofertas">
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
+						<md-list-item>
+							<md-button flex md-colors="{background: 'green'}" class="md-raised md-primary" href="#/new-offer">Crea tu propia oferta</md-button>
+						</md-list-item>
 						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id: '!' + user.id } }">
 							<md-card flex layout-padding layout="row">
 								<md-card-title layout="column">
@@ -195,15 +201,15 @@
 				<i class="material-icons">search</i>
 			</md-button>
 		</div>
-		<div layout="column" layout-padding ng-show="isVisibleClosed()" class="filter">
+		<div layout="column" layout-padding ng-show="isVisibleClosed()" class="filter_icon">
 			<md-button class="md-icon-button md-accent" aria-label="Cerrar Menu" ng-click="$ctrl.closeBar()">
 				<i class="material-icons">keyboard_arrow_right</i>
 			</md-button>
 		</div>
-		<md-sidenav ng-show="isVisible()" class="md-sidenav-right" style="border-left:1px solid #DCDCDC" md-component-id="right2" md-is-locked-open="$mdMedia('(min-width: 850px)')">
+		<md-sidenav ng-show="isVisible()" class="md-sidenav-right sidenav-color" style="border-left:1px solid #DCDCDC" md-component-id="right2" md-is-locked-open="$mdMedia('(min-width: 850px)')">
 			<div>
-				<md-content>
-					<div class="filter" class="filter_input" layout-padding>
+				<md-content class="trasparent">
+					<div class="filter trasparent" class="filter_input" layout-padding>
 						<form ng-keypress="$ctrl.filter_bar()">
 							<md-input-container  md-no-float class="filter_input">
 								<md-icon class="material-icons">search</md-icon>
@@ -212,18 +218,18 @@
 						</form>
 					</div>
 					<div layout-padding>
-						<h4 class="filter_header">Categorías</h4>
+						<h4 class="filter_header trasparent">Categorías</h4>
 						<div ng-repeat="cat in $ctrl.categories">
 							<md-checkbox class="filter_input" ng-checked="exists(cat, $ctrl.category)" ng-click="toggle(cat,  $ctrl.category)">
 								{{ cat.category_name }}
 							</md-checkbox>
 						</div>
-						<h4 class="filter_header">Orden de las ofertas</h4>
-						<md-select class="filter_input" ng-change="$ctrl.filter_bar()" placeholder="Orden" ng-model="$ctrl.sort_value">
+						<h4 class="filter_header trasparent">Orden de las ofertas</h4>
+						<md-select class="filter_input trasparent" ng-change="$ctrl.filter_bar()" placeholder="Orden" ng-model="$ctrl.sort_value">
 							<md-option value="pub_date">Fecha de creación</md-option>
 							<md-option value="activity_date">Fecha de la oferta</md-option>
 						</md-select>
-						<h4 class="filter_header">Búsqueda por fecha</h4>
+						<h4 class="filter_header trasparent">Búsqueda por fecha</h4>
 						<md-datepicker flex ng-change="$ctrl.filter_bar()" ng-model="$ctrl.ini_date" md-placeholder="Fecha Inicial" md-min-date="$ctrl.min_date"></md-datepicker>
 						<md-datepicker flex ng-change="$ctrl.filter_bar()" ng-model="$ctrl.fin_date" md-placeholder="Fecha Final" md-min-date="$ctrl.min_date"></md-datepicker>
 					</div>
