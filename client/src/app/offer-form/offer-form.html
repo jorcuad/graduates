@@ -65,7 +65,6 @@
 				<h4>¿Cuándo va a ser?</h4>
 				<md-datepicker flex ng-model="$ctrl.form.activity_date" ng-model-options="{ timezone: 'CET'}" md-placeholder="Fecha de la oferta"
 				md-min-date="$ctrl.minDate"></md-datepicker>
-				{{$ctrl.form.activity_date}}
 				<div layout="row">
 					<md-input-container style="margin-bottom: 0;">
 						<input name="hour" required type="number" min="0" max="23" placeholder="Hora" ng-model="$ctrl.activity_hour"/>
@@ -97,7 +96,7 @@
 		<div layout="row">
 			<md-input-container style="margin-bottom: 0;">
 			<md-icon md-svg-src="../assets/icons/limitContacts.svg"></md-icon>
-				<input name="./icons/limitContacts" required type="number" min="1" max="23" placeholder="Limite de Contactos" ng-model="$ctrl.form.maxContacts" ng-disabled="$ctrl.checkLimit()" ng-value="$ctrl.checkMaxContacts()"/>
+				<input name="./icons/limitContacts" type="number" min="1" max="23" placeholder="Limite de Contactos" ng-model="$ctrl.form.maxContacts" required ng-show="!$ctrl.checkLimit()" ng-disabled="$ctrl.checkLimit()" ng-value="$ctrl.checkMaxContacts()"/>
 
 				<div ng-messages="offer.limitContacts.$error" multiple md-auto-hide="true">
 					<div ng-message="required">

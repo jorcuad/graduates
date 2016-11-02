@@ -103,12 +103,15 @@ function offerFormCtrl ($http, $location, $routeParams, OfferForm, OfferDetailSe
 		vm.withoutLimit = !vm.withoutLimit;
 		if(vm.withoutLimit){
 			vm.disableInput=true;
-			vm.offer.maxContacts=-1;
-			vm.form.maxContacts = "";
+			vm.hideInput=true;
+			vm.form.maxContacts=-1
+		}
+		else{
+			vm.form.maxContacts=1
 		}
 	}
 	vm.checkMaxContacts = function(){
-		return vm.offer.maxContacts;
+		return vm.form.Contacts;
 	}
 }
 
@@ -120,11 +123,14 @@ angular.module('graduatesApp').component('offerForm', {
 function check_form(form) {
 	var is_ok = true
 	//Para no poner limite
-	if(form.maxContacts ==""){
-		form.maxContacts = -1;
-	}
+	//if(form.maxContacts ==""){
+	//	form.maxContacts = -1;
+	//}
 	for(var field in form) {
 		if( String(form[field]) == "" || angular.isUndefined(String(form[field]))) {
+			is_ok = false
+		}
+		if( form[field] == null) {
 			is_ok = false
 		}
 	}
