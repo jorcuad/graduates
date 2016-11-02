@@ -1,10 +1,11 @@
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet, GenericViewSet
+from django.core.mail import send_mail
 from django.contrib.auth.models import User, Group
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from functools import reduce
-
+from datetime import datetime
 from django.db.models import Q
 
 from django.views.decorators.csrf import csrf_exempt
@@ -67,6 +68,74 @@ class FavsByUserViewSet(mixins.RetrieveModelMixin,
     serializer_class = UserFavsSerializer
 
 
+
+
+class SendEmail(APIView):
+
+    authentication_classes = (JSONWebTokenAuthentication, )
+    permission_classes = (IsAuthenticated,)
+
+    def get_user(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get_offer(self, pk):
+        try:
+            return Offer.objects.get(pk=pk)
+        except Offer.DoesNotExist:
+            raise Http404
+
+    def post(self, request, format=None):
+        send_email = SendEmailSerializer(data=request.data)
+
+        if send_email.is_valid():
+            offer = self.get_offer(send_email.data["offer"])
+            sender_user = UserOfferSerializer(request.user)
+
+            message_user = send_email.data["message"]
+
+            email_sender = sender_user.data["email"]
+            sender_username = sender_user.data["username"]
+
+            email_receiver = offer.user.email
+            offer_name = offer.offer_name
+            offer_description = offer.description
+            offer_category = offer.categories
+            offer_user= offer.user.username
+            offer_date= str(offer.activity_date)
+
+            # email al demandante
+            subject_demand = "Se ha contactado con el creador de la oferta"
+            message_demand = ('Has contactado con el usuario usuario ' + offer_user + ' sobre la oferta ' + offer_name +
+                        ': \n' +
+                        'Descripción: ' + offer_description +'\n'+
+                        'Fecha: '+ offer_date+ '\n'+
+                        'Categoria: ' + offer_category +'\n'+
+                        '\n\n Será contestado por el creador en cuanto pueda.\n Muchas gracias, un saludo.\n')
+
+            # email al ofertante
+            subject = "Un usuario quiere ponerse en contacto contigo"
+            message = ('El usuario ' + sender_username + ' le ha enviado un mensaje ' +
+                        ' en relación a la oferta con título "' + offer_name +
+                        '". \nPara contestar envie un email a: ' + email_sender +
+                        '\n\nMENSAJE:\n' + message_user)
+            print("aaaaaaaaa"+ email_sender)
+            if offer.maxContacts > 0 or offer.maxContacts == -1:
+                send_mail(subject, message, email_sender, [email_receiver], fail_silently=False)
+                send_mail(subject_demand, message_demand, email_sender, [email_sender], fail_silently=False)
+
+                if offer.maxContacts > 0:
+                    offer.maxContacts -= 1
+                    offer.save()
+                return Response(status=status.HTTP_200_OK)
+            else :
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 class FavsEdit(APIView):
     """
     Retrieve, update or delete a snippet instance.
@@ -109,9 +178,11 @@ def offer_search(request):
 
     search = request.GET.get('search', None)
     categories = request.GET.get('category', None)
+    gt = request.GET.get('gt', None)
+    lt = request.GET.get('lt', None)
 
     qFilter = Q()
-    if(search):
+    if search:
         # description or offer_name contains search
         # split the search in words, then remove the
         # words with len < 4
@@ -130,7 +201,30 @@ def offer_search(request):
         # qFilter.add( Q(categories__iexact=categories), Q.AND)
         qFilter.add( Q(categories=categories), Q.AND)
 
-    results = Offer.objects.filter(qFilter).order_by('pub_date')
+    today = datetime.now()
+    results = Offer.objects.filter(qFilter)
+
+    try:
+        if gt:
+            if gt == "today":
+                results = results.filter(activity_date__gte=today)
+            else:
+                date = datetime.strptime(gt,'%Y-%m-%d')
+                results = results.filter(activity_date__gte=date)
+    except:
+        print("formato fecha gt erroneo")
+
+    try:
+        if lt:
+            if lt == "today":
+                results = results.filter(activity_date__lt=today)
+            else:
+                date = datetime.strptime(lt,'%Y-%m-%d')
+                results = results.filter(activity_date__lt=date)
+    except:
+        print("formato fecha lt erroneo")
+
+    results = results.order_by('-pub_date')
     serializer = OfferReadSerializer(results, many=True)
     return Response(serializer.data)
 

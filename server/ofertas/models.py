@@ -15,6 +15,7 @@ class Offer(models.Model):
 	modified_date =  models.DateTimeField(auto_now_add=False, auto_now=True)
 	active = models.BooleanField(default=True)
 	private = models.BooleanField(default=False)
+	maxContacts = models.IntegerField(default=-1)
 	favorites = models.ManyToManyField(User, related_name='favorites', blank=True)
 	#favorites = models.ManyToManyField(User, through='Favorite', related_name='favorites')
 

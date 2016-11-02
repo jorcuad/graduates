@@ -44,7 +44,7 @@ angular.module('graduatesApp').service('Offers', function ($http) {
 					});
 	}
 	this.changeStateOffer = function (offer) {
-		return $http.put(offersEditEndpoint + offer.id + '/',offer,config)
+		return $http.put(offersEditEndpoint + offer.id + '/',offer)
 					.then(function(offer) {
 						return offer.data;
 					});

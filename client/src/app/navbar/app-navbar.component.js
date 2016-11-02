@@ -1,5 +1,5 @@
 'use strict';
-function navbarCtrl ($scope,$route,Utils,Session) {
+function navbarCtrl ($scope,$route, $mdPanel, Utils, Session, Panels) {
 	var vm = this
 
 	vm.$onInit = function () {
@@ -23,9 +23,14 @@ function navbarCtrl ($scope,$route,Utils,Session) {
 
 		Utils.toast("¡¡HASTA PRONTO!!");
 	}
+
+	$scope.showLogin = function (ev) {
+		Panels.showPanel(ev)
+	}
 }
 
 angular.module('graduatesApp').component('appNavbar', {
 	templateUrl: 'app/navbar/app-navbar.html',
 	controller: navbarCtrl
 });
+
