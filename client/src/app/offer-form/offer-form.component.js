@@ -66,6 +66,9 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 					vm.form.active = true;
 					vm.form.private = false;
 					vm.form.user = Session.getUser().id
+					vm.form.active2 = "Activa";
+					vm.form.private2 = "Privada";
+
 				}
 
 			}, function (answer) {
