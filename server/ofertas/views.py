@@ -189,14 +189,14 @@ def offer_search(request):
         # split the search in words, then remove the
         # words with len < 4
         words = search.split()
-        words = [x for x in words if len(x) > 3]
+        words = [x for x in words if len(x) > 2]
+        if words:
+            # create the q filter for unorder items for description field
+            qDescFilter = reduce(lambda x, y: x & y, [Q(description__icontains=word) for word in words])
+            # same with offer_name field
+            qNameFilter = reduce(lambda x, y: x & y, [Q(offer_name__icontains=word) for word in words])
 
-        # create the q filter for unorder items for description field
-        qDescFilter = reduce(lambda x, y: x & y, [Q(description__icontains=word) for word in words])
-        # same with offer_name field
-        qNameFilter = reduce(lambda x, y: x & y, [Q(offer_name__icontains=word) for word in words])
-
-        qFilter.add( qDescFilter | qNameFilter, Q.AND)
+            qFilter.add( qDescFilter | qNameFilter, Q.AND)
 
     if categories:
         # categories equals categories
@@ -207,7 +207,7 @@ def offer_search(request):
 
     today = datetime.now()
     results = Offer.objects.filter(qFilter)
-    print(qFilter)
+
     try:
         if gt:
             if gt == "today":
@@ -231,7 +231,6 @@ def offer_search(request):
     try:
         Offer._meta.get_field(sort)
     except:
-        print("cambio de ordenación erroneo, se usa pub_date por defecto")
         sort = 'pub_date'
 
     results = results.order_by('-'+sort)
