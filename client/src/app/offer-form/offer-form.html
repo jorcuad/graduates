@@ -4,6 +4,7 @@
 			<md-input-container flex style="margin-top: 0">
 				<md-icon md-font-icon="event">event</md-icon>
 				<input name="name" required type="text" placeholder="Nombre de la oferta" ng-model="$ctrl.form.offer_name"/>
+
 				<div ng-messages="offer.name.$error" multiple md-auto-hide="true">
 				  <div ng-message="required">
 					Este campo es necesario.
@@ -47,10 +48,12 @@
 					<md-input-container style="margin-top: 0;">
 						<md-icon md-font-icon="place">category</md-icon>
 						<md-select placeholder="{{$ctrl.form.categories}}" ng-model="$ctrl.form.categories">
+							<md-option value="{{cat.category_name}}">Categoría</md-option>
 							<md-option ng-repeat="cat in $ctrl.categories" value="{{cat.category_name}}">
 								{{cat.category_name}}
 							</md-option>
 						</md-select>
+
 						<div ng-messages="offer.category.$error" multiple md-auto-hide="true">
 						  <div ng-message="required">
 							Este campo es necesario.
@@ -92,23 +95,6 @@
 				<md-switch style="margin-top: 0;" ng-model="$ctrl.form.active" aria-label="Activa">Activa</md-switch>
 				<md-switch ng-disabled="true" style="margin-top: 0;" ng-model="$ctrl.form.private" aria-label="Privada">Privada</md-switch>
 			</div>
-		</div>
-		<div layout="row">
-			<md-input-container style="margin-bottom: 0;">
-			<md-icon md-svg-src="../assets/icons/limitContacts.svg"></md-icon>
-				<input name="./icons/limitContacts" required type="number" min="1" max="23" placeholder="Limite de Contactos" ng-model="$ctrl.form.maxContacts" ng-disabled="$ctrl.checkLimit()" ng-value="$ctrl.checkMaxContacts()"/>
-
-				<div ng-messages="offer.limitContacts.$error" multiple md-auto-hide="true">
-					<div ng-message="required">
-						Límite inválido. Min/Max (1/23)
-					</div>
-				</div>
-			</md-input-container>
-			<md-input-container style="margin-bottom: 0;">
-				<md-checkbox name="withoutLimit" ng-model="$ctrl.withoutLimit" ng-checked="$ctrl.checkLimit()" ng-click="$ctrl.changeLimit()" >
-					Sin Limite
-				</md-checkbox>
-			</md-input-container>	
 		</div>
 		<div layout="row" layout-align="center center">
 			<md-button class="md-raised md-primary"  ng-click="$ctrl.create()" ng-show="!$ctrl.editar" type="submit">Crear Oferta</md-button>
