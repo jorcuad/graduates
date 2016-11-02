@@ -101,7 +101,7 @@
 											<md-icon md-font-icon="event">event</md-icon>
 											{{offer.activity_date | date: medium}}
 											<md-icon md-font-icon="place">place</md-icon>
-											{{offer.place}}									
+											{{offer.place}}
 											<md-icon md-font-icon="place">category</md-icon>
 											{{offer.categories}}
 										</span>
@@ -118,7 +118,7 @@
 			<md-tab label="Creadas por mi" >
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:user.id } }">
+						<md-list-item ng-repeat="offer in $ctrl.myoffers | filter:{ user:{ id:user.id } }">
 							<md-card flex layout-padding layout="row">
 								<md-card-title layout="column">
 									<md-card-title-text>
@@ -153,7 +153,7 @@
 										</span>
 									</md-card-title-text>
 								</md-card-title>
-								
+
 								<md-card-actions layout="column" layout-align="end center">
 									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
