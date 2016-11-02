@@ -46,11 +46,13 @@
 				<p><md-icon md-font-icon="event" style="margin-right:10px">event</md-icon> 	<b>Fecha:</b> {{$ctrl.offer.activity_date | date: medium}}</p>
 				<p><md-icon md-font-icon="alarm" style="margin-right:10px">alarm</md-icon> 	<b>Hora:</b> {{$ctrl.offer.activity_date | date: 'HH:mm'}}</p>
 				<p><md-icon md-font-icon="place" style="margin-right:10px">place</md-icon>	<b>Lugar:</b> {{$ctrl.offer.place}}</p>
-				<p><md-icon md-font-icon="place" style="margin-right:10px">category</md-icon>	<b>Categorías:</b> {{$ctrl.offer.categories}}</p>
+				<p><md-icon md-font-icon="category" style="margin-right:10px">category</md-icon>	<b>Categorías:</b> {{$ctrl.offer.categories}}</p>
+				<p><md-icon md-svg-src="../assets/icons/limitContacts.svg" style="margin-right:10px"></md-icon>
+				<b>Límite de contactos:</b> {{$ctrl.stringLimit}}</p>
 				</div>
 			</md-card-content>
-			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id != userlogged.id">
-				<md-button ng-click="contact($event)" ng-show="$ctrl.limit" class="md-raised md-primary">Contactar</md-button>
+			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id != userlogged.id && $ctrl.limit && userlogged!=null">
+				<md-button ng-click="contact($event)" class="md-raised md-primary">Contactar</md-button>
 			</md-card-actions>
 			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
 				<md-button class="md-raised md-primary" href="#/edit/{{$ctrl.offer.id}}">Editar</md-button>
