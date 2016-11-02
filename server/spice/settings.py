@@ -125,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'CET'
 
@@ -149,3 +149,9 @@ CORS_ORIGIN_WHITELIST = ('127.0.0.1:8000','127.0.0.1:3000', )
 
 SESSION_COOKIE_DOMAIN = '127.0.0.1'
 CSRF_COOKIE_DOMAIN = '127.0.0.1'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'spice.people.graduates@gmail.com'
+EMAIL_HOST_PASSWORD = 'i4sgraduates'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

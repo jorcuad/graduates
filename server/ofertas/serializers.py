@@ -3,6 +3,11 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 
+
+class SendEmailSerializer(serializers.Serializer):
+    offer = serializers.IntegerField()
+    message = serializers.CharField()
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -57,10 +62,3 @@ class OfferWriteSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-
-
-'''
-class FavoriteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Favorite
-'''
