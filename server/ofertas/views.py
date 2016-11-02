@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from functools import reduce
-
+from datetime import datetime
 from django.db.models import Q
 
 from django.views.decorators.csrf import csrf_exempt
@@ -106,7 +106,7 @@ class SendEmail(APIView):
             offer_user= offer.user.username
             offer_date= str(offer.activity_date)
 
-            # email al demandante            
+            # email al demandante
             subject_demand = "Se ha contactado con el creador de la oferta"
             message_demand = ('Has contactado con el usuario usuario ' + offer_user + ' sobre la oferta ' + offer_name +
                         ': \n' +
@@ -115,7 +115,7 @@ class SendEmail(APIView):
                         'Categoria: ' + offer_category +'\n'+
                         '\n\n Será contestado por el creador en cuanto pueda.\n Muchas gracias, un saludo.\n')
 
-            # email al ofertante            
+            # email al ofertante
             subject = "Un usuario quiere ponerse en contacto contigo"
             message = ('El usuario ' + sender_username + ' le ha enviado un mensaje ' +
                         ' en relación a la oferta con título "' + offer_name +
@@ -178,9 +178,11 @@ def offer_search(request):
 
     search = request.GET.get('search', None)
     categories = request.GET.get('category', None)
+    gt = request.GET.get('gt', None)
+    lt = request.GET.get('lt', None)
 
     qFilter = Q()
-    if(search):
+    if search:
         # description or offer_name contains search
         # split the search in words, then remove the
         # words with len < 4
@@ -199,7 +201,30 @@ def offer_search(request):
         # qFilter.add( Q(categories__iexact=categories), Q.AND)
         qFilter.add( Q(categories=categories), Q.AND)
 
-    results = Offer.objects.filter(qFilter).order_by('pub_date')
+    today = datetime.now()
+    results = Offer.objects.filter(qFilter)
+
+    try:
+        if gt:
+            if gt == "today":
+                results = results.filter(activity_date__gte=today)
+            else:
+                date = datetime.strptime(gt,'%Y-%m-%d')
+                results = results.filter(activity_date__gte=date)
+    except:
+        print("formato fecha gt erroneo")
+
+    try:
+        if lt:
+            if lt == "today":
+                results = results.filter(activity_date__lt=today)
+            else:
+                date = datetime.strptime(lt,'%Y-%m-%d')
+                results = results.filter(activity_date__lt=date)
+    except:
+        print("formato fecha lt erroneo")
+
+    results = results.order_by('-pub_date')
     serializer = OfferReadSerializer(results, many=True)
     return Response(serializer.data)
 
