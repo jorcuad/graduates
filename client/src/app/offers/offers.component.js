@@ -18,7 +18,7 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 		$scope.user = {}
 
 		Offers.get().then(function (answer) {
-			vm.offers = answer.data;
+			vm.myoffers = answer.data;
 		}, function(answer) {
 			Utils.toast(answer.status + " : Error al obtener las ofertas, recargue la página e intentelo de nuevo.")
 		})
@@ -26,6 +26,11 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 			vm.categories = answer.data;
 		}, function (answer) {
 			Utils.toast(answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
+		})
+		Offers.search("").then(function (answer) {
+			vm.offers = answer.data;
+		}, function(answer) {
+			Utils.toast(answer.status + " : Error al obtener las ofertas, recargue la página e intentelo de nuevo.")
 		})
 
 		$scope.offerform = {}

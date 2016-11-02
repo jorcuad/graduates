@@ -204,9 +204,13 @@ def offer_search(request):
         qCateFilter = reduce(lambda x, y: x & y, [Q(categories__icontains=cat) for cat in arrayCategories])
         qFilter.add(qCateFilter, Q.AND)
 
-    today = datetime.now()
+    # solo mostrar activas y no privadas
+    qFilter.add(Q(active=True), Q.AND)
+    qFilter.add(Q(private=False), Q.AND)
+
     results = Offer.objects.filter(qFilter)
 
+    today = datetime.now()
     try:
         if gt:
             if gt == "today":
