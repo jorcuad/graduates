@@ -6,7 +6,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from django.core.exceptions import FieldError
 from functools import reduce
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.db.models import Q
 
 from django.views.decorators.csrf import csrf_exempt
@@ -122,7 +122,6 @@ class SendEmail(APIView):
                         ' en relación a la oferta con título "' + offer_name +
                         '". \nPara contestar envie un email a: ' + email_sender +
                         '\n\nMENSAJE:\n' + message_user)
-            print("aaaaaaaaa"+ email_sender)
             if offer.maxContacts > 0 or offer.maxContacts == -1:
                 send_mail(subject, message, email_sender, [email_receiver], fail_silently=False)
                 send_mail(subject_demand, message_demand, email_sender, [email_sender], fail_silently=False)
@@ -178,7 +177,7 @@ def offer_search(request):
     """
 
     search = request.GET.get('search', None)
-    categories = request.GET.get('categories', None)
+    categories = request.GET.get('category', None)
     gt = request.GET.get('gt', None)
     lt = request.GET.get('lt', None)
     sort = request.GET.get('sort', None)
@@ -213,7 +212,7 @@ def offer_search(request):
             if gt == "today":
                 results = results.filter(activity_date__gte=today)
             else:
-                date = datetime.strptime(gt,'%Y-%m-%d')
+                date = datetime.strptime(gt,'%d/%m/%Y')
                 results = results.filter(activity_date__gte=date)
     except:
         print("formato fecha gt erroneo")
@@ -223,7 +222,7 @@ def offer_search(request):
             if lt == "today":
                 results = results.filter(activity_date__lte=today)
             else:
-                date = datetime.strptime(lt,'%Y-%m-%d')
+                date = datetime.strptime(lt,'%d/%m/%Y') + timedelta(days=1)
                 results = results.filter(activity_date__lte=date)
     except:
         print("formato fecha lt erroneo")

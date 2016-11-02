@@ -14,6 +14,7 @@ function loginCtrl (LoginService, Utils, Session, Panels, $route, $scope) {
 						.then( function(answer) {
 							if ( !Utils.isError(answer.status) ) {
 								Session.create(answer.data.token, answer.data.user) //FIXME poner token traido por server
+								Panels.closePanel()
 								$route.reload()
 								Utils.toast(answer.status + " : Usuario loggeado correctamente.", false)
 							} else {

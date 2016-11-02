@@ -20,7 +20,7 @@ angular.module('graduatesApp').service('Panels', function ($http, $mdPanel) {
 			clickOutsideToClose: true,
 			escapeToClose: true,
 			focusOnOpen: false,
-			zIndex: 2
+			zIndex: 999
 		};
 
 		$mdPanel.open(config);
