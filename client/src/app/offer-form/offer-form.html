@@ -96,7 +96,7 @@
 		<div layout="row">
 			<md-input-container style="margin-bottom: 0;">
 			<md-icon md-svg-src="../assets/icons/limitContacts.svg"></md-icon>
-				<input name="./icons/limitContacts" type="number" min="1" max="23" placeholder="Limite de Contactos" ng-model="$ctrl.form.maxContacts" required ng-show="!$ctrl.checkLimit()" ng-disabled="$ctrl.checkLimit()" ng-value="$ctrl.checkMaxContacts()"/>
+				<input name="limitContacts" type="number" min="1" max="23" placeholder="Limite de Contactos" ng-model="$ctrl.form.maxContacts" required ng-show="!$ctrl.checkLimit()" ng-disabled="$ctrl.checkLimit()" ng-value="$ctrl.checkMaxContacts()"/>
 
 				<div ng-messages="offer.limitContacts.$error" multiple md-auto-hide="true">
 					<div ng-message="required">
