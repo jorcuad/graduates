@@ -1,7 +1,9 @@
 {
   "name": "topics",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "moment": "^2.15.2"
+  },
   "scripts": {
     "test": "gulp test",
     "start": "gulp serve",

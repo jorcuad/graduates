@@ -14,7 +14,6 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 			.then(function (answer) { //TODO readable date
 
 				if(answer.data.detail != null){
-					console.log("no existe")
 					$location.path("/404")
 				}
 
