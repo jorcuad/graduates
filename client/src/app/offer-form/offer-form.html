@@ -65,8 +65,9 @@
 		<div layout="row">
 			<div layout="column" flex="45">
 				<h4>¿Cuándo va a ser?</h4>
-				<md-datepicker flex ng-model="$ctrl.form.activity_date" md-placeholder="Fecha de la oferta"
+				<md-datepicker flex ng-model="$ctrl.form.activity_date" ng-model-options="{ timezone: 'CET'}" md-placeholder="Fecha de la oferta"
 				md-min-date="$ctrl.minDate"></md-datepicker>
+				{{$ctrl.form.activity_date}}
 				<div layout="row">
 					<md-input-container style="margin-bottom: 0;">
 						<input name="hour" required type="number" min="0" max="23" placeholder="Hora" ng-model="$ctrl.activity_hour"/>

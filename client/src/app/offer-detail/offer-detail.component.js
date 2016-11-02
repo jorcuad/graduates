@@ -14,7 +14,6 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 			.then(function (answer) { //TODO readable date
 
 				if(answer.data.detail != null){
-					console.log("no existe")
 					$location.path("/404")
 				}
 
@@ -28,7 +27,6 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 			})
 
 		$scope.userlogged = Session.getUser();
-		console.log($scope.userlogged)
 	};
 
 	$scope.showConfirm = function(ev) {
@@ -92,10 +90,8 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 			if (offer.favorites.indexOf($scope.userlogged.id) != -1){
 				return true;
 			}
-			console.log("No favorute");
 			return false;
 		}
-		console.log("no favorute, vacio");
 		return false;
 	};
 	$scope.addFavorite = function (userId,offerId){
