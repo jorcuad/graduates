@@ -97,6 +97,7 @@
 				<md-switch style="margin-top: 0;" ng-model="$ctrl.form.public" ng-change="onChange2()" aria-label="Privada">
 				{{ $ctrl.form.public2 }}
 				</md-switch>
+				Si no está activa, nadie podrá ver tu oferta ni contactar hasta que la actives. Además si la oferta es privada solo podrás verla tu y las personas con las que compartas el enlace.
 			</div>
 		</div>
 		<div layout="row">
@@ -114,7 +115,7 @@
 				<md-checkbox name="withoutLimit" ng-model="$ctrl.withoutLimit" ng-checked="$ctrl.checkLimit()" ng-click="$ctrl.changeLimit()" >
 					Sin Limite
 				</md-checkbox>
-			</md-input-container>	
+			</md-input-container>
 		</div>
 		<div layout="row" layout-align="center center">
 			<md-button class="md-raised md-primary"  ng-click="$ctrl.create()" ng-show="!$ctrl.editar" type="submit">Crear Oferta</md-button>
