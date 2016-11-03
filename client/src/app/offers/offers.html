@@ -18,6 +18,15 @@
 						<md-list-item>
 							<md-button flex ng-disabled="true" class="md-raised md-primary">Debes estar registrado para crear tus ofertas</md-button>
 						</md-list-item>
+						<md-list-item>
+							<div layout-padding flex class="search_reminder" ng-show='$ctrl.search != "" || $ctrl.category.length > 0 || $ctrl.ini_date != undefined || $ctrl.fin_date != undefined'>
+								<span><b>Filtros aplicados: </b></span>
+								<span ng-show='$ctrl.search != ""''>Ofertas que contengan el texto: <b>{{$ctrl.search}}</b>.</span>
+								<span ng-show='$ctrl.category.length > 0'>Filtradas por categoría: <b>{{$ctrl.category[0].category_name}}</b>.</span>
+								<span ng-show='$ctrl.ini_date != undefined'>Empezando a buscar en <b>{{$ctrl.ini_date  | date: medium}}</b>.</span>
+								<span ng-show='$ctrl.fin_date != undefined'> Acabando la busqueda en <b>{{$ctrl.fin_date  | date: medium}}</b>.</span>
+							</div>
+						</md-list-item>
 						<md-list-item flex layout-align="center" ng-show="$ctrl.offers.length == 0">
 							<span layout-align="center" flex class="no-offers-text"> No hay ofertas que mostrar ≧△≦ </span>
 						</md-list-item>
@@ -33,6 +42,8 @@
 											{{offer.activity_date | date: medium}}
 											<md-icon md-font-icon="place">place</md-icon>
 											{{offer.place}}
+											<md-icon md-font-icon="place">category</md-icon>
+											{{offer.categories}}
 										</span>
 									</md-card-title-text>
 								</md-card-title>
@@ -51,6 +62,8 @@
 											{{offer.activity_date | date: medium}}
 											<md-icon md-font-icon="place">place</md-icon>
 											{{offer.place}}
+											<md-icon md-font-icon="place">category</md-icon>
+											{{offer.categories}}
 										</span>
 									</md-card-title-text>
 								</md-card-title>

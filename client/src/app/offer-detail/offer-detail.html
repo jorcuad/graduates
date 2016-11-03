@@ -66,7 +66,10 @@
 				<md-button ng-click="contact($event)" class="md-raised md-primary">Contactar</md-button>
 			</md-card-actions>
 			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
-				<md-button class="md-raised md-primary" href="#/edit/{{$ctrl.offer.id}}">Editar</md-button>
+				<md-button class="md-raised md-primary" href="#/edit/{{$ctrl.offer.id}}">
+				<md-icon class="material-icons">create</md-icon>
+				Editar
+				</md-button>
 			</md-card-actions>
 			<md-card-actions layout="row" layout-align="center" ng-show="!$ctrl.offer.active">
 				<md-button ng-disabled="true" class="md-raised md-primary">OFERTA CERRADA</md-button>

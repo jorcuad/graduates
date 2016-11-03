@@ -6,6 +6,11 @@
   background-color: #69F0AE;
 }
 
+.search_reminder {
+  color: #6D787D;
+  background-color: #dbf1fb;
+}
+
 .no-offers {
   background: url(../../assets/images/Logo.png) no-repeat; 
   background-size: contain;
