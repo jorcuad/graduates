@@ -3,6 +3,7 @@ function navbarCtrl ($scope,$route, $mdPanel, Utils, Session, Panels) {
 	var vm = this
 
 	vm.$onInit = function () {
+		console.log("onInit")
 
 		$scope.logged = Session.isLogged();
 
@@ -13,6 +14,9 @@ function navbarCtrl ($scope,$route, $mdPanel, Utils, Session, Panels) {
 
 	$scope.getLogged = function () {
 		$scope.logged = Session.isLogged();
+		if($scope.logged) {
+			$scope.username = Session.getUser()
+		}
 		return $scope.logged;
 	}
 
@@ -33,4 +37,3 @@ angular.module('graduatesApp').component('appNavbar', {
 	templateUrl: 'app/navbar/app-navbar.html',
 	controller: navbarCtrl
 });
-
