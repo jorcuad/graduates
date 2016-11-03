@@ -3,7 +3,6 @@
 
 function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session) {
 
-
 	var vm = this;
 	$scope.formData = {};
 	$scope.userlogged= {};
@@ -20,17 +19,17 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 		Offers.get().then(function (answer) {
 			vm.myoffers = answer.data;
 		}, function(answer) {
-			Utils.toast(answer.status + " : Error al obtener las ofertas, recargue la página e intentelo de nuevo.")
+			Utils.toast("Código "+ answer.status + " : Error al obtener las ofertas, recargue la página e intentelo de nuevo.")
 		})
 		Offers.getCategories().then(function (answer) {
 			vm.categories = answer.data;
 		}, function (answer) {
-			Utils.toast(answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
+			Utils.toast("Código "+ answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
 		})
 		Offers.search("").then(function (answer) {
 			vm.offers = answer.data;
 		}, function(answer) {
-			Utils.toast(answer.status + " : Error al obtener las ofertas, recargue la página e intentelo de nuevo.")
+			Utils.toast("Código "+ answer.status + " : Error al obtener las ofertas, recargue la página e intentelo de nuevo.")
 		})
 
 		$scope.offerform = {}
@@ -148,7 +147,7 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 		Offers.search(query).then(function (answer) {
 			vm.offers = answer.data;
 		}, function(answer) {
-			Utils.toast(answer.status + " : Error al buscar ofertas, recargue la página e intentelo de nuevo.", true)
+			Utils.toast("Código "+ answer.status + " : Error al buscar ofertas, recargue la página e intentelo de nuevo.", true)
 		})
 	};
 

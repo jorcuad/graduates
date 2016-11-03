@@ -16,7 +16,7 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 		OfferForm.getCategories().then(function (answer) {
 			vm.categories = answer.data;
 		}, function (answer) {
-			Utils.toast(answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
+			Utils.toast("Código "+ answer.status + " : Error al obtener las categorías, recargue la página e intentelo de nuevo.", true)
 		})
 
 		OfferDetailService.get($routeParams.orderId)
@@ -75,9 +75,10 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 				}
 
 			}, function (answer) {
-				Utils.toast(answer.status + " : Error al obtener la información de la oferta, recargue la página.", true)
+				Utils.toast("Código "+ answer.status + " : Error al obtener la información de la oferta, recargue la página.", true)
 			})
 	};
+	
   	$scope.onChange = function() {
   		if(vm.form.active == true){
 			vm.form.active2 = "Activa";
@@ -93,6 +94,7 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 			vm.form.public2  = "Privada";
   		}
   	};
+
 	vm.create = function(){
 		if(check_form(vm.form) && check_time(vm.activity_hour, vm.activity_min)) {
 
@@ -102,9 +104,9 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 
 			OfferForm.create(vm.form).then(function (answer) {
 				$location.path("/")
-				Utils.toast(answer.status + " : Offerta creada correctamente.", false)
+				Utils.toast("Oferta creada correctamente.", false)
 			}, function(answer) {
-				Utils.toast(answer.status + " : Error al crear la oferta.", true)
+				Utils.toast("Código "+ answer.status + " : Error al crear la oferta.", true)
 			});
 		} else {
 			Utils.toast("Error : El formato de los datos no es correcto.", true)
@@ -117,9 +119,9 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 			//vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour, vm.activity_min)
 			OfferForm.update(vm.form).then(function (answer) {
 				$location.path("/")
-				Utils.toast(answer.status + " : Oferta actualizada correctamente.", false)
+				Utils.toast("Oferta actualizada correctamente.", false)
 			}, function(answer) {
-				Utils.toast(answer.status + " : Error al actualizar la oferta.", true)
+				Utils.toast("Código "+ answer.status + " : Error al actualizar la oferta.", true)
 			});
 		} else {
 			Utils.toast("Error : El formato de los datos no es correcto.", true)
@@ -133,9 +135,11 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 			return false
 		}
 	}
+
 	vm.checkLimit = function(){
 		return vm.withoutLimit;
 	}
+
 	vm.changeLimit = function(){
 		vm.withoutLimit = !vm.withoutLimit;
 		if(vm.withoutLimit){
@@ -147,6 +151,7 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 			vm.form.maxContacts=1
 		}
 	}
+
 	vm.checkMaxContacts = function(){
 		return vm.form.maxContacts;
 	}
@@ -159,10 +164,6 @@ angular.module('graduatesApp').component('offerForm', {
 
 function check_form(form) {
 	var is_ok = true
-	//Para no poner limite
-	//if(form.maxContacts ==""){
-	//	form.maxContacts = -1;
-	//}
 	for(var field in form) {
 		if( String(form[field]) == "" || angular.isUndefined(String(form[field]))) {
 			is_ok = false
@@ -185,10 +186,3 @@ function check_time(hour, min) {
 	}
 	return true
 }
-
-//function add_time(date, hour, min) { //FIXME
-//	var hour_sec = 3600000
-//	var min_sec = 60000
-//	date.setHours(date.getHours()+hour)
-//	return new Date(date.getTime() + (min * min_sec))
-//}

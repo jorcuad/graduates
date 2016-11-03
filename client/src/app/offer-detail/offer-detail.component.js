@@ -35,7 +35,7 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 					vm.stringLimit = vm.offer.maxContacts
 				}
 			}, function (answer) {
-				Utils.toast(answer.status + " : Error al obtener la información de la oferta, recargue la página.", true)
+				Utils.toast("Código "+ answer.status + " : Error al obtener la información de la oferta, recargue la página.", true)
 			})
 		$scope.userlogged = Session.getUser();
 			
@@ -55,9 +55,9 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 			OfferDetailService.deleteOffer($routeParams.orderId)
 				.then(function (answer) { //TODO readable date
 					$location.path('/')
-					Utils.toast(answer.status + ": La oferta ha sido borrada correctamente.", false)
+					Utils.toast("La oferta ha sido borrada correctamente.", false)
 				}, function (answer) {
-					Utils.toast(answer.status + ": La oferta no ha podido ser borrada, vuelva a intentarlo", true)
+					Utils.toast("Código "+ answer.status + ": La oferta no ha podido ser borrada, vuelva a intentarlo", true)
 				});
 		})
 	};
@@ -108,11 +108,11 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 		OfferDetailService.changeStateOffer($scope.offer)
 		.then(function(answer) {
 			if(offer.active)
-				Utils.toast(answer.status+": Oferta abierta.");
+				Utils.toast("El estado de la oferta ha cambiado a abierta.");
 			else
-				Utils.toast(answer.status+": Oferta cerrada.");
+				Utils.toast("El estado de la oferta ha cambiado a cerrada.");
 		}, function(answer) {
-			Utils.toast(answer.status + ": Ha habido un problema cambiando el estado de la oferta.");
+			Utils.toast("Código "+ answer.status + ": Ha habido un problema cambiando el estado de la oferta.");
 		});
 		
 
@@ -132,9 +132,9 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 		$mdDialog.show(confirm).then(function(result) {
 			OfferDetailService.sendMail($scope.offer.id, result)
 			.then(function(result) {
-				Utils.toast(result.status + ": Mensaje enviado correctamente.");
+				Utils.toast("Hemos enviado el mensaje al creador de la oferta.");
 			}, function(result) {
-				Utils.toast(result.status + ": El mensaje no ha podido enviarse.");
+				Utils.toast("Código "+ result.status + ": El mensaje no ha podido enviarse.");
 			})	
 		});
 	};

@@ -9,6 +9,7 @@
       <span>Spice People</span>
     </h2>
     <span flex></span>
+    <p ng-show="getLogged()">¡Bienvenido, {{username.username}}!</p>
     <md-button aria-label="Salir" ng-show="getLogged()" ng-click="logout()">
       <md-icon style="margin-right: 5px" class="material-icons">&#xE8AC;</md-icon>
       Salir
