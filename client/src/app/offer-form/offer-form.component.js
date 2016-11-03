@@ -6,8 +6,6 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 	vm.$onInit = function () {
 		vm.categories = ""
 		vm.minDate = new Date();
-
-		//FIXME recuperar horas en caso de que sea edicion
 		vm.offer={}
 		vm.activity_hour = ""
 		vm.activity_min = ""
@@ -33,7 +31,7 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 					vm.offer.pub_date = dateReadable;
 					vm.activity_hour= date_activity.getHours();
 					vm.activity_min = date_activity.getMinutes();
-					console.log(vm.offer);
+
 					if(vm.offer.maxContacts == -1){
 						vm.withoutLimit= true;
 						vm.disableInput=true;
@@ -66,7 +64,7 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 				}else{
 					vm.editar = false;
 					vm.form = {"user":"","active":"", "public":"","activity_date":"",
-					"offer_name":"", "description":"", "place":"", "categories":"Categoría"}
+					"offer_name":"", "description":"", "place":"", "categories":"Categoría", "maxContacts":""}
 					vm.form.active = true;
 					vm.form.public = true;
 					vm.form.user = Session.getUser().id
@@ -79,28 +77,26 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 			})
 	};
 	
-  	$scope.onChange = function() {
-  		if(vm.form.active == true){
+	$scope.onChange = function() {
+		if(vm.form.active == true){
 			vm.form.active2 = "Activa";
-  		}else{
+		}else{
 			vm.form.active2 = "Inactiva";
-  		}
+		}
 	};
  
-  	$scope.onChange2 = function() {
-  		if(vm.form.public == true){
+	$scope.onChange2 = function() {
+		if(vm.form.public == true){
 			vm.form.public2  = "Pública";
-  		}else{
+		}else{
 			vm.form.public2  = "Privada";
-  		}
-  	};
+		}
+	};
 
 	vm.create = function(){
 		if(check_form(vm.form) && check_time(vm.activity_hour, vm.activity_min)) {
 
-			//vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour-1, vm.activity_min)
 			vm.form.activity_date.setHours(vm.activity_hour,vm.activity_min);
-			//vm.form.activity_date.setMinutes(vm.activity_min);
 
 			OfferForm.create(vm.form).then(function (answer) {
 				$location.path("/")
@@ -116,7 +112,6 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 	vm.update = function(){
 		if(check_form(vm.form) && check_time(vm.activity_hour, vm.activity_min)) {
 
-			//vm.form.activity_date = add_time(vm.form.activity_date, vm.activity_hour, vm.activity_min)
 			OfferForm.update(vm.form).then(function (answer) {
 				$location.path("/")
 				Utils.toast("Oferta actualizada correctamente.", false)

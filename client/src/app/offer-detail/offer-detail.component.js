@@ -38,8 +38,6 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 				Utils.toast("Código "+ answer.status + " : Error al obtener la información de la oferta, recargue la página.", true)
 			})
 		$scope.userlogged = Session.getUser();
-			
-		
 	};
 
 	$scope.showConfirm = function(ev) {
@@ -66,25 +64,20 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 		$scope.offer = offer;
 		return  offer.active;
 	};
-/*	$scope.shareLink = function (){
-		alert(window.location.href)
-	};
 
-*/  $scope.shareLink = function(ev) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    // Modal dialogs should fully cover application
-    // to prevent interaction outside of dialog
-    $mdDialog.show(
-      $mdDialog.alert()
-        .parent(angular.element(document.querySelector('#popupContainer')))
-        .clickOutsideToClose(true)
-        .title('Copia la siguiente URL para compartir esta oferta')
-        .textContent(window.location.href)
-        .ariaLabel('Alert Dialog Demo')
-        .ok('Cerrar')
-        .targetEvent(ev)
-    );
-  };
+
+	$scope.shareLink = function(ev) {
+		$mdDialog.show(
+			$mdDialog.alert()
+			.parent(angular.element(document.querySelector('#popupContainer')))
+			.clickOutsideToClose(true)
+			.title('Copia la siguiente URL para compartir esta oferta')
+			.textContent(window.location.href)
+			.ariaLabel('Alert Dialog Demo')
+			.ok('Cerrar')
+			.targetEvent(ev)
+		);
+	};
 
 	$scope.isFavorite = function (offer){
 		$scope.offer = offer;
@@ -97,12 +90,15 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 		}
 		return false;
 	};
+
 	$scope.addFavorite = function (userId,offerId){
 		OfferDetailService.addFavorite(userId,offerId);
 	}
+
 	$scope.deleteFavorite = function (userId,offerId){
 		OfferDetailService.deleteFavorite(userId,offerId);
 	}
+
 	$scope.changeStateOffer = function (offer){
 		$scope.offer.active = !offer.active;
 		OfferDetailService.changeStateOffer($scope.offer)
@@ -114,8 +110,6 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 		}, function(answer) {
 			Utils.toast("Código "+ answer.status + ": Ha habido un problema cambiando el estado de la oferta.");
 		});
-		
-
 	};
 
 	$scope.contact = function(ev) {
