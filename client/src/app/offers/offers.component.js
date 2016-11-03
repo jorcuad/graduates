@@ -146,6 +146,32 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 			Utils.toast(answer.status + " : Error al buscar ofertas, recargue la página e intentelo de nuevo.", true)
 		})
 	};
+
+
+	/* Loupe animation in responsive view */
+	$scope.load = function() {
+		window.setTimeout(function(){
+				shake()
+		}, 3000);
+	};
+
+	$scope.load();
+
+	function shake() {
+		var div = document.getElementById('lupa');
+		var interval = 100;
+		var distance = 10;
+		var times = 4;
+
+		$(div).css('position', 'relative');
+
+		for (var iter = 0; iter < (times + 1) ; iter++) {
+			$(div).animate({
+				left: ((iter % 2 == 0 ? distance : distance * -1))
+			}, interval);
+		}
+		$(div).animate({ left: 0 }, interval);
+	}
 }
 
 
@@ -154,3 +180,6 @@ angular.module('graduatesApp').component('offers', {
 	templateUrl: 'app/offers/offers.html',
 	controller: offersCtrl
 });
+
+
+
