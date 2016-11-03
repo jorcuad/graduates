@@ -63,7 +63,7 @@
 		<div layout="row">
 			<div layout="column" flex="45">
 				<h4>¿Cuándo va a ser?</h4>
-				<md-datepicker flex ng-model="$ctrl.form.activity_date" ng-model-options="{ timezone: 'CET'}" md-placeholder="Fecha de la oferta"
+				<md-datepicker flex ng-model="$ctrl.form.activity_date" ng-model-options="{timezone: '+0100'}" md-placeholder="Fecha de la oferta"
 				md-min-date="$ctrl.minDate"></md-datepicker>
 				<div layout="row">
 					<md-input-container style="margin-bottom: 0;">
@@ -97,7 +97,12 @@
 				<md-switch style="margin-top: 0;" ng-model="$ctrl.form.public" ng-change="onChange2()" aria-label="Privada">
 				{{ $ctrl.form.public2 }}
 				</md-switch>
-				Si no está activa, nadie podrá ver tu oferta ni contactar hasta que la actives. Además si la oferta es privada solo podrás verla tu y las personas con las que compartas el enlace.
+				<p class="md-caption bold">
+					*Activa: la oferta estará disponible para todos los usuarios.<br>
+					*Inactiva: nadie podrá ver tu oferta ni contactar hasta que la actives.<br>
+					*Pública: la oferta podrá ser encontrada por cualquier usuario.<br>
+					*Privada: solo los usuarios con el enlace de la oferta podrán verla.
+				</p>
 			</div>
 		</div>
 		<div layout="row">
