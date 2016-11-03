@@ -3,8 +3,8 @@
 }
 
 .header {
-  /*background: url(http://layout1.eurosport.com/i/v8/match/backgrounds/medium/background_v8_s22.jpg) no-repeat; 
-  background-size: cover; 
+  /*background: url(http://layout1.eurosport.com/i/v8/match/backgrounds/medium/background_v8_s22.jpg) no-repeat;
+  background-size: cover;
   background-position: center;*/
   background-color: #69F0AE;
 }
@@ -27,14 +27,14 @@
 }
 
 .filter_icon {
-  height: 49px; 
+  height: 49px;
   border-bottom: 1px solid #DCDCDC;
   border-left: 1px solid #DCDCDC;
   color: rgba(0, 0, 0, 0.5);
 }
 
 .filter {
-  height: 49px; 
+  height: 49px;
   /*border-bottom: 1px solid #DCDCDC;*/
   color: rgba(0, 0, 0, 0.5);
 }
@@ -61,7 +61,6 @@ md-input-container.md-default-theme .md-input, md-input-container .md-input {
   margin:0;
 }
 
-<<<<<<< HEAD
 .colorsdemoBasicUsage p.footnote {
   font-size: 0.85em;
   margin: 30px;
@@ -71,7 +70,6 @@ md-input-container.md-default-theme .md-input, md-input-container .md-input {
 
 .disable {
   background-color: rgba(205, 205, 205, 0.45); }
-=======
 .no_border {
   border: none !important;
 }
@@ -83,4 +81,3 @@ md-input-container.md-default-theme .md-input, md-input-container .md-input {
 .loupe {
 
 }
->>>>>>> saraMergea
