@@ -112,7 +112,11 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 		});
 	};
 	$scope.allowContact = function () {
-		return (userlogged.id!=null && $ctrl.offer.user.id != userlogged.id && $ctrl.limit && $ctrl.offer.active)
+		return ($scope.userlogged.id != null && vm.offer.user.id != $scope.userlogged.id && vm.limit && vm.offer.active)
+	}
+
+	$scope.showRegisterMessage = function () {
+		return !($scope.userlogged.id != null)
 	}
 
 	$scope.contact = function(ev) {
