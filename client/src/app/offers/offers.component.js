@@ -158,7 +158,14 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 	$scope.load();
 
 	function shake() {
-		var div = document.getElementById('lupa');
+		var div = document.getElementsByClassName('loupe');
+
+		if(Session.isLogged()){
+			div = div[1]
+		} else {
+			div = div[0]
+		}
+
 		var interval = 100;
 		var distance = 10;
 		var times = 4;
