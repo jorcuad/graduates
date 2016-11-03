@@ -23,3 +23,12 @@ md-toast.md-success-toast-theme .md-toast-content {
 md-toast.md-error-toast-theme .md-toast-content {
     background-color: red;
 }
+
+footer {
+    padding-left: 50px;
+    padding-top: 0;
+}
+
+.no-margin {
+    margin:0;
+}
