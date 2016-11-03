@@ -57,8 +57,10 @@ angular.module('graduatesApp').service('OfferDetailService', function ($http, $r
 		var json = {"offer":offerId,"message":message}
 		return $http.post(sendMailEndpoint,json)
 			.then(function(result) {
+				$route.reload();
 				return result;
 			}, function (result) {
+				$route.reload();
 				return result;
 			});
 		}

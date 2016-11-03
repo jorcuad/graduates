@@ -1,51 +1,67 @@
-.buttondemoBasicUsage section {
-  background: #f7f7f7;
-  border-radius: 3px;
-  text-align: center;
-  margin: 1em;
-  position: relative !important;
-  padding-bottom: 10px; }
+.offers_body {
+  min-height: 550px;
+}
 
-.buttondemoBasicUsage md-content {
-  margin-right: 7px; }
+.header {
+  /*background: url(http://layout1.eurosport.com/i/v8/match/backgrounds/medium/background_v8_s22.jpg) no-repeat; 
+  background-size: cover; 
+  background-position: center;*/
+  background-color: #69F0AE;
+}
 
-.buttondemoBasicUsage section .md-button {
-  margin-top: 16px;
-  margin-bottom: 16px; }
+.trasparent {
+  background-color:rgba(0, 0, 0, 0);
+}
 
-.buttondemoBasicUsage .label {
-  position: absolute;
-  bottom: 5px;
-  left: 7px;
-  font-size: 14px;
-  opacity: 0.54; }
+.search_bar{
+  margin-top: 50px;
+  padding-left:25px;
+}
 
+.search_bar md-input-container {
+  margin-bottom: 0
+}
 
+.visible{
+  color: rgba(0, 0, 0, 0.5);
+}
 
+.filter_icon {
+  height: 49px; 
+  border-bottom: 1px solid #DCDCDC;
+  border-left: 1px solid #DCDCDC;
+  color: rgba(0, 0, 0, 0.5);
+}
 
-.colorsdemoBasicUsage .card-media {
-  margin-right: 16px;
-  border-radius: 50%;
-  overflow: hidden; }
+.filter {
+  height: 49px; 
+  /*border-bottom: 1px solid #DCDCDC;*/
+  color: rgba(0, 0, 0, 0.5);
+}
 
-.colorsdemoBasicUsage .md-subhead.description {
-  color: rgba(255, 255, 255, 0.7); }
+.filter md-select {
+  margin-left: 10px;
+}
 
-.colorsdemoBasicUsage .card-media md-icon {
-  width: 40px;
-  height: 40px;
-  color: rgba(255, 255, 255, 0.87); }
+md-input-container.md-default-theme .md-input, md-input-container .md-input {
+  border-color: rgba(0,0,0,0.2);
+}
 
-.colorsdemoBasicUsage span.card-title {
-  padding-left: 15px;
-  margin-top: 20px; }
+.white_layer {
+  /*background-color: rgba(255,255,255,0.3)*/
+}
 
-.colorsdemoBasicUsage code.css {
-  background-color: #fffcc2; }
+.filter_header {
+  margin:0;
+  margin-top: 15px;
+  color: rgba(0, 0, 0, 0.5);
+}
 
-.colorsdemoBasicUsage p.footnote code {
-  font-size: 0.85em; }
+.filter_input{
+  margin:0;
+}
 
+<<<<<<< HEAD
 .colorsdemoBasicUsage p.footnote {
   font-size: 0.85em;
   margin: 30px;
@@ -55,3 +71,16 @@
 
 .disable {
   background-color: rgba(205, 205, 205, 0.45); }
+=======
+.no_border {
+  border: none !important;
+}
+
+.sidenav-color {
+  background-color: #dbf1fb
+}
+
+.loupe {
+
+}
+>>>>>>> saraMergea

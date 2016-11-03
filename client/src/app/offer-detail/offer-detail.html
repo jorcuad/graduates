@@ -3,7 +3,7 @@
 		<md-card>
 			<md-card-header>
 				<md-card-avatar>
-					<img src="https://material.angularjs.org/latest/img/logo.svg"/>
+					<img src="../assets/icons/activity.svg"/>
 				</md-card-avatar>
 				<md-card-header-text>
 					<span class="md-title">{{$ctrl.offer.offer_name}}</span>
@@ -43,17 +43,33 @@
 			<md-divider></md-divider>
 			<md-card-content>
 				<div layout-padding>
-				<p><md-icon md-font-icon="event" style="margin-right:10px">event</md-icon> 	<b>Fecha:</b> {{$ctrl.offer.activity_date | date: medium}}</p>
-				<p><md-icon md-font-icon="alarm" style="margin-right:10px">alarm</md-icon> 	<b>Hora:</b> {{$ctrl.offer.activity_date | date: 'HH:mm'}}</p>
-				<p><md-icon md-font-icon="place" style="margin-right:10px">place</md-icon>	<b>Lugar:</b> {{$ctrl.offer.place}}</p>
-				<p><md-icon md-font-icon="place" style="margin-right:10px">category</md-icon>	<b>Categorías:</b> {{$ctrl.offer.categories}}</p>
+					<p>
+						<md-icon md-font-icon="event" style="margin-right:10px">event</md-icon> 	<b>Fecha:</b> {{$ctrl.offer.activity_date | date: medium}}
+					</p>
+					<p>
+						<md-icon md-font-icon="alarm" style="margin-right:10px">alarm</md-icon> 	<b>Hora:</b> {{$ctrl.offer.activity_date | date: 'HH:mm'}}
+					</p>
+					<p>
+						<md-icon md-font-icon="place" style="margin-right:10px">place</md-icon>	<b>Lugar:</b> {{$ctrl.offer.place}}
+					</p>
+					<p>
+						<md-icon md-font-icon="category" style="margin-right:10px">category</md-icon>	<b>Categorías:</b> {{$ctrl.offer.categories}}
+					</p>
+					<p>
+						<md-icon md-svg-src="../assets/icons/limitContacts.svg" style="margin-right:10px"></md-icon> <b>Nº de contactos disponibles:</b> {{$ctrl.stringLimit}}
+					</p>
+					<p> Sólo se podrá contactar con el creador si este contador no está a 0.</p>
 				</div>
 			</md-card-content>
-			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id != userlogged.id">
+			
+			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id != userlogged.id && $ctrl.limit && userlogged!=null && $ctrl.offer.active">
 				<md-button ng-click="contact($event)" class="md-raised md-primary">Contactar</md-button>
 			</md-card-actions>
 			<md-card-actions layout="row" layout-align="center" ng-show="$ctrl.offer.user.id == userlogged.id">
 				<md-button class="md-raised md-primary" href="#/edit/{{$ctrl.offer.id}}">Editar</md-button>
+			</md-card-actions>
+			<md-card-actions layout="row" layout-align="center" ng-show="!$ctrl.offer.active">
+				<md-button ng-disabled="true" class="md-raised md-primary">OFERTA CERRADA</md-button>
 			</md-card-actions>
 		</md-card>
 	</md-content>

@@ -21,7 +21,7 @@ function navbarCtrl ($scope,$route, $mdPanel, Utils, Session, Panels) {
 		$scope.logged = Session.isLogged();
 		$route.reload();
 
-		Utils.toast("¡¡HASTA PRONTO!!");
+		Utils.toast("Sesión cerrada ¡¡HASTA PRONTO!!");
 	}
 
 	$scope.showLogin = function (ev) {

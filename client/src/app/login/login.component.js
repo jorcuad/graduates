@@ -13,15 +13,16 @@ function loginCtrl (LoginService, Utils, Session, Panels, $route, $scope) {
 			LoginService.login({"username":vm.nick, "password":vm.password})
 						.then( function(answer) {
 							if ( !Utils.isError(answer.status) ) {
-								Session.create(answer.data.token, answer.data.user) //FIXME poner token traido por server
+								Session.create(answer.data.token, answer.data.user)
+								Panels.closePanel()
 								$route.reload()
-								Utils.toast(answer.status + " : Usuario loggeado correctamente.", false)
+								Utils.toast("Bienvenido, te has loggeado como " + answer.data.user.username, false)
 							} else {
-								Utils.toast(answer.status + " : Datos de login incorrectos.", true)
+								Utils.toast("Código: "+ answer.status + " : Datos de login incorrectos.", true)
 							}
 							
 						}, function(answer) {
-							Utils.toast(answer.status + " : Datos de login incorrectos.", true)
+							Utils.toast("Código: "+ answer.status + " : Datos de login incorrectos.", true)
 						});
 		} else {
 			Utils.toast("Error : Datos de login incorrectos.", true)
