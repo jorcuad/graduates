@@ -234,7 +234,7 @@ def offer_search(request):
     try:
         Offer._meta.get_field(sort)
     except:
-        sort = 'pub_date'
+        sort = 'activity_date'
 
     results = results.order_by('-'+sort)
 
