@@ -22,13 +22,31 @@
 							<span layout-align="center" flex class="no-offers-text"> No hay ofertas que mostrar ≧△≦ </span>
 						</md-list-item>
 						<md-list-item ng-repeat="offer in $ctrl.offers">
-							<md-card flex layout-padding layout="row">
+							<md-card class="disable" ng-if="display(offer.activity_date)" flex layout-padding layout="row">
 								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
 											{{offer.offer_name}}
 										</span>
-										<span class="md-subhead">
+										<span class="md-subhead" >
+											<md-icon md-font-icon="event">event</md-icon>
+											{{offer.activity_date | date: medium}}
+											<md-icon md-font-icon="place">place</md-icon>
+											{{offer.place}}
+										</span>
+									</md-card-title-text>
+								</md-card-title>
+								<md-card-actions layout="column" layout-align="end center">
+									<md-button  ng-disabled="true" href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
+								</md-card-actions>
+							</md-card>
+							<md-card ng-if="!display(offer.activity_date)" flex layout-padding layout="row"  >
+								<md-card-title layout="column">
+									<md-card-title-text>
+										<span class="md-headline">
+											{{offer.offer_name}}
+										</span>
+										<span class="md-subhead" >
 											<md-icon md-font-icon="event">event</md-icon>
 											{{offer.activity_date | date: medium}}
 											<md-icon md-font-icon="place">place</md-icon>
@@ -40,6 +58,7 @@
 									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
 							</md-card>
+
 						</md-list-item>
 					</md-list>
 				</md-content>
@@ -109,8 +128,8 @@
 						<md-list-item>
 							<md-button flex md-colors="{background: 'green'}" class="md-raised md-primary" href="#/new-offer">Crea tu propia oferta</md-button>
 						</md-list-item>
-						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id: '!' + user.id } }">
-							<md-card flex layout-padding layout="row">
+						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id: '!' + user.id } }" >
+							<md-card flex layout-padding layout="row" class="disable" ng-if="display(offer.activity_date)">
 								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
@@ -127,6 +146,26 @@
 									</md-card-title-text>
 								</md-card-title>
 								<md-card-actions layout="column" layout-align="end center">
+									<md-button ng-disabled="true"  href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
+								</md-card-actions>
+							</md-card>
+							<md-card flex layout-padding layout="row" ng-if="!display(offer.activity_date)" >
+								<md-card-title layout="column">
+									<md-card-title-text>
+										<span class="md-headline">
+											{{offer.offer_name}}
+										</span>
+										<span class="md-subhead">
+											<md-icon md-font-icon="event">event</md-icon>
+											{{offer.activity_date | date: medium}}
+											<md-icon md-font-icon="place">place</md-icon>
+											{{offer.place}}
+											<md-icon md-font-icon="place">category</md-icon>
+											{{offer.categories}}
+										</span>
+									</md-card-title-text>
+								</md-card-title>
+								<md-card-actions layout="column" layout-alingn="end center">
 									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
 							</md-card>
@@ -167,7 +206,6 @@
 										</span>
 									</md-card-title-text>
 								</md-card-title>
-
 								<md-card-actions layout="column" layout-align="end center">
 									<md-button href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
@@ -197,7 +235,7 @@
 											<md-icon md-font-icon="place">place</md-icon>
 											{{fav.place}}
 											<md-icon md-font-icon="place">category</md-icon>
-											{{offer.categories}}
+											{{fav.categories}}
 										</span>
 									</md-card-title-text>
 								</md-card-title>
@@ -205,6 +243,7 @@
 									<md-button href="#/detail/{{fav.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
 							</md-card>
+
 						</md-list-item>
 					</md-list>
 				</md-content>
