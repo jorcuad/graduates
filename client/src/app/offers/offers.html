@@ -6,9 +6,20 @@
 		<md-tabs md-dynamic-height md-border-bottom flex layout="column">
 			<md-tab label="Ofertas">
 				<md-content layout-padding flex="100">
-					<md-list flex="100">
+					<md-list flex="100" class="no-offers" ng-show="$ctrl.offers.length == 0">
 						<md-list-item>
 							<md-button flex ng-disabled="true" class="md-raised md-primary">Debes estar registrado para crear tus ofertas</md-button>
+						</md-list-item>
+						<md-list-item flex layout-align="center">
+							<span layout-align="center" flex class="no-offers-text"> No hay ofertas que mostrar ≧△≦</span>
+						</md-list-item>
+					</md-list>
+					<md-list flex="100" ng-show="$ctrl.offers.length != 0">
+						<md-list-item>
+							<md-button flex ng-disabled="true" class="md-raised md-primary">Debes estar registrado para crear tus ofertas</md-button>
+						</md-list-item>
+						<md-list-item flex layout-align="center" ng-show="$ctrl.offers.length == 0">
+							<span layout-align="center" flex class="no-offers-text"> No hay ofertas que mostrar ≧△≦ </span>
 						</md-list-item>
 						<md-list-item ng-repeat="offer in $ctrl.offers">
 							<md-card flex layout-padding layout="row">
@@ -85,8 +96,16 @@
 	<md-content layout="row"  class="offers_body">
 		<md-tabs md-dynamic-height md-border-bottom flex layout="column">
 			<md-tab label="Ofertas">
-				<md-content layout-padding flex="100">
-					<md-list flex="100">
+				<md-content layout-padding flex="100" >
+					<md-list flex="100" class="no-offers" ng-show="$ctrl.offers.length == 0 || isAllMine()">
+						<md-list-item>
+							<md-button flex md-colors="{background: 'green'}" class="md-raised md-primary" href="#/new-offer">Crea tu propia oferta</md-button>
+						</md-list-item>
+						<md-list-item flex layout-align="center">
+							<span layout-align="center" flex class="no-offers-text"> No hay ofertas que mostrar ≧△≦</span>
+						</md-list-item>
+					</md-list>
+					<md-list flex="100" ng-show="$ctrl.offers.length != 0 && !isAllMine()">
 						<md-list-item>
 							<md-button flex md-colors="{background: 'green'}" class="md-raised md-primary" href="#/new-offer">Crea tu propia oferta</md-button>
 						</md-list-item>
@@ -117,7 +136,18 @@
 			</md-tab>
 			<md-tab label="Creadas por mi" >
 				<md-content layout-padding flex="100">
-					<md-list flex="100">
+					<md-list flex="100" class="no-offers" ng-show="!isMine()">
+						<md-list-item>
+							<md-button flex md-colors="{background: 'green'}" class="md-raised md-primary" href="#/new-offer">Crea tu propia oferta</md-button>
+						</md-list-item>
+						<md-list-item flex layout-align="center">
+							<span layout-align="center" flex class="no-offers-text"> ¡Crea tu primera oferta! (>‿◠)✌</span>
+						</md-list-item>
+					</md-list>
+					<md-list flex="100" ng-show="isMine()">
+						<md-list-item>
+							<md-button flex md-colors="{background: 'green'}" class="md-raised md-primary" href="#/new-offer">Crea tu propia oferta</md-button>
+						</md-list-item>
 						<md-list-item ng-repeat="offer in $ctrl.myoffers | filter:{ user:{ id:user.id } }">
 							<md-card flex layout-padding layout="row">
 								<md-card-title layout="column">
@@ -126,22 +156,6 @@
 											<div layout="column" flex="70">
 												{{offer.offer_name}}
 											</div>
-											<!--div layout="column" flex="30">
-												<md-card-actions layout="row" layout-align="end start">
-												<md-button ng-click="changeStateOffer(offer)" ng-show="getStateOffer(offer)" class="md-icon-button" aria-label="Lock">
-													<md-icon md-svg-icon="../assets/icons/lock.svg"></md-icon>
-												</md-button>
-												<md-button ng-click="changeStateOffer(offer)" ng-show="!getStateOffer(offer)" class="md-icon-button" aria-label="Open">
-													<md-icon md-svg-icon="../assets/icons/open.svg"></md-icon>
-												</md-button>
-												<md-button class="md-icon-button" aria-label="Edit" href="#/edit/{{offer.id}}">
-													<md-icon md-svg-icon="../assets/icons/edit.svg"></md-icon>
-												</md-button>
-												<md-button class="md-icon-button" aria-label="Delete">
-													<md-icon md-svg-icon="../assets/icons/delete.svg"></md-icon>
-												</md-button>
-												</md-card-actions>
-											</div-->
 										</span>
 										<span class="md-subhead">
 											<md-icon md-font-icon="event">event</md-icon>
@@ -164,7 +178,12 @@
 			</md-tab>
 			<md-tab label="Favoritos" >
 				<md-content layout-padding flex="100">
-					<md-list flex="100">
+					<md-list flex="100" class="no-offers" ng-show="$ctrl.favorites.length == 0">
+						<md-list-item flex layout-align="center" ng-show="$ctrl.favorites.length == 0">
+							<span layout-align="center" flex class="no-offers-text"> Aún no tienes ninguna actividad favorita (^_^;)</span>
+						</md-list-item>
+					</md-list>
+					<md-list flex="100" ng-show="$ctrl.favorites.length != 0">
 						<md-list-item ng-repeat="fav in $ctrl.favorites">
 							<md-card flex layout-padding layout="row">
 								<md-card-title layout="column">

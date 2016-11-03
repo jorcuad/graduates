@@ -183,6 +183,27 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 		}
 		$(div).animate({ left: 0 }, interval);
 	}
+
+	/*Empty list methods*/
+	$scope.isMine = function () {
+		var isOk = false
+		vm.offers.forEach( function (element) {
+			if(element.user.username == $scope.user.username) {
+				isOk = true
+			}
+		})
+		return isOk
+	}
+
+	$scope.isAllMine = function () {
+		var isOk = true
+		vm.offers.forEach( function (element) {
+			if(element.user.username != $scope.user.username) {
+				isOk = false
+			}
+		})
+		return isOk
+	}
 }
 
 
