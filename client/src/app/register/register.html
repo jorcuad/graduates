@@ -11,7 +11,6 @@
 			<div layout="column" flex="50">
 				<md-input-container flex >
 					<md-icon>face</md-icon>
-					<md-icon md-font-icon="nombre">nombre</md-icon>
 					<input name="nombre" required type="text" placeholder="Nombre" ng-pattern="a/^\w+$/" ng-model="$ctrl.form.nombre"/>
 					<div ng-messages="register.nombre.$error" multiple md-auto-hide="true">
 					  <div ng-message="required">
@@ -29,7 +28,6 @@
 				<md-input-container flex>
 				<md-icon>face</md-icon>
 
-					<md-icon md-font-icon="apellido">apellido</md-icon>
 					<input name="apellido" required type="text" placeholder="Apellido"  ng-pattern="/^\w+$/" ng-model="$ctrl.form.apellido"/>
 					<div ng-messages="register.apellido.$error" multiple md-auto-hide="true">
 					  <div ng-message="required">
@@ -64,7 +62,6 @@
 			<md-input-container flex>
 				<md-icon>account_circle</md-icon>
 
-				<md-icon md-font-icon="Usuario">username</md-icon>
 				<input name="username" required type="text" placeholder="Nick" ng-pattern="/^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$/" ng-model="$ctrl.form.username"/>
 				<div ng-messages="register.username.$error" multiple md-auto-hide="true">
 					<div ng-message="required">
@@ -82,7 +79,6 @@
 				<md-input-container flex>
 					<md-icon>vpn_key</md-icon>
 
-					<md-icon md-font-icon="contrasena">contrasena</md-icon>
 					<input type="password" name="contrasena" required type="text" ng-pattern="/^(?=.{8,20}$)[a-zA-Z0-9@*#]+$/" placeholder="Contraseña" ng-model="$ctrl.form.contrasena"/>
 					<div ng-messages="register.contrasena.$error" multiple md-auto-hide="true">
 					  <div ng-message="required">
@@ -97,7 +93,6 @@
 			<div layout="column" flex="50">
 				<md-input-container flex>
 					<md-icon>vpn_key</md-icon>
-					<md-icon md-font-icon="confirmacontrasena">confirmacontrasena</md-icon>
 					<input type="password" name="confirmacontrasena" required type="text" ng-pattern="/^(?=.{8,20}$)[a-zA-Z0-9@*#]+$/" placeholder="Confirma tu contraseña" ng-model="$ctrl.form.confirmacontrasena" />
 					<div ng-messages="register.confirmacontrasena.$error" multiple md-auto-hide="true">
 					  <div ng-message="required">
