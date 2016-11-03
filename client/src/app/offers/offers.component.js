@@ -45,10 +45,10 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 		}
 
 	
-    $scope.display = function(stringDate, isActive, isPublic) {
+    $scope.display = function(stringDate) {
     	var actDate = new Date(stringDate);
     	var disabled = false
-    	if((actDate < $scope.CurrentDate) || !isActive || !isPublic){
+    	if(actDate < $scope.CurrentDate){
     		disabled = true
     	}
         return disabled;

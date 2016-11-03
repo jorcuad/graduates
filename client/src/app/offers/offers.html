@@ -11,7 +11,7 @@
 							<md-button flex ng-disabled="true" class="md-raised md-primary">Debes estar registrado para crear tus ofertas</md-button>
 						</md-list-item>
 						<md-list-item ng-repeat="offer in $ctrl.offers">
-							<md-card class="disable" ng-if="display(offer.activity_date, offer.active, offer.public)" flex layout-padding layout="row">
+							<md-card class="disable" ng-if="display(offer.activity_date)" flex layout-padding layout="row">
 								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
@@ -29,7 +29,7 @@
 									<md-button  ng-disabled="true" href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
 							</md-card>
-							<md-card ng-if="!display(offer.activity_date, offer.active, offer.public)" flex layout-padding layout="row"  >
+							<md-card ng-if="!display(offer.activity_date)" flex layout-padding layout="row"  >
 								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
@@ -110,7 +110,7 @@
 							<md-button flex md-colors="{background: 'green'}" class="md-raised md-primary" href="#/new-offer">Crea tu propia oferta</md-button>
 						</md-list-item>
 						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id: '!' + user.id } }" >
-							<md-card flex layout-padding layout="row" class="disable" ng-if="display(offer.activity_date, offer.active, offer.public)">
+							<md-card flex layout-padding layout="row" class="disable" ng-if="display(offer.activity_date)">
 								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
@@ -130,7 +130,7 @@
 									<md-button ng-disabled="true"  href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
 								</md-card-actions>
 							</md-card>
-							<md-card flex layout-padding layout="row" ng-if="!display(offer.activity_date, offer.active, offer.public)" >
+							<md-card flex layout-padding layout="row" ng-if="!display(offer.activity_date)" >
 								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
@@ -158,30 +158,7 @@
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
 						<md-list-item ng-repeat="offer in $ctrl.offers | filter:{ user:{ id:user.id } }" >
-							<md-card flex layout-padding layout="row" class="disable" ng-if="display(offer.activity_date, offer.active, offer.public)">
-							<md-card flex layout-padding layout="row">
-								<md-card-title layout="column">
-									<md-card-title-text>
-										<span class="md-headline" layout="row">
-											<div layout="column" flex="70">
-												{{offer.offer_name}}
-											</div>
-										</span>
-										<span class="md-subhead">
-											<md-icon md-font-icon="event">event</md-icon>
-											{{offer.activity_date | date: medium}}
-											<md-icon md-font-icon="place">place</md-icon>
-											{{offer.place}}
-											<md-icon md-font-icon="place">category</md-icon>
-											{{offer.categories}}
-										</span>
-									</md-card-title-text>
-								</md-card-title>
-								<md-card-actions layout="column" layout-align="end center">
-									<md-button  href="#/detail/{{offer.id}}" class="md-raised md-primary">Ver Más</md-button>
-								</md-card-actions>
-							</md-card>
-							<md-card flex layout-padding layout="row" ng-if="!display(offer.activity_date, offer.active, offer.public)">
+							<md-card flex layout-padding layout="row" >
 								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline" layout="row">
@@ -211,27 +188,7 @@
 				<md-content layout-padding flex="100">
 					<md-list flex="100">
 						<md-list-item ng-repeat="fav in $ctrl.favorites" >
-							<md-card flex layout-padding layout="row" class="disable" ng-if="display(offer.activity_date, offer.active, offer.public)">
-								<md-card-title layout="column">
-									<md-card-title-text>
-										<span class="md-headline">
-											{{fav.offer_name}}
-										</span>
-										<span class="md-subhead">
-											<md-icon md-font-icon="event">event</md-icon>
-											{{fav.activity_date | date: medium}}
-											<md-icon md-font-icon="place">place</md-icon>
-											{{fav.place}}
-											<md-icon md-font-icon="place">category</md-icon>
-											{{fav.categories}}
-										</span>
-									</md-card-title-text>
-								</md-card-title>
-								<md-card-actions layout="column" layout-align="end center">
-									<md-button ng-disabled="true" href="#/detail/{{fav.id}}" class="md-raised md-primary">Ver Más</md-button>
-								</md-card-actions>
-							</md-card>
-							<md-card flex ng-if="!display(offer.activity_date, offer.active, offer.public)" layout-padding layout="row">
+							<md-card flex layout-padding layout="row">
 								<md-card-title layout="column">
 									<md-card-title-text>
 										<span class="md-headline">
