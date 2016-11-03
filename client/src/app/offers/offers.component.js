@@ -10,11 +10,15 @@ function offersCtrl ($http, $scope, Offers,OfferDetailService, Utils, Session) {
 	vm.categories = ""
 	vm.category = ""
 
+
 	vm.$onInit = function () {
-		$scope.user = {}
+		$scope.user = {}            
+		$scope.CurrentDate = new Date();
+
 
 		Offers.get().then(function (answer) {
 			vm.offers = answer.data;
+
 		}, function(answer) {
 			Utils.toast(answer.status + " : Error al obtener las ofertas, recargue la página e intentelo de nuevo.")
 		})
@@ -31,6 +35,17 @@ function offersCtrl ($http, $scope, Offers,OfferDetailService, Utils, Session) {
 			$scope.user = Session.getUser()
 			Offers.getFavorites($scope.user.id).then(function (favorites) { vm.favorites = favorites; })
 		}
+
+	
+    $scope.display = function(stringDate, isActive, isPublic) {
+    	var actDate = new Date(stringDate);
+    	var disabled = false
+    	if((actDate < $scope.CurrentDate) || !isActive || !isPublic){
+    		disabled = true
+    	}
+        return disabled;
+    };
+
 
 	};
 
