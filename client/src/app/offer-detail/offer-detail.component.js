@@ -111,6 +111,9 @@ function offerDetailCtrl ($http, $location, $route, $scope, $mdDialog, $routePar
 			Utils.toast("Código "+ answer.status + ": Ha habido un problema cambiando el estado de la oferta.");
 		});
 	};
+	$scope.allowContact = function () {
+		return (userlogged.id!=null && $ctrl.offer.user.id != userlogged.id && $ctrl.limit && $ctrl.offer.active)
+	}
 
 	$scope.contact = function(ev) {
 		var confirm = $mdDialog.prompt()
