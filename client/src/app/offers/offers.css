@@ -61,6 +61,17 @@ md-input-container.md-default-theme .md-input, md-input-container .md-input {
   margin:0;
 }
 
+<<<<<<< HEAD
+.colorsdemoBasicUsage p.footnote {
+  font-size: 0.85em;
+  margin: 30px;
+  padding: 5px;
+  background-color: rgba(205, 205, 205, 0.45); }
+
+
+.disable {
+  background-color: rgba(205, 205, 205, 0.45); }
+=======
 .no_border {
   border: none !important;
 }
@@ -72,3 +83,4 @@ md-input-container.md-default-theme .md-input, md-input-container .md-input {
 .loupe {
 
 }
+>>>>>>> saraMergea

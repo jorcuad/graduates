@@ -11,7 +11,11 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 	vm.categories = ""
 	vm.category = []
 
+
 	vm.$onInit = function () {
+          
+		$scope.CurrentDate = new Date();
+
 		vm.isClosed = false
 		vm.min_date = new Date()
 		$scope.user = {}
@@ -39,6 +43,17 @@ function offersCtrl ($http, $scope, $mdSidenav, $mdMedia, Offers, Utils, Session
 			$scope.user = Session.getUser()
 			Offers.getFavorites($scope.user.id).then(function (favorites) { vm.favorites = favorites; })
 		}
+
+	
+    $scope.display = function(stringDate, isActive, isPublic) {
+    	var actDate = new Date(stringDate);
+    	var disabled = false
+    	if((actDate < $scope.CurrentDate) || !isActive || !isPublic){
+    		disabled = true
+    	}
+        return disabled;
+    };
+
 
 	};
 
