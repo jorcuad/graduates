@@ -33,14 +33,18 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 					vm.offer.pub_date = dateReadable;
 					vm.activity_hour= date_activity.getHours();
 					vm.activity_min = date_activity.getMinutes();
+					console.log(vm.offer);
 					if(vm.offer.maxContacts == -1){
-						vm.withoutLimit= true;						
+						vm.withoutLimit= true;
+						vm.disableInput=true;
+						vm.hideInput=true;
+						vm.form.maxContacts=-1						
 					}
 					else{
-						vm.withoutLimit= false;
+						vm.withoutLimit = false;
 					}
 					if(vm.withoutLimit){
-						vm.offer.maxContacts="";
+						vm.offer.maxContacts=-1;
 					}
 					vm.form = {"id": vm.offer.id, "user":vm.offer.user.id,
 					"active":vm.offer.active, "public":vm.offer.public,
@@ -144,7 +148,7 @@ function offerFormCtrl ($scope, $http, $location, $routeParams, OfferForm, Offer
 		}
 	}
 	vm.checkMaxContacts = function(){
-		return vm.form.Contacts;
+		return vm.form.maxContacts;
 	}
 }
 
