@@ -216,7 +216,7 @@ def offer_search(request):
             if gt == "today":
                 results = results.filter(activity_date__gte=today)
             else:
-                date = datetime.strptime(gt,'%m/%d/%Y')
+                date = datetime.strptime(gt,'%d/%m/%Y')
                 results = results.filter(activity_date__gte=date)
                 print(date)
     except:
@@ -227,7 +227,7 @@ def offer_search(request):
             if lt == "today":
                 results = results.filter(activity_date__lte=today)
             else:
-                date = datetime.strptime(lt,'%m/%d/%Y') + timedelta(days=1)
+                date = datetime.strptime(lt,'%d/%m/%Y') + timedelta(days=1)
                 print(date)
                 results = results.filter(activity_date__lte=date)
     except:
