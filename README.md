@@ -30,6 +30,13 @@ Create a virtualenv to isolate our package dependencies locally
    
    #To init client server
    $ npm start
+   #Fix problems with EACCES permission denied
+   https://docs.npmjs.com/getting-started/fixing-npm-permissions
+   1. Find the path to npm's directory
+   $ npm config get prefix
+   
+   2. Change the owner of npm's directories to the name of the current user (your username!):
+   $ sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
    
    #If bower install doesn't work, run
    $ sudo apt-get remove node
