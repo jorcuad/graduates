@@ -32,6 +32,7 @@ Create a virtualenv to isolate our package dependencies locally
    $ npm start
    #Fix problems with EACCES permission denied
    https://docs.npmjs.com/getting-started/fixing-npm-permissions
+   
    1. Find the path to npm's directory
    $ npm config get prefix
    
